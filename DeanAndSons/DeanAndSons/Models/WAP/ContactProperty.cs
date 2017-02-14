@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EstateAgency.Models
 {
-    public class ContactProperty
+    public class ContactProperty : Contact
     {
-        //public int ContactPropertyID { get; set; }
+        [ForeignKey("Property")]
         public int PropertyID { get; set; }
-        public int ContactID { get; set; }
 
         public Property Property { get; set; }
-        public Contact Contact { get; set; }
+
+        public ContactProperty() : base()
+        {
+
+        }
     }
 }

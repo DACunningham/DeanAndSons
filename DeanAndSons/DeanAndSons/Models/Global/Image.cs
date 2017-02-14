@@ -7,6 +7,7 @@ namespace EstateAgency.Models
 {
     public abstract class Image
     {
+        public int ImageID { get; set; }
         public string Location { get; set; }
         public ImageType Type { get; set; }
     }

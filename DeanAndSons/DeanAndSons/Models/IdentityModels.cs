@@ -21,22 +21,18 @@ namespace DeanAndSons.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Property> Properties { get; set; }
+        //public DbSet<Image> Images { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("LocalDB", throwIfV1Schema: false)
         {
         }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
-        }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ContactProperty>()
-                .HasKey<>
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }
