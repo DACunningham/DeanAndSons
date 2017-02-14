@@ -208,8 +208,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Global\Contact.cs" />
+    <Compile Include="Models\Global\Image.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\WAP\ContactProperty.cs" />
+    <Compile Include="Models\WAP\ImageProperty.cs" />
+    <Compile Include="Models\WAP\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -290,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\CMS\" />
+    <Folder Include="Models\IMS\" />
+    <Folder Include="Models\WAP\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
