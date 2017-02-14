@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201702142132308_PropertyInitial.Designer.cs">
       <DependentUpon>201702142132308_PropertyInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702142230049_AddImages.cs" />
+    <Compile Include="Migrations\201702142230049_AddImages.Designer.cs">
+      <DependentUpon>201702142230049_AddImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Global\Contact.cs" />
@@ -215,6 +219,7 @@
     <Compile Include="Models\WAP\ContactProperty.cs" />
     <Compile Include="Models\WAP\ContactUser.cs" />
     <Compile Include="Models\WAP\ImageProperty.cs" />
+    <Compile Include="Models\WAP\ImageUser.cs" />
     <Compile Include="Models\WAP\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -309,6 +314,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702142132308_PropertyInitial.resx">
       <DependentUpon>201702142132308_PropertyInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702142230049_AddImages.resx">
+      <DependentUpon>201702142230049_AddImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,8 +19,9 @@ namespace EstateAgency.Models
 
         public PropertyType Type { get; set; }
 
+        //Only want to allow one of these programmatically
         public ICollection<ContactProperty> Contact { get; set; }
-        //public ICollection<ImageProperty> Images { get; set; }
+        public ICollection<ImageProperty> Images { get; set; }
     }
 
     public enum PropertyType
