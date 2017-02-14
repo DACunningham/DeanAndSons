@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace EstateAgency.Models
 {
+    [Table("Propertys")]
     public class Property
     {
         public int PropertyID { get; set; }
@@ -18,6 +19,8 @@ namespace EstateAgency.Models
         public string Description { get; set; }
 
         public PropertyType Type { get; set; }
+
+        public int Price { get; set; }
 
         //Only want to allow one of these programmatically
         public ICollection<ContactProperty> Contact { get; set; }

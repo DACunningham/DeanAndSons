@@ -7,13 +7,13 @@ namespace DeanAndSons.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class PropertyInitial : IMigrationMetadata
+    public sealed partial class PropertyImageContactAdd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PropertyInitial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PropertyImageContactAdd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702142132308_PropertyInitial"; }
+            get { return "201702142341577_PropertyImageContactAdd"; }
         }
         
         string IMigrationMetadata.Source

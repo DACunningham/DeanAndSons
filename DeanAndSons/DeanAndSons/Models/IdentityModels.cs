@@ -21,7 +21,7 @@ namespace DeanAndSons.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Property> Properties { get; set; }
+        public DbSet<Property> Propertys { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 

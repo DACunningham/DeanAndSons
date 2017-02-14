@@ -3,7 +3,7 @@ namespace DeanAndSons.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PropertyInitial : DbMigration
+    public partial class PropertyImageContactAdd : DbMigration
     {
         public override void Up()
         {
@@ -24,7 +24,7 @@ namespace DeanAndSons.Migrations
                     })
                 .PrimaryKey(t => t.ContactID)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserID)
-                .ForeignKey("dbo.Properties", t => t.PropertyID, cascadeDelete: true)
+                .ForeignKey("dbo.Propertys", t => t.PropertyID, cascadeDelete: true)
                 .Index(t => t.UserID)
                 .Index(t => t.PropertyID);
             
@@ -87,15 +87,33 @@ namespace DeanAndSons.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Properties",
+                "dbo.Propertys",
                 c => new
                     {
                         PropertyID = c.Int(nullable: false, identity: true),
                         Title = c.String(nullable: false),
                         Description = c.String(nullable: false),
                         Type = c.Int(nullable: false),
+                        Price = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PropertyID);
+            
+            CreateTable(
+                "dbo.Images",
+                c => new
+                    {
+                        ImageID = c.Int(nullable: false, identity: true),
+                        Location = c.String(),
+                        Type = c.Int(nullable: false),
+                        PropertyID = c.Int(),
+                        UserID = c.String(maxLength: 128),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.ImageID)
+                .ForeignKey("dbo.Propertys", t => t.PropertyID, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserID)
+                .Index(t => t.PropertyID)
+                .Index(t => t.UserID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -112,12 +130,16 @@ namespace DeanAndSons.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Contacts", "PropertyID", "dbo.Properties");
+            DropForeignKey("dbo.Images", "UserID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Contacts", "PropertyID", "dbo.Propertys");
+            DropForeignKey("dbo.Images", "PropertyID", "dbo.Propertys");
             DropForeignKey("dbo.Contacts", "UserID", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Images", new[] { "UserID" });
+            DropIndex("dbo.Images", new[] { "PropertyID" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -126,7 +148,8 @@ namespace DeanAndSons.Migrations
             DropIndex("dbo.Contacts", new[] { "PropertyID" });
             DropIndex("dbo.Contacts", new[] { "UserID" });
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Properties");
+            DropTable("dbo.Images");
+            DropTable("dbo.Propertys");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

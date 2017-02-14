@@ -199,16 +199,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PropertysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702142132308_PropertyInitial.cs" />
-    <Compile Include="Migrations\201702142132308_PropertyInitial.Designer.cs">
-      <DependentUpon>201702142132308_PropertyInitial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702142230049_AddImages.cs" />
-    <Compile Include="Migrations\201702142230049_AddImages.Designer.cs">
-      <DependentUpon>201702142230049_AddImages.cs</DependentUpon>
+    <Compile Include="Migrations\201702142341577_PropertyImageContactAdd.cs" />
+    <Compile Include="Migrations\201702142341577_PropertyImageContactAdd.Designer.cs">
+      <DependentUpon>201702142341577_PropertyImageContactAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,6 +295,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Propertys\Create.cshtml" />
+    <Content Include="Views\Propertys\Delete.cshtml" />
+    <Content Include="Views\Propertys\Details.cshtml" />
+    <Content Include="Views\Propertys\Edit.cshtml" />
+    <Content Include="Views\Propertys\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,11 +314,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702142132308_PropertyInitial.resx">
-      <DependentUpon>201702142132308_PropertyInitial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702142230049_AddImages.resx">
-      <DependentUpon>201702142230049_AddImages.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702142341577_PropertyImageContactAdd.resx">
+      <DependentUpon>201702142341577_PropertyImageContactAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
