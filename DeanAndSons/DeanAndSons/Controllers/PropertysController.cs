@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DeanAndSons.Models;
-using EstateAgency.Models;
+using DeanAndSons.Models.WAP.ViewModels;
 
 namespace DeanAndSons.Controllers
 {
@@ -18,7 +18,17 @@ namespace DeanAndSons.Controllers
         // GET: Propertys
         public ActionResult Index()
         {
-            return View(db.Propertys.ToList());
+            var dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images).ToList();
+            var indexList = new List<PropertyIndexViewModel>();
+
+            foreach (var item in dbModel)
+            {
+                var vm = new PropertyIndexViewModel(item);
+
+                indexList.Add(vm);
+            }
+
+            return View(indexList);
         }
 
         // GET: Propertys/Details/5

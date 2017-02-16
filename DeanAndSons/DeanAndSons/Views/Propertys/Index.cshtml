@@ -1,15 +1,94 @@
-﻿@model IEnumerable<EstateAgency.Models.Property>
+﻿@using DeanAndSons.Models.WAP.ViewModels
+@model IEnumerable<PropertyIndexViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Properties</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+<div class="row">
+    @using (Ajax.BeginForm("Index", "Propertys", new { },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "indexList"//,
+                                    //OnComplete = ""
+                                }))
+    {
+        <div class="col-md-2 col-xs-6">
+            @*@Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })*@
+        </div>
+
+        <div class="col-md-2 col-xs-6">
+            @*@Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })*@
+        </div>
+        <div class="col-md-8">
+            @Html.TextBox("indexSearch", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control has-success", placeholder = "Search by property title (press ENTER to search)" })
+        </div>
+    }
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        @*Image*@
+        <div class="col-md-2">
+            @*<a href="@Url.Action("Deails", "Propertys", new { id = item.PropertyID })">
+                <img src="~/Storage/Propertys/@item.Image.Location" class="img-responsive img-thumbnail center-block" alt="@item.Title image" />
+            </a>*@
+        </div>
+
+        @*Body*@
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>@Html.ActionLink(@item.Title, "Details", "Propertys", new { id = @item.PropertyID }, null)</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>@item.Description</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Address: @item.Contact.PropertyNo @item.Contact.Street @item.Contact.Town @item.Contact.PostCode</p>
+                </div>
+            </div>
+
+        </div>
+
+        @*End*@
+        <div class="col-md-2">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Property Type: @item.Type </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Price: @item.Price </p>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -26,26 +105,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PropertyID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PropertyID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PropertyID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PropertyID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PropertyID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PropertyID })
+            </td>
+        </tr>
+    }
 
-</table>
+</table>*@

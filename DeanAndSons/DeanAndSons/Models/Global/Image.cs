@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EstateAgency.Models
+namespace DeanAndSons.Models
 {
     public abstract class Image
     {
@@ -14,7 +14,8 @@ namespace EstateAgency.Models
 
     public enum ImageType
     {
-        Property = 1,
+        PropertyHeader = 1,
+        PropertyBody,
         Profile,
         Event,
         Service

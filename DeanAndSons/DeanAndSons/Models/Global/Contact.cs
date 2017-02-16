@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EstateAgency.Models
+namespace DeanAndSons.Models
 {
     public abstract class Contact
     {
