@@ -24,9 +24,9 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public PropertyIndexViewModel(Property item)
         {
-            Contact = item.Contact.SingleOrDefault();
+            Contact = getContact(item);
             Description = createDescription(item.Description);
-            Image = item.Images.Where(i => i.Type == ImageType.PropertyHeader).SingleOrDefault();
+            Image = getImage(item);
             Price = item.Price;
             PropertyID = item.PropertyID;
             Title = item.Title;
@@ -43,6 +43,36 @@ namespace DeanAndSons.Models.WAP.ViewModels
             {
                 return desc;
             }
+        }
+
+        private ContactProperty getContact(Property item)
+        {
+            ContactProperty contact = null;
+            try
+            {
+                contact = item.Contact.First();
+            }
+            catch (InvalidOperationException)
+            {
+                contact = new ContactProperty();
+            }
+
+            return contact;
+        }
+
+        private ImageProperty getImage(Property item)
+        {
+            ImageProperty image = null;
+            try
+            {
+                image = item.Images.First(i => i.Type == ImageType.PropertyHeader);
+            }
+            catch (InvalidOperationException)
+            {
+                image = new ImageProperty();
+            }
+
+            return image;
         }
     }
 }
