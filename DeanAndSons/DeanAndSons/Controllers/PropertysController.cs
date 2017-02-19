@@ -49,7 +49,10 @@ namespace DeanAndSons.Controllers
         // GET: Propertys/Create
         public ActionResult Create()
         {
-            return View();
+            PropertyCreateViewModel vm = new PropertyCreateViewModel();
+
+
+            return View(vm);
         }
 
         // POST: Propertys/Create
@@ -133,6 +136,11 @@ namespace DeanAndSons.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult MoreImages(PropertyCreateViewModel vm)
+        {
+            return PartialView("_ImageUpload", vm);
         }
     }
 }

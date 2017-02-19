@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201702142341577_PropertyImageContactAdd.Designer.cs">
       <DependentUpon>201702142341577_PropertyImageContactAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702181731112_PropertyNoToStr.cs" />
+    <Compile Include="Migrations\201702181731112_PropertyNoToStr.Designer.cs">
+      <DependentUpon>201702181731112_PropertyNoToStr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Global\Contact.cs" />
@@ -218,6 +222,7 @@
     <Compile Include="Models\WAP\ImageProperty.cs" />
     <Compile Include="Models\WAP\ImageUser.cs" />
     <Compile Include="Models\WAP\Property.cs" />
+    <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -301,6 +306,7 @@
     <Content Include="Views\Propertys\Details.cshtml" />
     <Content Include="Views\Propertys\Edit.cshtml" />
     <Content Include="Views\Propertys\Index.cshtml" />
+    <Content Include="Views\Propertys\_ImageUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +323,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702142341577_PropertyImageContactAdd.resx">
       <DependentUpon>201702142341577_PropertyImageContactAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702181731112_PropertyNoToStr.resx">
+      <DependentUpon>201702181731112_PropertyNoToStr.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
