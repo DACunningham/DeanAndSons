@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DeanAndSons.Models
 {
@@ -10,6 +12,37 @@ namespace DeanAndSons.Models
         public int ImageID { get; set; }
         public string Location { get; set; }
         public ImageType Type { get; set; }
+
+        public Image()
+        {
+
+        }
+
+        public Image(ImageType type, string imgLocation, HttpPostedFileBase file)
+        {
+            Location = saveImage(imgLocation, file);
+            Type = type;
+        }
+
+        private string saveImage(string path, HttpPostedFileBase file)
+        {
+            //Generate GUID filename.
+            string saveFileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+            string fullPath = Path.Combine(HttpContext.Current.Server.MapPath(path), saveFileName);
+
+            try
+            {
+                //Save the actual file to the server by combining server path, images application path and the photo's name.
+                file.SaveAs(fullPath);
+
+                return fullPath;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 
     public enum ImageType

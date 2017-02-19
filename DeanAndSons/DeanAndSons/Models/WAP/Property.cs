@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DeanAndSons.Models.WAP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DeanAndSons.Models
 {
@@ -28,10 +30,45 @@ namespace DeanAndSons.Models
 
         public ICollection<ImageProperty> Images { get; set; }
 
+        public string imgLocation = "~/Storage/Propertys";
+
         protected Property()
         {
             Contact = new Collection<ContactProperty>();
             Images = new Collection<ImageProperty>();
+        }
+
+        public Property(PropertyCreateViewModel vm)
+        {
+            Title = vm.Title;
+            Description = vm.Description;
+            Type = vm.Type;
+            Price = vm.Price;
+            Contact = new Collection<ContactProperty>();
+            Images = new Collection<ImageProperty>();
+
+            Contact.Add(new ContactProperty(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
+            Images = addImages(vm.Images);
+
+        }
+
+        private ICollection<ImageProperty> addImages(ICollection<HttpPostedFileBase> files)
+        {
+            var images = new Collection<ImageProperty>();
+            ImageType imgType = ImageType.PropertyHeader;
+
+            for (int i = 0; i < files.Count; i++)
+            {
+                if (files.ElementAt(i) != null && files.ElementAt(i).ContentLength != 0)
+                {
+                    if (i != 0)
+                        imgType = ImageType.PropertyBody;
+
+                    images.Add(new ImageProperty(files.ElementAt(i), imgType, imgLocation, this));
+                }
+            }
+
+            return images;
         }
     }
 

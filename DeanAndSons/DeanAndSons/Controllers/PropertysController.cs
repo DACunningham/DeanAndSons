@@ -51,7 +51,6 @@ namespace DeanAndSons.Controllers
         {
             PropertyCreateViewModel vm = new PropertyCreateViewModel();
 
-
             return View(vm);
         }
 
@@ -60,16 +59,18 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PropertyID,Title,Description,Type,Price")] Property property)
+        public ActionResult Create([Bind(Include = "PropertyID,Title,Description,Type,Price,PropertyNo,Street,Town,PostCode,TelephoneNo,Email,Images")] PropertyCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                var property = new Property(vm);
+
                 db.Propertys.Add(property);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(property);
+            return View(vm);
         }
 
         // GET: Propertys/Edit/5

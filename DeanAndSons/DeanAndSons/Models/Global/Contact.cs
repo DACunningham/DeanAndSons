@@ -31,5 +31,20 @@ namespace DeanAndSons.Models
         [Display(Name = "Email Address")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }
+
+        public Contact()
+        {
+
+        }
+
+        public Contact(string propertyNo, string street, string town, string postCode, int? telephoneNo, string email)
+        {
+            PropertyNo = propertyNo;
+            Street = street;
+            Town = town;
+            PostCode = postCode;
+            TelephoneNo = telephoneNo;
+            Email = email;
+        }
     }
 }
