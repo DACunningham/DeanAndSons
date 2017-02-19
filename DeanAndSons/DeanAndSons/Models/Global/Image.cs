@@ -28,19 +28,22 @@ namespace DeanAndSons.Models
         {
             //Generate GUID filename.
             string saveFileName = Guid.NewGuid().ToString() + Path.GetFileName(file.FileName);
+            //Generate local file system string location so, the app can physically save the file to disk
             string fullPath = Path.Combine(HttpContext.Current.Server.MapPath(path), saveFileName);
+            //Generate the relative path of the image in the app for DB entry
+            string loc = path + "/" + saveFileName;
 
             try
             {
                 //Save the actual file to the server by combining server path, images application path and the photo's name.
                 file.SaveAs(fullPath);
 
-                return fullPath;
+                return loc;
             }
             catch (Exception)
             {
 
-                throw;
+                throw new Exception("The image was not saved for some reason");
             }
         }
     }

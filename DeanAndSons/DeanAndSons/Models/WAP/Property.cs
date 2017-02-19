@@ -30,7 +30,7 @@ namespace DeanAndSons.Models
 
         public ICollection<ImageProperty> Images { get; set; }
 
-        public string imgLocation = "~/Storage/Propertys";
+        public string imgLocation = "/Storage/Propertys";
 
         protected Property()
         {
@@ -52,6 +52,7 @@ namespace DeanAndSons.Models
 
         }
 
+        //Takes a collectin of uploaded images and creates a new ImpageProperty for each non null && non empty entry
         private ICollection<ImageProperty> addImages(ICollection<HttpPostedFileBase> files)
         {
             var images = new Collection<ImageProperty>();

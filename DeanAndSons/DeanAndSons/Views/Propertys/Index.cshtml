@@ -11,6 +11,8 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@* ********** Sort and Search Bar ********** *@
+
 <div class="row">
     @using (Ajax.BeginForm("Index", "Propertys", new { },
                                 new AjaxOptions
@@ -34,19 +36,19 @@
     }
 </div>
 
-
+@* ********** Property List ********** *@
 
 @foreach (var item in Model)
 {
     <div class="row">
-        @*Image*@
+        @* ********** Image ********** *@
         <div class="col-md-2">
             <a href="@Url.Action("Details", "Propertys", new { id = item.PropertyID })">
                 <img src="@item.Image.Location" class="img-responsive img-thumbnail center-block" alt="@item.Title image" />
             </a>
         </div>
 
-        @*Body*@
+        @* ********** Body ********** *@
         <div class="col-md-8">
 
             <div class="row">
@@ -69,7 +71,7 @@
 
         </div>
 
-        @*End*@
+        @* ********** End ********** *@
         <div class="col-md-2">
 
             <div class="row">

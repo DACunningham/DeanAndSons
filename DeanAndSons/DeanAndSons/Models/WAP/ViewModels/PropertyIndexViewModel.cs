@@ -33,6 +33,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
             Type = item.Type;
         }
 
+        //Takes the description and cuts it down to 200 chars if required
         private string createDescription(string desc)
         {
             if (desc.Length > 200)
@@ -45,6 +46,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
             }
         }
 
+        //Checks if property's contact value is null
         private ContactProperty getContact(Property item)
         {
             ContactProperty contact = null;
@@ -60,6 +62,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
             return contact;
         }
 
+        //Checks if property's image value is null
         private ImageProperty getImage(Property item)
         {
             ImageProperty image = null;
