@@ -38,12 +38,18 @@ namespace DeanAndSons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Propertys.Find(id);
+
+            Property property = db.Propertys.Include(i => i.Images).Include(c => c.Contact).Single(p => p.PropertyID == id);
+
             if (property == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+
+            //.Include(i => i.Images).Include(c => c.Contact)
+            var vm = new PropertyDetailsViewModel(property);
+
+            return View(vm);
         }
 
         // GET: Propertys/Create

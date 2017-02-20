@@ -52,6 +52,23 @@ namespace DeanAndSons.Models
 
         }
 
+        //Checks if property's contact value is null
+        public ContactProperty getContact(ICollection<ContactProperty> contactCol)
+        {
+            ContactProperty contact = null;
+            try
+            {
+                contact = contactCol.First();
+            }
+            catch (InvalidOperationException)
+            {
+                contact = new ContactProperty();
+                contact.PropertyNo = "No address found";
+            }
+
+            return contact;
+        }
+
         //Takes a collectin of uploaded images and creates a new ImpageProperty for each non null && non empty entry
         private ICollection<ImageProperty> addImages(ICollection<HttpPostedFileBase> files)
         {

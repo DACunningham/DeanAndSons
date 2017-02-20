@@ -1,49 +1,79 @@
-﻿@model DeanAndSons.Models.Property
+﻿@using DeanAndSons.Models.WAP.ViewModels
+@model PropertyDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<link href="~/Content/Custom/Carousel.css" rel="stylesheet" />
 
-<div>
-    <h4>Property</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col-md-12">
+        <h2>model.Title - model.Type - £ model.Price</h2>
+    </div>
 </div>
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- Bootstrap Carousel for images -->
+        <div id="propertyImages" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < Model.Images.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        <li data-target="#propertyImages" data-slide-to="0" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#propertyImages" data-slide-to="@i"></li>
+                    }
+                }
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                @{
+                    var count = 0;
+
+                    foreach (var item in Model.Images)
+                    {
+                        if (count == 0)
+                        {
+                            <div class="item active">
+                                <img class="img-responsive" src="@item.Location" alt="A property Picture">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <img class="img-responsive" src="@item.Location" alt="A property Picture">
+                            </div>
+                        }
+                        count++;
+                    }
+                }
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#propertyImages" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#propertyImages" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <p>model.Description</p>
+    </div>
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PropertyID }) |
     @Html.ActionLink("Back to List", "Index")

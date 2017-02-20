@@ -24,7 +24,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public PropertyIndexViewModel(Property item)
         {
-            Contact = getContact(item);
+            Contact = item.getContact(item.Contact);
             Description = createDescription(item.Description);
             Image = getImage(item);
             Price = item.Price;
@@ -46,21 +46,21 @@ namespace DeanAndSons.Models.WAP.ViewModels
             }
         }
 
-        //Checks if property's contact value is null
-        private ContactProperty getContact(Property item)
-        {
-            ContactProperty contact = null;
-            try
-            {
-                contact = item.Contact.First();
-            }
-            catch (InvalidOperationException)
-            {
-                contact = new ContactProperty();
-            }
+        ////Checks if property's contact value is null
+        //private ContactProperty getContact(Property item)
+        //{
+        //    ContactProperty contact = null;
+        //    try
+        //    {
+        //        contact = item.Contact.First();
+        //    }
+        //    catch (InvalidOperationException)
+        //    {
+        //        contact = new ContactProperty();
+        //    }
 
-            return contact;
-        }
+        //    return contact;
+        //}
 
         //Checks if property's image value is null
         private ImageProperty getImage(Property item)

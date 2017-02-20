@@ -21,9 +21,6 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public int Price { get; set; }
 
-        //Only want to allow one of these programmatically
-        public ICollection<ContactProperty> Contact { get; set; }
-
         [DataType(DataType.Upload)]
         public ICollection<HttpPostedFileBase> Images { get; set; }
 
