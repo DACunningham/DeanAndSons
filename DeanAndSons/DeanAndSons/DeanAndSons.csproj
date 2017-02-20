@@ -198,6 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IMSController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropertysController.cs" />
     <Compile Include="Global.asax.cs">
@@ -214,6 +215,10 @@
     <Compile Include="Migrations\201702202209399_PropertyUserIMSUpdate.cs" />
     <Compile Include="Migrations\201702202209399_PropertyUserIMSUpdate.Designer.cs">
       <DependentUpon>201702202209399_PropertyUserIMSUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702202330281_UserHierarchy.cs" />
+    <Compile Include="Migrations\201702202330281_UserHierarchy.Designer.cs">
+      <DependentUpon>201702202330281_UserHierarchy.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,6 +318,8 @@
     <Content Include="Views\Propertys\Edit.cshtml" />
     <Content Include="Views\Propertys\Index.cshtml" />
     <Content Include="Views\Propertys\_ImageUpload.cshtml" />
+    <Content Include="Views\IMS\Index.cshtml" />
+    <Content Include="Views\IMS\TeamViewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702202209399_PropertyUserIMSUpdate.resx">
       <DependentUpon>201702202209399_PropertyUserIMSUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702202330281_UserHierarchy.resx">
+      <DependentUpon>201702202330281_UserHierarchy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

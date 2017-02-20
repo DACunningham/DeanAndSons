@@ -29,6 +29,9 @@ namespace DeanAndSons.Models
         [Required]
         public bool Deleted { get; set; }
 
+        [ForeignKey("Superior")]
+        public string SuperiorID { get; set; }
+
         //Only want to allow one of these programmatically
         public ICollection<ContactUser> Contact { get; set; }
 
@@ -39,6 +42,10 @@ namespace DeanAndSons.Models
 
         [InverseProperty("Seller")]
         public ICollection<Property> PropertysSell { get; set; }
+
+        public ApplicationUser Superior { get; set; }
+
+        public ICollection<ApplicationUser> Subordinates { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
