@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +11,24 @@ namespace DeanAndSons.Models
     public abstract class Image
     {
         public int ImageID { get; set; }
+
+        [Required]
         public string Location { get; set; }
+
+        [Required]
         public ImageType Type { get; set; }
+
+        [Required]
+        public DateTime Created { get; set; }
+
+        [Required]
+        public DateTime LastModified { get; set; }
+
+        [Required]
+        public bool Deleted { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
 
         public Image()
         {

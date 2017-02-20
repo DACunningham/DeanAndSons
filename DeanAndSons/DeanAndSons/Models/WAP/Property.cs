@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace DeanAndSons.Models
@@ -16,19 +15,70 @@ namespace DeanAndSons.Models
         public int PropertyID { get; set; }
 
         [Required]
+        [MaxLength(75), MinLength(10)]
         public string Title { get; set; }
 
         [Required]
+        [MaxLength(3000), MinLength(10)]
         public string Description { get; set; }
 
+        [Required]
+        [Display(Name = "Property Type")]
         public PropertyType Type { get; set; }
 
+        [Required]
         public int Price { get; set; }
+
+        [Required]
+        [Display(Name = "Sale Status")]
+        public SaleState SaleState { get; set; }
+
+        [Required]
+        [Display(Name = "Property Style")]
+        public PropertyStyle Style { get; set; }
+
+        [Required]
+        [Display(Name = "Property Age")]
+        public PropertyAge Age { get; set; }
+
+        [Required]
+        [Display(Name = "No# Bed Rooms")]
+        public int NoBedRms { get; set; }
+
+        [Required]
+        [Display(Name = "No# Bath Rooms")]
+        public int NoBathRms { get; set; }
+
+        [Required]
+        [Display(Name = "No# Sitting Rooms")]
+        public int NoSittingRms { get; set; }
+
+        [Required]
+        public DateTime Created { get; set; }
+
+        [Required]
+        public DateTime LastModified { get; set; }
+
+        [Required]
+        public bool Deleted { get; set; }
+
+        [ForeignKey("Buyer")]
+        public string BuyerID { get; set; }
+
+        [ForeignKey("Seller")]
+        public string SellerID { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
 
         //Only want to allow one of these programmatically
         public ICollection<ContactProperty> Contact { get; set; }
 
         public ICollection<ImageProperty> Images { get; set; }
+
+        public ApplicationUser Buyer { get; set; }
+
+        public ApplicationUser Seller { get; set; }
 
         public string imgLocation = "/Storage/Propertys";
 
@@ -97,6 +147,34 @@ namespace DeanAndSons.Models
         Maissonette,
         Mobile,
         Bungalow,
-        HMO
+        HMO,
+        BuildingPlot
+    }
+
+    public enum PropertyStyle
+    {
+        Detached = 1,
+        SemiDetached,
+        Terraced,
+        EndTerrace,
+        GroundFloorFlat,
+        UpperFloorFlat
+    }
+
+    public enum PropertyAge
+    {
+        Older = 1,
+        Modern,
+        NewBuild,
+        PostWar,
+        PreWar
+    }
+
+    public enum SaleState
+    {
+        ForSale = 1,
+        UnderOffer,
+        Sold,
+        ToLet
     }
 }
