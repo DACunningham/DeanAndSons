@@ -94,12 +94,23 @@ namespace DeanAndSons.Models
             Description = vm.Description;
             Type = vm.Type;
             Price = vm.Price;
+            SaleState = SaleState.ForSale;
+            Style = vm.Style;
+            Age = vm.Age;
+            NoBedRms = vm.NoBedRms;
+            NoBathRms = vm.NoBathRms;
+            NoSittingRms = vm.NoSittingRms;
+            Created = DateTime.Now;
+            LastModified = DateTime.Now;
+            Deleted = false;
+
             Contact = new Collection<ContactProperty>();
             Images = new Collection<ImageProperty>();
-
             Contact.Add(new ContactProperty(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
             Images = addImages(vm.Images);
 
+            Buyer = null;
+            Seller = vm.Seller;
         }
 
         //Checks if property's contact value is null

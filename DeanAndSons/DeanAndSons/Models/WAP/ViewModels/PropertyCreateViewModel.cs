@@ -12,23 +12,52 @@ namespace DeanAndSons.Models.WAP.ViewModels
         public int PropertyID { get; set; }
 
         [Required]
+        [MaxLength(75), MinLength(10)]
         public string Title { get; set; }
 
         [Required]
+        [MaxLength(3000), MinLength(10)]
         public string Description { get; set; }
 
+        [Required]
+        [Display(Name = "Property Type")]
         public PropertyType Type { get; set; }
 
+        [Required]
         public int Price { get; set; }
 
+        [Required]
+        [Display(Name = "Sale Status")]
+        public SaleState SaleState { get; set; }
+
+        [Required]
+        [Display(Name = "Property Style")]
+        public PropertyStyle Style { get; set; }
+
+        [Required]
+        [Display(Name = "Property Age")]
+        public PropertyAge Age { get; set; }
+
+        [Required]
+        [Display(Name = "No# Bed Rooms")]
+        public int NoBedRms { get; set; }
+
+        [Required]
+        [Display(Name = "No# Bath Rooms")]
+        public int NoBathRms { get; set; }
+
+        [Required]
+        [Display(Name = "No# Sitting Rooms")]
+        public int NoSittingRms { get; set; }
+
+        //********** Image **********
         [DataType(DataType.Upload)]
         public ICollection<HttpPostedFileBase> Images { get; set; }
 
+        //********** Users **********
+        public ApplicationUser Buyer { get; set; }
 
-        //********** Image **********
-        public string Location { get; set; }
-        public ImageType ImgType { get; set; }
-
+        public ApplicationUser Seller { get; set; }
 
         //********** Contact **********
         [Required]

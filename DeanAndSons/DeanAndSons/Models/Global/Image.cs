@@ -39,6 +39,9 @@ namespace DeanAndSons.Models
         {
             Location = saveImage(imgLocation, file);
             Type = type;
+            Created = DateTime.Now;
+            LastModified = DateTime.Now;
+            Deleted = false;
         }
 
         private string saveImage(string path, HttpPostedFileBase file)

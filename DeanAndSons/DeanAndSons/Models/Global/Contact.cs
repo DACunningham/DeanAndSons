@@ -57,6 +57,9 @@ namespace DeanAndSons.Models
             PostCode = postCode;
             TelephoneNo = telephoneNo;
             Email = email;
+            Created = DateTime.Now;
+            LastModified = DateTime.Now;
+            Deleted = false;
         }
     }
 }

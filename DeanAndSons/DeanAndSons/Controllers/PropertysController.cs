@@ -65,9 +65,10 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PropertyID,Title,Description,Type,Price,PropertyNo,Street,Town,PostCode,TelephoneNo,Email,Images")] PropertyCreateViewModel vm)
+        public ActionResult Create(/*[Bind(Include = "PropertyID,Title,Description,Type,Price,PropertyNo,Street,Town,PostCode,TelephoneNo,Email,Images")]*/ PropertyCreateViewModel vm)
         {
             if (ModelState.IsValid)
+
             {
                 var property = new Property(vm);
 
