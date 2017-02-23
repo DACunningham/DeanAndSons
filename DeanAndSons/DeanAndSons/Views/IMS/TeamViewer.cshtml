@@ -1,7 +1,65 @@
-﻿
+﻿@using DeanAndSons.Models.IMS.ViewModels
+@model HierarchyIndexViewModel
+
 @{
     ViewBag.Title = "TeamViewer";
 }
 
 <h2>TeamViewer</h2>
+<link href="~/Content/Custom/FamilyTree.css" rel="stylesheet" />
+<!--
+We will create a family tree using just CSS(3)
+The markup will be simple nested lists
+-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="tree">
+            <ul>
+                <li>
+                    <a href="#"> @Model.Superior.Forename @Model.Superior.Surname </a>
 
+                    @foreach (var item in Model.Subordinates)
+                    {
+                        <ul>
+                            <li>
+                                <a href="#"> @item.Forename @item.Surname </a>
+                            </li>
+                        </ul>
+                    }
+
+                    @*<ul>
+                        <li>
+                            <a href="#">Child</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Grand Child</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Child</a>
+                            <ul>
+                                <li><a href="#">Grand Child</a></li>
+                                <li>
+                                    <a href="#">Grand Child</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Great Grand Child</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Great Grand Child</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Great Grand Child</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Grand Child</a></li>
+                            </ul>
+                        </li>
+                    </ul>*@
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

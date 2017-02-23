@@ -1,6 +1,12 @@
-﻿using System;
+﻿using DeanAndSons.Models;
+using DeanAndSons.Models.IMS.ViewModels;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,6 +14,8 @@ namespace DeanAndSons.Controllers
 {
     public class IMSController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: IMS
         public ActionResult Index()
         {
@@ -16,6 +24,14 @@ namespace DeanAndSons.Controllers
 
         public ActionResult TeamViewer()
         {
+            //var a = db.Users.OfType<Staff>().Where(s => s.SuperiorID == null);
+
+            //Get logged in user ID then use this ID to get ApplicationUser instance
+            var usrID = User.Identity.GetUserId();
+            var appUser = db.Users.Where(usr => usr.Id == usrID).OfType<Staff>().Single();
+
+            var vm = new HierarchyIndexViewModel(appUser);
+
             return View();
         }
 
