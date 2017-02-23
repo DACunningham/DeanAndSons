@@ -7,8 +7,8 @@ namespace DeanAndSons.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.AspNetUsers", "Forename", c => c.String(nullable: false));
-            AddColumn("dbo.AspNetUsers", "Surname", c => c.String(nullable: false));
+            AddColumn("dbo.AspNetUsers", "Forename", c => c.String(nullable: false, maxLength: 60));
+            AddColumn("dbo.AspNetUsers", "Surname", c => c.String(nullable: false, maxLength: 60));
             AddColumn("dbo.AspNetUsers", "About", c => c.String());
             AddColumn("dbo.AspNetUsers", "Discriminator", c => c.String(nullable: false, maxLength: 128));
             DropColumn("dbo.AspNetUsers", "UserType");

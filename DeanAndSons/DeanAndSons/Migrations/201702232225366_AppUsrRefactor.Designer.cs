@@ -13,7 +13,7 @@ namespace DeanAndSons.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201702232038038_AppUsrRefactor"; }
+            get { return "201702232225366_AppUsrRefactor"; }
         }
         
         string IMigrationMetadata.Source

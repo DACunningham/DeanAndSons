@@ -79,6 +79,20 @@ namespace DeanAndSons.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // *********** Custom Customer Info **********
+
+        [Required]
+        [StringLength(60, ErrorMessage = "Your {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [Display(Name = "Forename")]
+        public string Forename { get; set; }
+
+        [Required]
+        [StringLength(60, ErrorMessage = "Your {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        // *********** END Custom Customer Info **********
     }
 
     public class ResetPasswordViewModel

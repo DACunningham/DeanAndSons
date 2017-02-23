@@ -151,7 +151,18 @@ namespace DeanAndSons.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                // *********** Added customer fields to applicationuser ***********
+                var user = new Customer
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Forename = model.Forename,
+                    Surname = model.Surname,
+                    UserNameDisp = model.Email,
+                    Deleted = false
+                };
+                // *********** END Added customer fields to applicationuser ***********
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
