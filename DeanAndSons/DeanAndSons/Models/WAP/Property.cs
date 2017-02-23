@@ -76,9 +76,9 @@ namespace DeanAndSons.Models
 
         public ICollection<ImageProperty> Images { get; set; }
 
-        public ApplicationUser Buyer { get; set; }
+        public Customer Buyer { get; set; }
 
-        public ApplicationUser Seller { get; set; }
+        public Customer Seller { get; set; }
 
         public string imgLocation = "/Storage/Propertys";
 

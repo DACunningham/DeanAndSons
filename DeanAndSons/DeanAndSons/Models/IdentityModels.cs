@@ -14,38 +14,24 @@ namespace DeanAndSons.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
+        public string Forename { get; set; }
+
+        [Required]
+        public string Surname { get; set; }
+
+        public string About { get; set; }
+
+        [Required]
         [Display(Name = "User Name to Display")]
         public string UserNameDisp { get; set; }
 
-        [Display(Name = "Lower Budget")]
-        public int? BudgetLower { get; set; }
-
-        [Display(Name = "Upper Budget")]
-        public int? BudgetHigher { get; set; }
-
-        [Display(Name = "User Type")]
-        public UserType UserType { get; set; }
-
         [Required]
         public bool Deleted { get; set; }
-
-        [ForeignKey("Superior")]
-        public string SuperiorID { get; set; }
 
         //Only want to allow one of these programmatically
         public ICollection<ContactUser> Contact { get; set; }
 
         public ICollection<ImageUser> Image { get; set; }
-
-        [InverseProperty("Buyer")]
-        public ICollection<Property> PropertysBuy { get; set; }
-
-        [InverseProperty("Seller")]
-        public ICollection<Property> PropertysSell { get; set; }
-
-        public ApplicationUser Superior { get; set; }
-
-        public ICollection<ApplicationUser> Subordinates { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -71,15 +57,5 @@ namespace DeanAndSons.Models
         {
             return new ApplicationDbContext();
         }
-    }
-
-    public enum UserType
-    {
-        Buyer = 1,
-        Seller,
-        BuyerSeller,
-        Developer,
-        Business,
-        Staff
     }
 }

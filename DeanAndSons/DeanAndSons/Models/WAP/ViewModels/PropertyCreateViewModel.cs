@@ -55,9 +55,9 @@ namespace DeanAndSons.Models.WAP.ViewModels
         public ICollection<HttpPostedFileBase> Images { get; set; }
 
         //********** Users **********
-        public ApplicationUser Buyer { get; set; }
+        public Customer Buyer { get; set; }
 
-        public ApplicationUser Seller { get; set; }
+        public Customer Seller { get; set; }
 
         //********** Contact **********
         [Required]

@@ -220,12 +220,19 @@
     <Compile Include="Migrations\201702202330281_UserHierarchy.Designer.cs">
       <DependentUpon>201702202330281_UserHierarchy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702232038038_AppUsrRefactor.cs" />
+    <Compile Include="Migrations\201702232038038_AppUsrRefactor.Designer.cs">
+      <DependentUpon>201702232038038_AppUsrRefactor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\WAP\ContactProperty.cs" />
     <Compile Include="Models\WAP\ContactUser.cs" />
     <Compile Include="Models\WAP\ImageProperty.cs" />
@@ -324,7 +331,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\CMS\" />
-    <Folder Include="Models\IMS\" />
     <Folder Include="Storage\Propertys\" />
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702202330281_UserHierarchy.resx">
       <DependentUpon>201702202330281_UserHierarchy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702232038038_AppUsrRefactor.resx">
+      <DependentUpon>201702232038038_AppUsrRefactor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
