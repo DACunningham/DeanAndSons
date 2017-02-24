@@ -28,11 +28,12 @@ namespace DeanAndSons.Controllers
 
             //Get logged in user ID then use this ID to get ApplicationUser instance
             var usrID = User.Identity.GetUserId();
-            var appUser = db.Users.Where(usr => usr.Id == usrID).OfType<Staff>().Single();
+            var appUser = db.Users.Where(usr => usr.Id == usrID).OfType<Staff>()
+                .Include(s => s.Subordinates).Include(su => su.Superior).Single();
 
             var vm = new HierarchyIndexViewModel(appUser);
 
-            return View();
+            return View(vm);
         }
 
         // GET: IMS/Details/5

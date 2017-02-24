@@ -9,6 +9,10 @@ namespace DeanAndSons.Models.IMS.ViewModels
     {
         public string StaffID { get; set; }
 
+        public string Forename { get; set; }
+
+        public string Surname { get; set; }
+
         public Staff Superior { get; set; }
 
         public ICollection<Staff> Subordinates { get; set; }
@@ -16,7 +20,20 @@ namespace DeanAndSons.Models.IMS.ViewModels
         public HierarchyIndexViewModel(Staff staff)
         {
             StaffID = staff.Id;
-            Superior = staff.Superior;
+            Forename = staff.Forename;
+            Surname = staff.Surname;
+
+            if (staff.Superior == null)
+            {
+                Superior = new Staff();
+                Superior.Forename = "Dean & ";
+                Superior.Surname = "Sons";
+            }
+            else
+            {
+                Superior = staff.Superior;
+            }
+
             Subordinates = staff.Subordinates;
         }
     }

@@ -18,14 +18,29 @@ The markup will be simple nested lists
                 <li>
                     <a href="#"> @Model.Superior.Forename @Model.Superior.Surname </a>
 
-                    @foreach (var item in Model.Subordinates)
-                    {
-                        <ul>
-                            <li>
-                                <a href="#"> @item.Forename @item.Surname </a>
-                            </li>
-                        </ul>
-                    }
+                    <ul>
+                        <li>
+                            <a href="#"> @Model.Forename @Model.Surname </a>
+
+                            @if (Model.Subordinates.Count != 0)
+                            {
+                                <ul>
+                                    @foreach (var item in Model.Subordinates)
+                                    {
+
+                                        <li>
+                                            <a href="#"> @item.Forename @item.Surname </a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            }
+                            
+
+                        </li>
+                    </ul>
+
+
 
                     @*<ul>
                         <li>
