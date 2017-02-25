@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DeanAndSons.Models.WAP.ViewModels
 {
@@ -21,6 +22,8 @@ namespace DeanAndSons.Models.WAP.ViewModels
         public ContactProperty Contact { get; set; }
 
         public ImageProperty Image { get; set; }
+
+        public string SearchTerm { get; set; }
 
         public PropertyIndexViewModel(Property item)
         {

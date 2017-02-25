@@ -1,5 +1,7 @@
 ﻿using DeanAndSons.Models;
 using DeanAndSons.Models.WAP.ViewModels;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,11 +15,67 @@ namespace DeanAndSons.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Propertys
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchString = null, string CategorySel = null, string SortSel = null, string currentFilter = null)
         {
-            var dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images).ToList();
-            var indexList = new List<PropertyIndexViewModel>();
+            // ********** Database Access **********
 
+            var dbModel = new List<Property>();
+
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images)
+                    .Where(p => p.Title.Contains(searchString)).ToList();
+            }
+            else
+            {
+                dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images).ToList();
+            }
+
+            // ********** Paging and Sorting **********
+
+            //Populate lists and add them to ViewBag for assignment to dropDowns in View.
+            ViewBag.CategorySort = populateCategorySel();
+            ViewBag.OrderSort = populateSortSel();
+
+            //Concatenate both sorting methods for use in select case.
+            CategorySel = CategorySel + SortSel;
+
+            //Start of pagination addition
+            ViewBag.CurrentSort = CategorySel;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            //Takes CategorySel var and matches it against case strings to determine how to order the table
+            switch (CategorySel)
+            {
+                case "00":
+                    //Alters iavmList SQL to add order params to it, ditto for all of below.
+                    dbModel = dbModel.OrderBy(a => a.Title).ToList();
+                    break;
+                case "01":
+                    dbModel = dbModel.OrderByDescending(a => a.Title).ToList();
+                    break;
+                case "10":
+                    dbModel = dbModel.OrderBy(a => a.Created).ToList();
+                    break;
+                case "11":
+                    dbModel = dbModel.OrderByDescending(a => a.Created).ToList();
+                    break;
+                default:
+                    dbModel = dbModel.OrderBy(a => a.Title).ToList();
+                    break;
+            }
+
+            var indexList = new List<PropertyIndexViewModel>();
             foreach (var item in dbModel)
             {
                 var vm = new PropertyIndexViewModel(item);
@@ -25,7 +83,16 @@ namespace DeanAndSons.Controllers
                 indexList.Add(vm);
             }
 
-            return View(indexList);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexArticle", indexList.ToPagedList(pageNumber, pageSize));
+            }
+
+            return View(indexList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Propertys/Details/5
@@ -146,6 +213,27 @@ namespace DeanAndSons.Controllers
         public ActionResult MoreImages(PropertyCreateViewModel vm)
         {
             return PartialView("_ImageUpload", vm);
+        }
+
+        //Populate category and sort drop down lists
+        private List<SelectListItem> populateCategorySel()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Title", Value = "0", Selected = true });
+            items.Add(new SelectListItem { Text = "Date Listed", Value = "1" });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateSortSel()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Asc.", Value = "0", Selected = true });
+            items.Add(new SelectListItem { Text = "Desc.", Value = "1" });
+
+            return items;
         }
     }
 }

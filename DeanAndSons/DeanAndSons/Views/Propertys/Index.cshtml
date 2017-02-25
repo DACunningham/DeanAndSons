@@ -1,9 +1,15 @@
 ﻿@using DeanAndSons.Models.WAP.ViewModels
-@model IEnumerable<PropertyIndexViewModel>
+@using PagedList.Mvc
+@model PagedList.IPagedList<PropertyIndexViewModel>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script>
+    var catsel = "" + @ViewBag.CurrentSort;
+</script>
 
 <h2>Properties</h2>
 
@@ -14,7 +20,7 @@
 @* ********** Sort and Search Bar ********** *@
 
 <div class="row">
-    @using (Ajax.BeginForm("Index", "Propertys", new { },
+    @using (Ajax.BeginForm("Index", "Propertys", new { currentFilter = ViewBag.CurrentFilter },
                                 new AjaxOptions
                                 {
                                     HttpMethod = "GET",
@@ -24,68 +30,71 @@
                                 }))
     {
         <div class="col-md-2 col-xs-6">
-            @*@Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })*@
+            @Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
         </div>
 
         <div class="col-md-2 col-xs-6">
-            @*@Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })*@
+            @Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
         </div>
         <div class="col-md-8">
-            @Html.TextBox("indexSearch", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control has-success", placeholder = "Search by property title (press ENTER to search)" })
+            @Html.TextBox("indexSearch", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
         </div>
     }
 </div>
 
 @* ********** Property List ********** *@
+<div id="indexList">
 
-@foreach (var item in Model)
-{
-    <div class="row">
-        @* ********** Image ********** *@
-        <div class="col-md-2">
-            <a href="@Url.Action("Details", "Propertys", new { id = item.PropertyID })">
-                <img src="@item.Image.Location" class="img-responsive img-thumbnail center-block" alt="@item.Title image" />
-            </a>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            @* ********** Image ********** *@
+            <div class="col-md-2">
+                <a href="@Url.Action("Details", "Propertys", new { id = item.PropertyID })">
+                    <img src="@item.Image.Location" class="img-responsive img-thumbnail center-block" alt="@item.Title image" />
+                </a>
+            </div>
+
+            @* ********** Body ********** *@
+            <div class="col-md-8">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>@Html.ActionLink(@item.Title, "Details", "Propertys", new { id = @item.PropertyID }, null)</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Address: @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
+                    </div>
+                </div>
+
+            </div>
+
+            @* ********** End ********** *@
+            <div class="col-md-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Property Type: @item.Type </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Price: @item.Price </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    }
 
-        @* ********** Body ********** *@
-        <div class="col-md-8">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>@Html.ActionLink(@item.Title, "Details", "Propertys", new { id = @item.PropertyID }, null)</h4>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p>@item.Description</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Address: @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
-                </div>
-            </div>
-
-        </div>
-
-        @* ********** End ********** *@
-        <div class="col-md-2">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Property Type: @item.Type </p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Price: @item.Price </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-}
+</div>
