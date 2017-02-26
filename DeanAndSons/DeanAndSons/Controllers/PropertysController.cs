@@ -15,7 +15,7 @@ namespace DeanAndSons.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Propertys
-        public ActionResult Index(int? page, string searchString = null, string CategorySel = null, string SortSel = null, string currentFilter = null)
+        public ActionResult Index(int? page, string searchString = null, string CategorySort = null, string OrderSort = null, string currentFilter = null)
         {
             // ********** Database Access **********
 
@@ -34,14 +34,14 @@ namespace DeanAndSons.Controllers
             // ********** Paging and Sorting **********
 
             //Populate lists and add them to ViewBag for assignment to dropDowns in View.
-            ViewBag.CategorySort = populateCategorySel();
-            ViewBag.OrderSort = populateSortSel();
+            ViewBag.CategorySort = populateCategorySort();
+            ViewBag.OrderSort = populateOrderSort();
 
             //Concatenate both sorting methods for use in select case.
-            CategorySel = CategorySel + SortSel;
+            CategorySort = CategorySort + OrderSort;
 
             //Start of pagination addition
-            ViewBag.CurrentSort = CategorySel;
+            ViewBag.CurrentSort = CategorySort;
 
             if (searchString != null)
             {
@@ -54,8 +54,8 @@ namespace DeanAndSons.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            //Takes CategorySel var and matches it against case strings to determine how to order the table
-            switch (CategorySel)
+            //Takes CategorySort var and matches it against case strings to determine how to order the table
+            switch (CategorySort)
             {
                 case "00":
                     //Alters iavmList SQL to add order params to it, ditto for all of below.
@@ -89,7 +89,7 @@ namespace DeanAndSons.Controllers
             //If the user has called this action via AJAX (ie search field) then only update the partial view.
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_IndexArticle", indexList.ToPagedList(pageNumber, pageSize));
+                return PartialView("_IndexList", indexList.ToPagedList(pageNumber, pageSize));
             }
 
             return View(indexList.ToPagedList(pageNumber, pageSize));
@@ -216,7 +216,7 @@ namespace DeanAndSons.Controllers
         }
 
         //Populate category and sort drop down lists
-        private List<SelectListItem> populateCategorySel()
+        private List<SelectListItem> populateCategorySort()
         {
             List<SelectListItem> items = new List<SelectListItem>();
 
@@ -226,7 +226,7 @@ namespace DeanAndSons.Controllers
             return items;
         }
 
-        private List<SelectListItem> populateSortSel()
+        private List<SelectListItem> populateOrderSort()
         {
             List<SelectListItem> items = new List<SelectListItem>();
 
