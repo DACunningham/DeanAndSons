@@ -70,6 +70,12 @@ namespace DeanAndSons.Controllers
                 case "11":
                     dbModel = dbModel.OrderByDescending(a => a.Created).ToList();
                     break;
+                case "20":
+                    dbModel = dbModel.OrderBy(a => a.Price).ToList();
+                    break;
+                case "21":
+                    dbModel = dbModel.OrderByDescending(a => a.Price).ToList();
+                    break;
                 default:
                     dbModel = dbModel.OrderBy(a => a.Title).ToList();
                     break;
@@ -222,6 +228,7 @@ namespace DeanAndSons.Controllers
 
             items.Add(new SelectListItem { Text = "Title", Value = "0", Selected = true });
             items.Add(new SelectListItem { Text = "Date Listed", Value = "1" });
+            items.Add(new SelectListItem { Text = "Price", Value = "2" });
 
             return items;
         }

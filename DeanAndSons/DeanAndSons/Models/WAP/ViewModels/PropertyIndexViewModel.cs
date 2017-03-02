@@ -23,6 +23,8 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public ImageProperty Image { get; set; }
 
+        public DateTime Created { get; set; }
+
         public string SearchTerm { get; set; }
 
         public PropertyIndexViewModel(Property item)
@@ -34,6 +36,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
             PropertyID = item.PropertyID;
             Title = item.Title;
             Type = item.Type;
+            Created = item.Created;
         }
 
         //Takes the description and cuts it down to 200 chars if required
