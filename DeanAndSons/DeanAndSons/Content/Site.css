@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #f2f2f2;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -17,8 +18,146 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
+}*/
+
+.logo1 {
+    color: #ffffff;
+    letter-spacing: 0.4em;
+    font-size: 3.5em;
+    font-weight: 100;
+}
+
+.logo2{
+    color: #ffffff;
+    letter-spacing: 0.404em;
+    word-spacing: 0.5em;
+    font-size: 2em;
+    font-weight: 100;
+    padding-bottom: 0.5em;
+}
+
+@media (max-width: 992px) {
+    .pageTitle {
+        padding-bottom: 0.3em;
+        margin-bottom: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo1{
+        font-size: 2.5em;
+    }
+    .logo2{
+        letter-spacing: 0.36em;
+        font-size: 1.5em;
+    }
+}
+
+.pageTitle{
+    letter-spacing: 0.2em;
+    font-size: 1.5em;
+    font-weight: 100;
+    padding-top: 0.3em;
+}
+
+.dc-header{
+    background-color: #96858f;
+}
+
+.dc-footer {
+    background-color: #96858f;
+    color: #ffffff;
+}
+
+footer {
+    box-shadow: 0px 500px 0px 500px #96858f;
+}
+
+.dc-pageHead{
+    background-color: #d5d5d5;
+}
+
+.dc-rows {
+    margin-top: 1em;
+}
+
+.dc-search {
+    margin-top: 1em;
+}
+
+/* ********** Hyperlink customisations ********* */
+
+a {
+  color: #6d7993;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #333333;
+  text-decoration: none;
+}
+a:focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.pagination > li > a {
+    color: #6d7993;
+}
+
+.pagination > li > a:hover,
+.pagination > li > a:focus {
+    color: #333333;
+}
+
+/* ********** Navbar customisations ********* */
+
+.navbar-default {
+    background-color: #ffffff;
+    color: #ffffff;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #222222;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #777777;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-brand {
+  color: #222222;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #777777;
+  background-color: transparent;
+}
+
+.navbar.navbar-default .navbar-collapse {
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #222222;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar {
+    background-color: #777777;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #ffffff;
 }

@@ -14,47 +14,54 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/Custom/IndexSort.js"></script>
 
+@* ********** Page Header ********** *@
 
-
-<h2>Properties</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@* ********** Sort and Search Bar ********** *@
-
-<div class="row">
-    @using (Ajax.BeginForm("Index", "Propertys", new { currentFilter = ViewBag.CurrentFilter },
-                                new AjaxOptions
-                                {
-                                    HttpMethod = "GET",
-                                    InsertionMode = InsertionMode.Replace,
-                                    UpdateTargetId = "indexList"//,
-                                    //OnComplete = ""
-                                }))
-    {
-        <div class="col-md-2 col-xs-6">
-            @Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
-        </div>
-
-        <div class="col-md-2 col-xs-6">
-            @Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
-        </div>
-        <div class="col-md-8">
-            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
-        </div>
-    }
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+                <div class="col-md-12 dc-pageHead">
+                    <p class="pageTitle">Property Index</p>
+                </div>
+            
+        </header>
+    </div>
 </div>
 
-@* ********** Property List ********** *@
-<div id="indexList">
+<div class="container body-content">
 
-    @Html.Partial("_IndexList", Model)
+    @* ********** Sort and Search Bar ********** *@
+    <div class="row dc-search">
+        @using (Ajax.BeginForm("Index", "Propertys", new { currentFilter = ViewBag.CurrentFilter },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "GET",
+                                            InsertionMode = InsertionMode.Replace,
+                                            UpdateTargetId = "indexList"//,
+                                                                        //OnComplete = ""
+                                        }))
+        {
+            <div class="col-md-2 col-xs-6">
+                @Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+            </div>
 
+            <div class="col-md-2 col-xs-6">
+                @Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+            </div>
+            <div class="col-md-8">
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
+            </div>
+        }
+    </div>
+
+    @* ********** Property List ********** *@
+    <div id="indexList">
+
+        @Html.Partial("_IndexList", Model)
+
+    </div>
 </div>
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

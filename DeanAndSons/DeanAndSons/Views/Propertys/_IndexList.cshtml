@@ -4,11 +4,11 @@
 
 @foreach (var item in Model)
 {
-    <div class="row">
+    <div class="row dc-rows">
         @* ********** Image ********** *@
         <div class="col-md-2">
             <a href="@Url.Action("Details", "Propertys", new { id = item.PropertyID })">
-                <img src="@item.Image.Location" class="img-responsive img-thumbnail center-block" alt="@item.Title image" />
+                <img src="@item.Image.Location" class="img-responsive center-block" alt="@item.Title image" />
             </a>
         </div>
 
@@ -52,6 +52,8 @@
 
         </div>
     </div>
+
+    <hr />
 }
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount

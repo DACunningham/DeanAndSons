@@ -5,76 +5,90 @@
     ViewBag.Title = "TeamViewer";
 }
 
-<h2>TeamViewer</h2>
 <link href="~/Content/Custom/FamilyTree.css" rel="stylesheet" />
-<!--
-We will create a family tree using just CSS(3)
-The markup will be simple nested lists
--->
-<div class="row">
-    <div class="col-md-12">
-        <div class="tree">
-            <ul>
-                <li>
-                    <a href="#"> @Model.Superior.Forename @Model.Superior.Surname </a>
 
-                    <ul>
-                        <li>
-                            <a href="#"> @Model.Forename @Model.Surname </a>
+@* ********** Page Header ********** *@
 
-                            @if (Model.Subordinates.Count != 0)
-                            {
-                                <ul>
-                                    @foreach (var item in Model.Subordinates)
-                                    {
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
 
-                                        <li>
-                                            <a href="#"> @item.Forename @item.Surname </a>
-                                        </li>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+            <div class="col-md-12 dc-pageHead">
+                <p class="pageTitle">Information Management System - Team Viewer</p>
+            </div>
 
-                                    }
-                                </ul>
-                            }
-                            
+        </header>
+    </div>
+</div>
 
-                        </li>
-                    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tree">
+                <ul>
+                    <li>
+                        <a href="#"> @Model.Superior.Forename @Model.Superior.Surname </a>
+
+                        <ul>
+                            <li>
+                                <a href="#"> @Model.Forename @Model.Surname </a>
+
+                                @if (Model.Subordinates.Count != 0)
+                                {
+                                    <ul>
+                                        @foreach (var item in Model.Subordinates)
+                                        {
+
+                                            <li>
+                                                <a href="#"> @item.Forename @item.Surname </a>
+                                            </li>
+
+                                        }
+                                    </ul>
+                                }
+
+
+                            </li>
+                        </ul>
 
 
 
-                    @*<ul>
-                        <li>
-                            <a href="#">Child</a>
-                            <ul>
+                        @*<ul>
                                 <li>
-                                    <a href="#">Grand Child</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Child</a>
-                            <ul>
-                                <li><a href="#">Grand Child</a></li>
-                                <li>
-                                    <a href="#">Grand Child</a>
+                                    <a href="#">Child</a>
                                     <ul>
                                         <li>
-                                            <a href="#">Great Grand Child</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Great Grand Child</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Great Grand Child</a>
+                                            <a href="#">Grand Child</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Grand Child</a></li>
-                            </ul>
-                        </li>
-                    </ul>*@
-                </li>
-            </ul>
+                                <li>
+                                    <a href="#">Child</a>
+                                    <ul>
+                                        <li><a href="#">Grand Child</a></li>
+                                        <li>
+                                            <a href="#">Grand Child</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Great Grand Child</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Great Grand Child</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Great Grand Child</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Grand Child</a></li>
+                                    </ul>
+                                </li>
+                            </ul>*@
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

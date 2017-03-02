@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Dean & Sons.</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @* ********** Move scripts here as seems only way to get JQuery working on pages ********** *@
@@ -13,7 +13,7 @@
     <meta name="description" content="Homepage of the Dean & Sons Estate Agency.  Houses, flats, bungalows for sale and rent" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,12 +34,17 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Dean &amp; Sons Estate Agency</p>
-        </footer>
+    
+
+    <div class="container-fluid dc-footer">
+        <div class="container">
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Dean & Sons.</p>
+            </footer>
+        </div>
     </div>
 
     @RenderSection("scripts", required: false)
