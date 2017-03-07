@@ -172,13 +172,15 @@ namespace DeanAndSons.Models
         UpperFloorFlat
     }
 
+    [Flags]
     public enum PropertyAge
     {
+        None = 0,
         Older = 1,
-        Modern,
-        NewBuild,
-        PostWar,
-        PreWar
+        Modern = 2,
+        NewBuild = 4,
+        PostWar = 8,
+        PreWar = 16
     }
 
     public enum SaleState

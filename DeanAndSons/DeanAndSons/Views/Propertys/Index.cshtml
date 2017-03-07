@@ -42,14 +42,58 @@
                                                                         //OnComplete = ""
                                         }))
         {
-            <div class="col-md-2 col-xs-6">
-                @Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+            <div class="row">
+                <div class="col-md-6">
+
+                    <label class="control-label col-md-3">Location</label>
+                    <div class="col-md-9">
+                        
+                        @Html.DropDownList("Location", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                    <label class="control-label col-md-3">Min Price</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("MinPrice", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                    <label class="control-label col-md-3">Beds</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("Beds", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                    <label class="control-label col-md-3">Category Sort</label>
+                    <div class="col-md-9 col-xs-6">
+                        @Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="control-label col-md-3">Radius</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("Radius", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                    <label class="control-label col-md-3">Max Price</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("MaxPrice", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                    <label class="control-label col-md-3">Age</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("Age", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                    <label class="control-label col-md-3">Order Sort</label>
+                    <div class="col-md-9 col-xs-6">
+                        @Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                </div>
             </div>
 
-            <div class="col-md-2 col-xs-6">
-                @Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
             </div>
         }

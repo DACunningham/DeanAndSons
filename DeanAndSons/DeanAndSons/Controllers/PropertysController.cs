@@ -15,25 +15,61 @@ namespace DeanAndSons.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Propertys
-        public ActionResult Index(int? page, string searchString = null, string CategorySort = null, string OrderSort = null, string currentFilter = null)
+        public ActionResult Index(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null,
+            string Location = null, string MinPrice = "50000", string Beds = "1", string Radius = null, string MaxPrice = "1000000", string Age = "0")
         {
-            // ********** Database Access **********
+            var _MinPrice = Int32.Parse(MinPrice);
+            var _MaxPrice = Int32.Parse(MaxPrice);
+            var _Beds = UInt16.Parse(Beds);
+            var _Age = Convert.ToUInt16(Age);
 
-            var dbModel = new List<Property>();
+            // ********** Database Access **********
+            //var dbModel = new List<Property>();
+            var dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images);
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
-                dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images)
-                    .Where(p => p.Title.Contains(searchString)).ToList();
+                //dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images)
+                //    .Where(p => p.Title.Contains(searchString))
+                //    .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
+                //    .Where(b => b.NoBedRms > _Beds)
+                //    .Where(a => a.Age == (PropertyAge)_Age)
+                //    .ToList();
+
+                dbModel = dbModel
+                    .Where(p => p.Title.Contains(searchString))
+                    .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
+                    .Where(b => b.NoBedRms > _Beds);
             }
             else
             {
-                dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images).ToList();
+                //dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images).Include(c => c.Contact)
+                //    .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
+                //    .Where(b => b.NoBedRms > _Beds)
+                //    .Where(a => a.Age == (PropertyAge)_Age)
+                //    .ToList();
+
+                dbModel = dbModel
+                        .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
+                        .Where(b => b.NoBedRms >= _Beds);
             }
+
+            if (_Age != 0)
+            {
+                dbModel = dbModel.Where(a => a.Age == (PropertyAge)_Age);
+            }
+
+            var dbModelList = dbModel.ToList();
 
             // ********** Paging and Sorting **********
 
             //Populate lists and add them to ViewBag for assignment to dropDowns in View.
+            ViewBag.Location = populateLocation();
+            ViewBag.Radius = populateRadius();
+            ViewBag.MinPrice = populateMinPrice();
+            ViewBag.MaxPrice = populateMaxPrice();
+            ViewBag.Beds = populateBeds();
+            ViewBag.Age = populateAge();
             ViewBag.CategorySort = populateCategorySort();
             ViewBag.OrderSort = populateOrderSort();
 
@@ -59,30 +95,30 @@ namespace DeanAndSons.Controllers
             {
                 case "00":
                     //Alters iavmList SQL to add order params to it, ditto for all of below.
-                    dbModel = dbModel.OrderBy(a => a.Title).ToList();
+                    dbModelList = dbModel.OrderBy(a => a.Title).ToList();
                     break;
                 case "01":
-                    dbModel = dbModel.OrderByDescending(a => a.Title).ToList();
+                    dbModelList = dbModel.OrderByDescending(a => a.Title).ToList();
                     break;
                 case "10":
-                    dbModel = dbModel.OrderBy(a => a.Created).ToList();
+                    dbModelList = dbModel.OrderBy(a => a.Created).ToList();
                     break;
                 case "11":
-                    dbModel = dbModel.OrderByDescending(a => a.Created).ToList();
+                    dbModelList = dbModel.OrderByDescending(a => a.Created).ToList();
                     break;
                 case "20":
-                    dbModel = dbModel.OrderBy(a => a.Price).ToList();
+                    dbModelList = dbModel.OrderBy(a => a.Price).ToList();
                     break;
                 case "21":
-                    dbModel = dbModel.OrderByDescending(a => a.Price).ToList();
+                    dbModelList = dbModel.OrderByDescending(a => a.Price).ToList();
                     break;
                 default:
-                    dbModel = dbModel.OrderBy(a => a.Title).ToList();
+                    dbModelList = dbModel.OrderBy(a => a.Title).ToList();
                     break;
             }
 
             var indexList = new List<PropertyIndexViewModel>();
-            foreach (var item in dbModel)
+            foreach (var item in dbModelList)
             {
                 var vm = new PropertyIndexViewModel(item);
 
@@ -222,6 +258,101 @@ namespace DeanAndSons.Controllers
         }
 
         //Populate category and sort drop down lists
+        private List<SelectListItem> populateLocation()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Bath", Value = "Bath", Selected = true });
+            items.Add(new SelectListItem { Text = "Chippenham", Value = "Chippenham" });
+            items.Add(new SelectListItem { Text = "Corsham", Value = "Corsham" });
+            items.Add(new SelectListItem { Text = "Devizes", Value = "Devizes" });
+            items.Add(new SelectListItem { Text = "Melksham", Value = "Melksham" });
+            items.Add(new SelectListItem { Text = "Swindon", Value = "Swindon" });
+            items.Add(new SelectListItem { Text = "Trowbridge", Value = "Trowbridge" });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateRadius()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "1 Mile", Value = "0" });
+            items.Add(new SelectListItem { Text = "2 Miles", Value = "1" });
+            items.Add(new SelectListItem { Text = "5 Miles", Value = "2" });
+            items.Add(new SelectListItem { Text = "10 Miles", Value = "3" });
+            items.Add(new SelectListItem { Text = "15 Miles", Value = "4" });
+            items.Add(new SelectListItem { Text = "20 Miles", Value = "5" });
+            items.Add(new SelectListItem { Text = "30 Miles", Value = "6", Selected = true });
+
+            return items;
+        }
+        
+        private List<SelectListItem> populateMinPrice()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "50,000", Value = "50000", Selected = true });
+            items.Add(new SelectListItem { Text = "100,000", Value = "100000" });
+            items.Add(new SelectListItem { Text = "200,000", Value = "200000" });
+            items.Add(new SelectListItem { Text = "300,000", Value = "300000" });
+            items.Add(new SelectListItem { Text = "400,000", Value = "400000" });
+            items.Add(new SelectListItem { Text = "500,000", Value = "500000" });
+            items.Add(new SelectListItem { Text = "600,000", Value = "600000" });
+            items.Add(new SelectListItem { Text = "700,000", Value = "700000" });
+            items.Add(new SelectListItem { Text = "800,000", Value = "800000" });
+            items.Add(new SelectListItem { Text = "900,000", Value = "900000" });
+            items.Add(new SelectListItem { Text = "1,000,000", Value = "1000000" });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateMaxPrice()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "50,000", Value = "50000" });
+            items.Add(new SelectListItem { Text = "100,000", Value = "100000" });
+            items.Add(new SelectListItem { Text = "200,000", Value = "200000" });
+            items.Add(new SelectListItem { Text = "300,000", Value = "300000" });
+            items.Add(new SelectListItem { Text = "100,000", Value = "400000" });
+            items.Add(new SelectListItem { Text = "500,000", Value = "500000" });
+            items.Add(new SelectListItem { Text = "600,000", Value = "600000" });
+            items.Add(new SelectListItem { Text = "700,000", Value = "700000" });
+            items.Add(new SelectListItem { Text = "800,000", Value = "800000" });
+            items.Add(new SelectListItem { Text = "900,000", Value = "900000" });
+            items.Add(new SelectListItem { Text = "1,000,000", Value = "1000000", Selected = true });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateBeds()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "1", Value = "1", Selected = true });
+            items.Add(new SelectListItem { Text = "2", Value = "2" });
+            items.Add(new SelectListItem { Text = "3", Value = "3" });
+            items.Add(new SelectListItem { Text = "4", Value = "4" });
+            items.Add(new SelectListItem { Text = "5+", Value = "5" });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateAge()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            
+            items.Add(new SelectListItem { Text = "Any", Value = "0", Selected = true });
+            items.Add(new SelectListItem { Text = "Older", Value = "1" });
+            items.Add(new SelectListItem { Text = "Modern", Value = "2" });
+            items.Add(new SelectListItem { Text = "New Build", Value = "4" });
+            items.Add(new SelectListItem { Text = "Post War", Value = "8" });
+            items.Add(new SelectListItem { Text = "Pre-War", Value = "16" });
+
+            return items;
+        }
+
         private List<SelectListItem> populateCategorySort()
         {
             List<SelectListItem> items = new List<SelectListItem>();
