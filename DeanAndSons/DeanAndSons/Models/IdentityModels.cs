@@ -1,10 +1,12 @@
 ﻿using DeanAndSons.Models.WAP;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -42,6 +44,40 @@ namespace DeanAndSons.Models
 
         // List of images associated with this user
         public ICollection<ImageUser> Image { get; set; }
+
+        //Checks if property's contact value is null
+        public ContactUser getContact(ICollection<ContactUser> contactCol)
+        {
+            ContactUser contact = null;
+            try
+            {
+                contact = contactCol.First();
+            }
+            catch (InvalidOperationException)
+            {
+                contact = new ContactUser();
+                contact.PropertyNo = "No address found";
+                contact.Town = "No address found";
+            }
+
+            return contact;
+        }
+
+        //Checks if property's image value is null
+        public ImageUser getImage(ICollection<ImageUser> item)
+        {
+            ImageUser image = null;
+            try
+            {
+                image = item.First(i => i.Type == ImageType.Profile);
+            }
+            catch (InvalidOperationException)
+            {
+                image = new ImageUser();
+            }
+
+            return image;
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -1,0 +1,57 @@
+﻿@using DeanAndSons.Models
+@model ProfileDetailsViewModel
+
+@{
+    ViewBag.Title = "ProfileDetails";
+}
+
+@* ********** Page Header ********** *@
+
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+            <div class="col-md-12 dc-pageHead">
+                <p class="pageTitle">Profile Details</p>
+            </div>
+
+        </header>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @* ********** Image ********** *@
+        <div class="col-md-3">
+            <img src="@Model.Image." class="img-responsive center-block" alt="@item.Title image" />
+        </div>
+
+        @* ********** Body ********** *@
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>@Html.ActionLink(@item.Title, "Details", "Propertys", new { id = @item.PropertyID }, null)</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>@item.Description</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Address: @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+

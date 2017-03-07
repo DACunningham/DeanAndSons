@@ -339,6 +339,7 @@
     <Content Include="Views\IMS\Index.cshtml" />
     <Content Include="Views\IMS\TeamViewer.cshtml" />
     <Content Include="Views\Propertys\_IndexList.cshtml" />
+    <Content Include="Views\Account\ProfileDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

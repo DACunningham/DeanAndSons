@@ -1,9 +1,7 @@
 namespace DeanAndSons.Migrations
 {
-    using System;
-    using System.Data.Entity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DeanAndSons.Models.ApplicationDbContext>
     {
@@ -15,6 +13,13 @@ namespace DeanAndSons.Migrations
         protected override void Seed(DeanAndSons.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
+
+            //Add user roles to DB
+            context.Roles.AddOrUpdate(r => r.Name,
+                new IdentityRole { Name = "Admin" },
+                new IdentityRole { Name = "Staff" },
+                new IdentityRole { Name = "Customer" }
+                );
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.

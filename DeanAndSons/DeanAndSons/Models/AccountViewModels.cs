@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DeanAndSons.Models.WAP;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DeanAndSons.Models
@@ -122,5 +123,31 @@ namespace DeanAndSons.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    // *********** Custom View Models **********
+
+    public class ProfileDetailsViewModel
+    {
+        public string ID { get; set; }
+        public string Forename { get; set; }
+        public string Surname { get; set; }
+        public string About { get; set; }
+        public string Email { get; set; }
+        public string UserNameDisp { get; set; }
+        public ContactUser Contact { get; set; }
+        public ImageUser Image { get; set; }
+
+        public ProfileDetailsViewModel(ApplicationUser usr)
+        {
+            ID = usr.Id;
+            Forename = usr.Forename;
+            Surname = usr.Surname;
+            About = usr.About;
+            Email = usr.Email;
+            UserNameDisp = usr.UserNameDisp;
+            Contact = usr.getContact(usr.Contact);
+            Image = usr.getImage(usr.Image);
+        }
     }
 }
