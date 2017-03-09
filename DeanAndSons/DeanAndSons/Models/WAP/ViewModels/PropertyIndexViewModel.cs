@@ -79,6 +79,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
             catch (InvalidOperationException)
             {
                 image = new ImageProperty();
+                image.Location = ImageProperty.defaultImgLocation;
             }
 
             return image;

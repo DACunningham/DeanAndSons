@@ -74,6 +74,7 @@ namespace DeanAndSons.Models
             catch (InvalidOperationException)
             {
                 image = new ImageUser();
+                image.Location = ImageUser.defaultImgLocation;
             }
 
             return image;

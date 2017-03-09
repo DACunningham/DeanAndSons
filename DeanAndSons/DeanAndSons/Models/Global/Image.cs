@@ -30,6 +30,9 @@ namespace DeanAndSons.Models
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
+        //*********** Static Public Fields *********
+        public static string defaultImgLocation = "~/Storage/Global/NoImg.jpg";
+
         public Image()
         {
 

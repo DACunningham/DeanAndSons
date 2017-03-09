@@ -24,7 +24,7 @@
     <div class="row">
         @* ********** Image ********** *@
         <div class="col-md-3">
-            <img src="@Model.Image." class="img-responsive center-block" alt="@item.Title image" />
+            <img src="@Model.Image.Location" class="img-responsive center-block" alt="@Model.Surname image" />
         </div>
 
         @* ********** Body ********** *@
@@ -32,19 +32,25 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h4>@Html.ActionLink(@item.Title, "Details", "Propertys", new { id = @item.PropertyID }, null)</h4>
+                    <h2>@Model.UserNameDisp</h2>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <p>@item.Description</p>
+                    <p>Name: @Model.Forename @Model.Surname</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <p>Address: @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
+                    <p>Email: @Model.Email</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Location: @Model.Contact.Town</p>
                 </div>
             </div>
 
@@ -53,5 +59,36 @@
     </div>
 
     <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Find me a property that...</h2>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Starts at £@Model.BudgetLower </p>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>and goes up to £@Model.BudgetHigher </p>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
 </div>
 
