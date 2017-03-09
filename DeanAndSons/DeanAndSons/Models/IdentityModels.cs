@@ -53,7 +53,7 @@ namespace DeanAndSons.Models
             {
                 contact = contactCol.First();
             }
-            catch (InvalidOperationException)
+            catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentNullException)
             {
                 contact = new ContactUser();
                 contact.PropertyNo = "No address found";
@@ -71,7 +71,7 @@ namespace DeanAndSons.Models
             {
                 image = item.First(i => i.Type == ImageType.Profile);
             }
-            catch (InvalidOperationException)
+            catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentNullException)
             {
                 image = new ImageUser();
                 image.Location = ImageUser.defaultImgLocation;

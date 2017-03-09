@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201702232225366_AppUsrRefactor.Designer.cs">
       <DependentUpon>201702232225366_AppUsrRefactor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703092057143_CustomerModelPropertyAdd.cs" />
+    <Compile Include="Migrations\201703092057143_CustomerModelPropertyAdd.Designer.cs">
+      <DependentUpon>201703092057143_CustomerModelPropertyAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -376,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702232225366_AppUsrRefactor.resx">
       <DependentUpon>201702232225366_AppUsrRefactor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703092057143_CustomerModelPropertyAdd.resx">
+      <DependentUpon>201703092057143_CustomerModelPropertyAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -31,7 +31,7 @@ namespace DeanAndSons.Models
         public byte[] RowVersion { get; set; }
 
         //*********** Static Public Fields *********
-        public static string defaultImgLocation = "~/Storage/Global/NoImg.jpg";
+        public static string defaultImgLocation = "/Storage/Global/NoImg.jpg";
 
         public Image()
         {

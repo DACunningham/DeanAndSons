@@ -52,22 +52,6 @@ namespace DeanAndSons.Models.WAP.ViewModels
             }
         }
 
-        ////Checks if property's contact value is null
-        //private ContactProperty getContact(Property item)
-        //{
-        //    ContactProperty contact = null;
-        //    try
-        //    {
-        //        contact = item.Contact.First();
-        //    }
-        //    catch (InvalidOperationException)
-        //    {
-        //        contact = new ContactProperty();
-        //    }
-
-        //    return contact;
-        //}
-
         //Checks if property's image value is null
         private ImageProperty getImage(Property item)
         {

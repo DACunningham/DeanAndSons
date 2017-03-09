@@ -139,6 +139,7 @@ namespace DeanAndSons.Models
         public string About { get; set; }
 
         public string Email { get; set; }
+
         // The user name that should be displayed around the site (not used for validation)
         [Display(Name = "User Name")]
         public string UserNameDisp { get; set; }
@@ -172,7 +173,7 @@ namespace DeanAndSons.Models
         public ContactUser Contact { get; set; }
         public ImageUser Image { get; set; }
 
-        public ProfileDetailsViewModel(ApplicationUser usr)
+        public ProfileDetailsViewModel(Customer usr)
         {
             ID = usr.Id;
             Forename = usr.Forename;
@@ -180,6 +181,15 @@ namespace DeanAndSons.Models
             About = usr.About;
             Email = usr.Email;
             UserNameDisp = usr.UserNameDisp;
+            BudgetLower = usr.BudgetLower;
+            BudgetHigher = usr.BudgetHigher;
+            PrefPropertyType = usr.PrefPropertyType;
+            PrefPropertyStyle = usr.PrefPropertyStyle;
+            PrefPropertyAge = usr.PrefPropertyAge;
+            PrefNoBedRms = usr.PrefNoBedRms;
+            PrefNoBathRms = usr.PrefNoBathRms;
+            PrefNoSittingRms = usr.PrefNoSittingRms;
+
             Contact = usr.getContact(usr.Contact);
             Image = usr.getImage(usr.Image);
         }

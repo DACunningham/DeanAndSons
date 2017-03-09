@@ -169,14 +169,15 @@ namespace DeanAndSons.Controllers
                     //Adds this user to the customer role on account creation
                     await UserManager.AddToRoleAsync(user.Id, "Customer");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("ProfileDetails", "Account");
+                    // Find newly created user ID and pass to Profile Details method
+                    return RedirectToAction("ProfileDetails", "Account", new { userID = user.Id });
                 }
                 AddErrors(result);
             }
@@ -434,6 +435,27 @@ namespace DeanAndSons.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        // ********** CUSTOM ACCOUNT CONTROLLER METHODS **********
+
+        public ActionResult ProfileDetails(string userID)
+        {
+            var user = UserManager.FindById(userID);
+
+            if (user is Customer)
+            {
+                var vm = new ProfileDetailsViewModel((Customer)user);
+                return View("ProfileDetails", vm);
+            }
+            else
+            {
+                //TODO - Implement logic for Staff members
+            }
+
+            //TODO - Implement error logic
+
+            return View();
         }
 
         #region Helpers

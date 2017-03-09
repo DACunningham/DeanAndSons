@@ -121,7 +121,7 @@ namespace DeanAndSons.Models
             {
                 contact = contactCol.First();
             }
-            catch (InvalidOperationException)
+            catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentNullException)
             {
                 contact = new ContactProperty();
                 contact.PropertyNo = "No address found";
@@ -153,29 +153,31 @@ namespace DeanAndSons.Models
 
     public enum PropertyType
     {
+        Any = 0,
         House = 1,
-        Flat,
-        Maissonette,
-        Mobile,
-        Bungalow,
-        HMO,
-        BuildingPlot
+        Flat = 2,
+        Maissonette = 4,
+        Mobile = 8,
+        Bungalow = 16,
+        HMO = 32,
+        BuildingPlot = 64
     }
 
     public enum PropertyStyle
     {
+        Any = 0,
         Detached = 1,
-        SemiDetached,
-        Terraced,
-        EndTerrace,
-        GroundFloorFlat,
-        UpperFloorFlat
+        SemiDetached = 2,
+        Terraced = 4,
+        EndTerrace = 8,
+        GroundFloorFlat = 16,
+        UpperFloorFlat = 32
     }
 
     [Flags]
     public enum PropertyAge
     {
-        None = 0,
+        Any = 0,
         Older = 1,
         Modern = 2,
         NewBuild = 4,
@@ -185,9 +187,10 @@ namespace DeanAndSons.Models
 
     public enum SaleState
     {
+        Any = 0,
         ForSale = 1,
-        UnderOffer,
-        Sold,
-        ToLet
+        UnderOffer = 2,
+        Sold = 4,
+        ToLet = 8
     }
 }
