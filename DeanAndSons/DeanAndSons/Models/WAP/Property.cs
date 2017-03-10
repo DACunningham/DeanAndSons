@@ -19,7 +19,7 @@ namespace DeanAndSons.Models
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(3000), MinLength(10)]
+        [MaxLength(10000), MinLength(10)]
         public string Description { get; set; }
 
         [Required]

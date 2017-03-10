@@ -248,6 +248,8 @@
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\WAP\ContactProperty.cs" />
     <Compile Include="Models\WAP\ContactUser.cs" />
+    <Compile Include="Models\WAP\Event.cs" />
+    <Compile Include="Models\WAP\ImageEvent.cs" />
     <Compile Include="Models\WAP\ImageProperty.cs" />
     <Compile Include="Models\WAP\ImageService.cs" />
     <Compile Include="Models\WAP\ImageUser.cs" />

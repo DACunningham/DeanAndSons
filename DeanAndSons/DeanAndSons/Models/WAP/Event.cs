@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeanAndSons.Models.WAP
 {
-    public class Service
+    public class Event
     {
-        public int ServiceID { get; set; }
+        public int EventID { get; set; }
 
         [Required]
         [MaxLength(75), MinLength(5)]
@@ -19,9 +19,12 @@ namespace DeanAndSons.Models.WAP
         [Required]
         public string StaffOwnerID { get; set; }
 
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
         [ForeignKey("StaffOwnerID")]
         public Staff StaffOwner { get; set; }
 
-        public ICollection<ImageService> Images { get; set; }
+        public ICollection<ImageEvent> Images { get; set; }
     }
 }

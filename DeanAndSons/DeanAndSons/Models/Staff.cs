@@ -1,9 +1,6 @@
 ﻿using DeanAndSons.Models.WAP;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace DeanAndSons.Models
 {
@@ -20,6 +17,8 @@ namespace DeanAndSons.Models
         public ICollection<Staff> Subordinates { get; set; }
 
         public ICollection<Service> ServicesOwned { get; set; }
+
+        public ICollection<Event> EventsOwned { get; set; }
 
         public ICollection<Property> PropertysOwned { get; set; }
     }
