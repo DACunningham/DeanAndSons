@@ -49,7 +49,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ServiceID,Title,Description,Created,LastModified,Deleted,StaffOwnerID,RowVersion")] Service service)
+        public ActionResult Create([Bind(Include = "ServiceID,Title,Description,StaffOwnerID")] Service service)
         {
             if (ModelState.IsValid)
             {
@@ -83,10 +83,13 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ServiceID,Title,Description,Created,LastModified,Deleted,StaffOwnerID,RowVersion")] Service service)
+        public ActionResult Edit([Bind(Include = "ServiceID,Title,Description,StaffOwnerID")] Service service)
         {
             if (ModelState.IsValid)
             {
+                //Update last updated field
+                service.LastModified = DateTime.Now;
+
                 db.Entry(service).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
