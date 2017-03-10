@@ -94,6 +94,8 @@ namespace DeanAndSons.Models
         public DbSet<Property> Propertys { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         public ApplicationDbContext()
             : base("LocalDB", throwIfV1Schema: false)

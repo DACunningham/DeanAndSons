@@ -209,7 +209,6 @@
     <Compile Include="Controllers\IMSController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropertysController.cs" />
-    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -364,7 +363,6 @@
     <Content Include="Views\IMS\TeamViewer.cshtml" />
     <Content Include="Views\Propertys\_IndexList.cshtml" />
     <Content Include="Views\Account\ProfileDetails.cshtml" />
-    <Content Include="Views\Services\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
