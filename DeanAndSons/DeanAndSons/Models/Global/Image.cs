@@ -19,13 +19,13 @@ namespace DeanAndSons.Models
         public ImageType Type { get; set; }
 
         [Required]
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         [Required]
-        public DateTime LastModified { get; set; }
+        public DateTime LastModified { get; set; } = DateTime.Now;
 
         [Required]
-        public bool Deleted { get; set; }
+        public bool Deleted { get; set; } = false;
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
@@ -42,9 +42,6 @@ namespace DeanAndSons.Models
         {
             Location = saveImage(imgLocation, file);
             Type = type;
-            Created = DateTime.Now;
-            LastModified = DateTime.Now;
-            Deleted = false;
         }
 
         private string saveImage(string path, HttpPostedFileBase file)
@@ -75,10 +72,10 @@ namespace DeanAndSons.Models
     {
         PropertyHeader = 1,
         PropertyBody,
-        Profile,
-        Event,
+        ProfileBody,
+        EventBody,
         EventHeader,
-        Service,
+        ServiceBody,
         ServiceHeader
     }
 }
