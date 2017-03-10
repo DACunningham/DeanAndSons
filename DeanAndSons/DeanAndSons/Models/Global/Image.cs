@@ -10,6 +10,7 @@ namespace DeanAndSons.Models
 {
     public abstract class Image
     {
+        [Key]
         public int ImageID { get; set; }
 
         [Required]
