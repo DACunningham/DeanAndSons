@@ -28,9 +28,6 @@ namespace DeanAndSons.Models
         [Required]
         public bool Deleted { get; set; } = false;
 
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
-
         //*********** Static Public Fields *********
         public static string defaultImgLocation = "/Storage/Global/NoImg.jpg";
 

@@ -15,11 +15,11 @@ namespace DeanAndSons.Models
         public int PropertyID { get; set; }
 
         [Required]
-        [MaxLength(75), MinLength(10)]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(10000), MinLength(10)]
+        [StringLength(10000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
         public string Description { get; set; }
 
         [Required]
@@ -27,6 +27,7 @@ namespace DeanAndSons.Models
         public PropertyType Type { get; set; }
 
         [Required]
+        [Range(50000, 100000000, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         public int Price { get; set; }
 
         [Required]
@@ -42,25 +43,28 @@ namespace DeanAndSons.Models
         public PropertyAge Age { get; set; }
 
         [Required]
+        [Range(1, 5, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         [Display(Name = "No# Bed Rooms")]
         public int NoBedRms { get; set; }
 
         [Required]
+        [Range(1, 5, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         [Display(Name = "No# Bath Rooms")]
         public int NoBathRms { get; set; }
 
         [Required]
+        [Range(1, 5, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         [Display(Name = "No# Sitting Rooms")]
         public int NoSittingRms { get; set; }
 
         [Required]
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         [Required]
-        public DateTime LastModified { get; set; }
+        public DateTime LastModified { get; set; } = DateTime.Now;
 
         [Required]
-        public bool Deleted { get; set; }
+        public bool Deleted { get; set; } = false;
 
         [ForeignKey("Buyer")]
         public string BuyerID { get; set; }
@@ -70,13 +74,10 @@ namespace DeanAndSons.Models
 
         public string StaffOwnerID { get; set; }
 
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
-
         //Only want to allow one of these programmatically
-        public ICollection<ContactProperty> Contact { get; set; }
+        public ICollection<ContactProperty> Contact { get; set; } = new Collection<ContactProperty>();
 
-        public ICollection<ImageProperty> Images { get; set; }
+        public ICollection<ImageProperty> Images { get; set; } = new Collection<ImageProperty>();
 
         public Customer Buyer { get; set; }
 
@@ -105,12 +106,7 @@ namespace DeanAndSons.Models
             NoBedRms = vm.NoBedRms;
             NoBathRms = vm.NoBathRms;
             NoSittingRms = vm.NoSittingRms;
-            Created = DateTime.Now;
-            LastModified = DateTime.Now;
-            Deleted = false;
 
-            Contact = new Collection<ContactProperty>();
-            Images = new Collection<ImageProperty>();
             Contact.Add(new ContactProperty(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
             Images = addImages(vm.Images);
 

@@ -40,7 +40,7 @@ namespace DeanAndSons.Controllers
         // GET: Services/Create
         public ActionResult Create()
         {
-            ViewBag.StaffOwnerID = new SelectList(db.ApplicationUsers, "Id", "Forename");
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace DeanAndSons.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StaffOwnerID = new SelectList(db.ApplicationUsers, "Id", "Forename", service.StaffOwnerID);
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
             return View(service);
         }
 
@@ -74,7 +74,7 @@ namespace DeanAndSons.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.StaffOwnerID = new SelectList(db.ApplicationUsers, "Id", "Forename", service.StaffOwnerID);
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
             return View(service);
         }
 
@@ -91,7 +91,7 @@ namespace DeanAndSons.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.StaffOwnerID = new SelectList(db.ApplicationUsers, "Id", "Forename", service.StaffOwnerID);
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
             return View(service);
         }
 

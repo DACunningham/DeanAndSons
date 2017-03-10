@@ -241,6 +241,14 @@
     <Compile Include="Migrations\201703101831487_AnnotationsUpd.Designer.cs">
       <DependentUpon>201703101831487_AnnotationsUpd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703102130249_RemoveTimeStampSvcs.cs" />
+    <Compile Include="Migrations\201703102130249_RemoveTimeStampSvcs.Designer.cs">
+      <DependentUpon>201703102130249_RemoveTimeStampSvcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703102152482_RemoveTimeStampAll.cs" />
+    <Compile Include="Migrations\201703102152482_RemoveTimeStampAll.Designer.cs">
+      <DependentUpon>201703102152482_RemoveTimeStampAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -402,6 +410,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703101831487_AnnotationsUpd.resx">
       <DependentUpon>201703101831487_AnnotationsUpd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703102130249_RemoveTimeStampSvcs.resx">
+      <DependentUpon>201703102130249_RemoveTimeStampSvcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703102152482_RemoveTimeStampAll.resx">
+      <DependentUpon>201703102152482_RemoveTimeStampAll.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

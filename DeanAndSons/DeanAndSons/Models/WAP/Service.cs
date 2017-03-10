@@ -13,11 +13,11 @@ namespace DeanAndSons.Models.WAP
         public int ServiceID { get; set; }
 
         [Required]
-        [MaxLength(75), MinLength(5)]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(10000), MinLength(5)]
+        [StringLength(10000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string Description { get; set; }
 
         [Required]
@@ -31,9 +31,6 @@ namespace DeanAndSons.Models.WAP
 
         [Required]
         public string StaffOwnerID { get; set; }
-
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
 
         [ForeignKey("StaffOwnerID")]
         public Staff StaffOwner { get; set; }

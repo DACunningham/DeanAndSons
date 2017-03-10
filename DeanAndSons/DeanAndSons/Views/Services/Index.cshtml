@@ -29,9 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Deleted)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.RowVersion)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -55,9 +55,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Deleted)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.RowVersion)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ServiceID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ServiceID }) |

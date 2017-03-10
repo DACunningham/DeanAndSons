@@ -9,16 +9,20 @@ namespace DeanAndSons.Models
         public int ContactID { get; set; }
 
         [Required]
+        [StringLength(50, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 1)]
         [Display(Name = "Property Number/Name")]
         public string PropertyNo { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Street { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Town { get; set; }
 
         [Required]
+        [StringLength(9, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         [Display(Name = "Post Code")]
         public string PostCode { get; set; }
 
@@ -37,9 +41,6 @@ namespace DeanAndSons.Models
 
         [Required]
         public bool Deleted { get; set; } = false;
-
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
 
         public Contact()
         {
