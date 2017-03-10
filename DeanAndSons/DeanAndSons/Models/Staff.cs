@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeanAndSons.Models.WAP;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,5 +18,9 @@ namespace DeanAndSons.Models
 
         // List of subordinates of this user
         public ICollection<Staff> Subordinates { get; set; }
+
+        public ICollection<Service> ServicesOwned { get; set; }
+
+        public ICollection<Property> PropertysOwned { get; set; }
     }
 }

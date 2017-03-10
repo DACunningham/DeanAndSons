@@ -209,6 +209,7 @@
     <Compile Include="Controllers\IMSController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropertysController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -248,11 +249,14 @@
     <Compile Include="Models\WAP\ContactProperty.cs" />
     <Compile Include="Models\WAP\ContactUser.cs" />
     <Compile Include="Models\WAP\ImageProperty.cs" />
+    <Compile Include="Models\WAP\ImageService.cs" />
     <Compile Include="Models\WAP\ImageUser.cs" />
     <Compile Include="Models\WAP\Property.cs" />
+    <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
+    <Compile Include="Models\WAP\ViewModels\ServiceIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -353,6 +357,7 @@
     <Content Include="Views\IMS\TeamViewer.cshtml" />
     <Content Include="Views\Propertys\_IndexList.cshtml" />
     <Content Include="Views\Account\ProfileDetails.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -77,6 +77,8 @@ namespace DeanAndSons.Models
         PropertyBody,
         Profile,
         Event,
-        Service
+        EventHeader,
+        Service,
+        ServiceHeader
     }
 }

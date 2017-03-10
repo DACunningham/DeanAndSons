@@ -1,17 +1,12 @@
-﻿using DeanAndSons.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeanAndSons.Models.WAP
 {
     public class ImageUser : Image
     {
-        [ForeignKey("ApplicationUser")]
+        [ForeignKey("Customer")]
         public string UserID { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public Customer Customer { get; set; }
     }
 }
