@@ -43,7 +43,7 @@ namespace DeanAndSons.Models
         public ICollection<ContactUser> Contact { get; set; }
 
         // List of images associated with this user
-        public ICollection<ImageUser> Image { get; set; }
+        public ICollection<ImageAppUser> Image { get; set; }
 
         //Checks if property's contact value is null
         public ContactUser getContact(ICollection<ContactUser> contactCol)
@@ -64,17 +64,17 @@ namespace DeanAndSons.Models
         }
 
         //Checks if property's image value is null
-        public ImageUser getImage(ICollection<ImageUser> item)
+        public ImageAppUser getImage(ICollection<ImageAppUser> item)
         {
-            ImageUser image = null;
+            ImageAppUser image = null;
             try
             {
-                image = item.First(i => i.Type == ImageType.Profile);
+                image = item.First(i => i.Type == ImageType.ProfileHeader);
             }
             catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentNullException)
             {
-                image = new ImageUser();
-                image.Location = ImageUser.defaultImgLocation;
+                image = new ImageAppUser();
+                image.Location = ImageAppUser.defaultImgLocation;
             }
 
             return image;

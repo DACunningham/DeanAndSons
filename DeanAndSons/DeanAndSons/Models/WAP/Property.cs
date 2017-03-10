@@ -68,6 +68,8 @@ namespace DeanAndSons.Models
         [ForeignKey("Seller")]
         public string SellerID { get; set; }
 
+        public string StaffOwnerID { get; set; }
+
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
@@ -79,6 +81,9 @@ namespace DeanAndSons.Models
         public Customer Buyer { get; set; }
 
         public Customer Seller { get; set; }
+
+        [ForeignKey("StaffOwnerID")]
+        public Staff StaffOwner { get; set; }
 
         public string imgLocation = "/Storage/Propertys";
 

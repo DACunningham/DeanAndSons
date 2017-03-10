@@ -2,11 +2,11 @@
 
 namespace DeanAndSons.Models.WAP
 {
-    public class ImageUser : Image
+    public class ImageAppUser : Image
     {
-        [ForeignKey("Customer")]
+        [ForeignKey("ApplicationUser")]
         public string UserID { get; set; }
 
-        public Customer Customer { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

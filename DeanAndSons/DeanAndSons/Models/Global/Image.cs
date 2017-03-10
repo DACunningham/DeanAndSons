@@ -72,7 +72,7 @@ namespace DeanAndSons.Models
     {
         PropertyHeader = 1,
         PropertyBody,
-        ProfileBody,
+        ProfileHeader,
         EventBody,
         EventHeader,
         ServiceBody,

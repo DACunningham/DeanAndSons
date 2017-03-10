@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DeanAndSons.Models
 {
@@ -33,13 +30,13 @@ namespace DeanAndSons.Models
         public string Email { get; set; }
 
         [Required]
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         [Required]
-        public DateTime LastModified { get; set; }
+        public DateTime LastModified { get; set; } = DateTime.Now;
 
         [Required]
-        public bool Deleted { get; set; }
+        public bool Deleted { get; set; } = false;
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
@@ -57,9 +54,6 @@ namespace DeanAndSons.Models
             PostCode = postCode;
             TelephoneNo = telephoneNo;
             Email = email;
-            Created = DateTime.Now;
-            LastModified = DateTime.Now;
-            Deleted = false;
         }
     }
 }

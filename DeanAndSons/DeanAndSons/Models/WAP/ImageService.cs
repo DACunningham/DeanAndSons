@@ -6,7 +6,7 @@ namespace DeanAndSons.Models.WAP
     public class ImageService : Image
     {
         [ForeignKey("Service")]
-        public string ServiceID { get; set; }
+        public int ServiceID { get; set; }
 
         public Service Service { get; set; }
 

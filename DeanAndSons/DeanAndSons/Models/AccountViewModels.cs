@@ -171,7 +171,7 @@ namespace DeanAndSons.Models
         public int PrefNoSittingRms { get; set; }
 
         public ContactUser Contact { get; set; }
-        public ImageUser Image { get; set; }
+        public ImageAppUser Image { get; set; }
 
         public ProfileDetailsViewModel(Customer usr)
         {

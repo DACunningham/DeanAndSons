@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201703092057143_CustomerModelPropertyAdd.Designer.cs">
       <DependentUpon>201703092057143_CustomerModelPropertyAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703101831487_AnnotationsUpd.cs" />
+    <Compile Include="Migrations\201703101831487_AnnotationsUpd.Designer.cs">
+      <DependentUpon>201703101831487_AnnotationsUpd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -246,13 +250,14 @@
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\WAP\ContactEvent.cs" />
     <Compile Include="Models\WAP\ContactProperty.cs" />
     <Compile Include="Models\WAP\ContactUser.cs" />
     <Compile Include="Models\WAP\Event.cs" />
     <Compile Include="Models\WAP\ImageEvent.cs" />
     <Compile Include="Models\WAP\ImageProperty.cs" />
     <Compile Include="Models\WAP\ImageService.cs" />
-    <Compile Include="Models\WAP\ImageUser.cs" />
+    <Compile Include="Models\WAP\ImageAppUser.cs" />
     <Compile Include="Models\WAP\Property.cs" />
     <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
@@ -390,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703092057143_CustomerModelPropertyAdd.resx">
       <DependentUpon>201703092057143_CustomerModelPropertyAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703101831487_AnnotationsUpd.resx">
+      <DependentUpon>201703101831487_AnnotationsUpd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

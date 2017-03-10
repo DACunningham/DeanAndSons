@@ -1,21 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Web;
 
 namespace DeanAndSons.Models.WAP
 {
-    public class ImageEvent : Image
+    public class ContactEvent : Contact
     {
         [ForeignKey("Event")]
         public int EventID { get; set; }
 
         public Event Event { get; set; }
 
-        public ImageEvent() : base()
+        public ContactEvent() : base()
         {
 
         }
 
-        public ImageEvent(HttpPostedFileBase file, ImageType imgType, string imgLocation, Event evObj) : base(imgType, imgLocation, file)
+        public ContactEvent(string propertyNo, string street, string town, string postCode, int? telephoneNo, string email, Event evObj)
+            : base(propertyNo, street, town, postCode, telephoneNo, email)
         {
             Event = evObj;
         }
