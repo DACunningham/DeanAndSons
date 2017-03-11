@@ -276,6 +276,7 @@
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceCreateViewModel.cs" />
+    <Compile Include="Models\WAP\ViewModels\ServiceDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -384,6 +385,7 @@
     <Content Include="Views\Services\Index.cshtml" />
     <Content Include="Views\Services\IndexCustomer.cshtml" />
     <Content Include="Views\Services\_ImageUpload.cshtml" />
+    <Content Include="Views\Services\DetailsCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

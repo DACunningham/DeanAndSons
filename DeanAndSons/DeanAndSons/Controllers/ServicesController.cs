@@ -37,6 +37,27 @@ namespace DeanAndSons.Controllers
             return View(vmList);
         }
 
+        public ActionResult DetailsCustomer(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Service service = db.Services.Include(s => s.StaffOwner)
+                .Include(i => i.Images)
+                .Single(se => se.ServiceID == id);
+
+            var vm = new ServiceDetailsViewModel(service);
+
+            if (service == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vm);
+        }
+
+
 
 
 
