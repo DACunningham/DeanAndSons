@@ -10,6 +10,7 @@ namespace DeanAndSons.Models.WAP
 {
     public class Event
     {
+        [Key]
         public int EventID { get; set; }
 
         [Required]
