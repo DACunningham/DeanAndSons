@@ -274,6 +274,7 @@
     <Compile Include="Models\WAP\Property.cs" />
     <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\WAP\ViewModels\EventCreateViewModel.cs" />
+    <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
@@ -397,6 +398,7 @@
     <Content Include="Views\Events\_ImageUpload.cshtml" />
     <Content Include="Views\Events\IndexCustomer.cshtml" />
     <Content Include="Views\Events\DetailsCustomer.cshtml" />
+    <Content Include="Views\Events\_IndexList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DeanAndSons.Models;
+using DeanAndSons.Models.WAP;
+using DeanAndSons.Models.WAP.ViewModels;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,9 +10,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DeanAndSons.Models;
-using DeanAndSons.Models.WAP;
-using DeanAndSons.Models.WAP.ViewModels;
 
 namespace DeanAndSons.Controllers
 {
@@ -17,22 +18,82 @@ namespace DeanAndSons.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // ********** Customer Views **********
-        public ActionResult IndexCustomer()
+        public ActionResult IndexCustomer(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null)
         {
-            var events = db.Events.Include(i => i.Images)
-                .Include(s => s.StaffOwner)
-                .Include(c => c.Contact)
-                .ToList();
+            // ********** Database Access **********
+            var dbModel = db.Events.Include(i => i.Images)
+                .Include(c => c.Contact);
 
-            var vmList = new List<EventIndexViewModel>();
-
-            foreach (var item in events)
+            // ********** Search string **********
+            if (!String.IsNullOrWhiteSpace(searchString))
             {
-                var vm = new EventIndexViewModel(item);
-                vmList.Add(vm);
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
             }
 
-            return View(vmList);
+            var dbModelList = dbModel.ToList();
+
+            // ********** Paging and Sorting **********
+
+            //Populate lists and add them to ViewBag for assignment to dropDowns in View.
+            ViewBag.CategorySort = populateCategorySort();
+            ViewBag.OrderSort = populateOrderSort();
+
+            //Concatenate both sorting methods for use in select case.
+            CategorySort = CategorySort + OrderSort;
+
+            //Start of pagination addition
+            ViewBag.CurrentSort = CategorySort;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            //Takes CategorySort var and matches it against case strings to determine how to order the table
+            switch (CategorySort)
+            {
+                case "00":
+                    //Alters dbModelList SQL to add order params to it, ditto for all of below.
+                    dbModelList = dbModel.OrderBy(a => a.Title).ToList();
+                    break;
+                case "01":
+                    dbModelList = dbModel.OrderByDescending(a => a.Title).ToList();
+                    break;
+                case "10":
+                    dbModelList = dbModel.OrderBy(a => a.Created).ToList();
+                    break;
+                case "11":
+                    dbModelList = dbModel.OrderByDescending(a => a.Created).ToList();
+                    break;
+                default:
+                    dbModelList = dbModel.OrderBy(a => a.Title).ToList();
+                    break;
+            }
+
+            var indexList = new List<EventIndexViewModel>();
+            foreach (var item in dbModelList)
+            {
+                var vm = new EventIndexViewModel(item);
+
+                indexList.Add(vm);
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexList", indexList.ToPagedList(pageNumber, pageSize));
+            }
+
+            return View(indexList.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult DetailsCustomer(int? id)
@@ -42,13 +103,14 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Service service = db.Services.Include(s => s.StaffOwner)
+            Event @event = db.Events.Include(s => s.StaffOwner)
                 .Include(i => i.Images)
-                .Single(se => se.ServiceID == id);
+                .Include(c => c.Contact)
+                .Single(se => se.EventID == id);
 
-            var vm = new ServiceDetailsViewModel(service);
+            var vm = new EventDetailsViewModel(@event);
 
-            if (service == null)
+            if (@event == null)
             {
                 return HttpNotFound();
             }
@@ -175,6 +237,27 @@ namespace DeanAndSons.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Populate category and sort drop down lists
+        private List<SelectListItem> populateCategorySort()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Title", Value = "0", Selected = true });
+            items.Add(new SelectListItem { Text = "Date Listed", Value = "1" });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateOrderSort()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Asc.", Value = "0", Selected = true });
+            items.Add(new SelectListItem { Text = "Desc.", Value = "1" });
+
+            return items;
         }
     }
 }

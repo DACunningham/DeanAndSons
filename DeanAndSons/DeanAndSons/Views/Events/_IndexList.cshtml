@@ -1,0 +1,56 @@
+﻿@using DeanAndSons.Models.WAP.ViewModels
+@using PagedList.Mvc
+@model PagedList.IPagedList<EventIndexViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="row dc-rows">
+        @* ********** Image ********** *@
+        <div class="col-md-2">
+            <a href="@Url.Action("DetailsCustomer", "Events", new { id = item.EventID })">
+                <img src="@item.Image.Location" class="img-responsive center-block" alt="@item.Title image" />
+            </a>
+        </div>
+
+        @* ********** Body ********** *@
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>@Html.ActionLink(@item.Title, "DetailsCustomer", "Events", new { id = @item.EventID }, null)</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>@item.Description</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Address: @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
+                </div>
+            </div>
+
+        </div>
+
+        @* ********** End ********** *@
+        <div class="col-md-2">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Listed On: @item.Created.ToLongDateString() </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr />
+}
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, CategorySort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

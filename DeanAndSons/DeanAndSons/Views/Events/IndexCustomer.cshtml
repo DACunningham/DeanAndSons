@@ -1,7 +1,80 @@
-﻿
+﻿@using DeanAndSons.Models.WAP.ViewModels
+@using PagedList.Mvc
+@model PagedList.IPagedList<EventIndexViewModel>
+
 @{
-    ViewBag.Title = "IndexCustomer";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>IndexCustomer</h2>
+<script>
+    var catsel = "" + @ViewBag.CurrentSort
+</script>
 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/Custom/IndexSort.js"></script>
+
+@* ********** Page Header ********** *@
+
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+            <div class="col-md-12 dc-pageHead">
+                <p class="pageTitle">Event Index</p>
+            </div>
+
+        </header>
+    </div>
+</div>
+
+<div class="container body-content">
+
+    @* ********** Sort and Search Bar ********** *@
+    <div class="row dc-search">
+        @using (Ajax.BeginForm("IndexCustomer", "Events", new { currentFilter = ViewBag.CurrentFilter },
+                                            new AjaxOptions
+                                            {
+                                                HttpMethod = "GET",
+                                                InsertionMode = InsertionMode.Replace,
+                                                UpdateTargetId = "indexList"
+                                            }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+
+                    <label class="control-label col-md-3">Category Sort</label>
+                    <div class="col-md-9 col-xs-6">
+                        @Html.DropDownList("CategorySort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="control-label col-md-3">Order Sort</label>
+                    <div class="col-md-9 col-xs-6">
+                        @Html.DropDownList("OrderSort", null, new { @class = "form-control", onchange = "$(this.form).submit()" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
+            </div>
+        }
+    </div>
+
+    @* ********** Property List ********** *@
+    <div id="indexList">
+
+        @Html.Partial("_IndexList", Model)
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
