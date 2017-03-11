@@ -96,6 +96,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                For further information on this property please contact @Model.Forename @Model.Surname at
+                <a href="mailto:@Model.Email?Subject=Property%20Enquiry" target="_top">@Model.Email</a>
+            </p>
+        </div>
+    </div>
+
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.PropertyID }) |
         @Html.ActionLink("Back to List", "Index")

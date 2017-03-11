@@ -26,6 +26,13 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public string PostCode { get; set; }
 
+        //********** Staff Owner **********
+        public string Forename { get; set; }
+
+        public string Surname { get; set; }
+
+        public string Email { get; set; }
+
         private ContactProperty _contact;
 
         public PropertyDetailsViewModel()
@@ -48,6 +55,10 @@ namespace DeanAndSons.Models.WAP.ViewModels
             Street = _contact.Street;
             Town = _contact.Town;
             PostCode = _contact.PostCode;
+
+            Forename = property.StaffOwner.Forename;
+            Surname = property.StaffOwner.Surname;
+            Email = property.StaffOwner.Email;
         }
     }
 }

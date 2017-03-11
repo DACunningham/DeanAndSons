@@ -29,13 +29,6 @@ namespace DeanAndSons.Controllers
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
-                //dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images)
-                //    .Where(p => p.Title.Contains(searchString))
-                //    .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
-                //    .Where(b => b.NoBedRms > _Beds)
-                //    .Where(a => a.Age == (PropertyAge)_Age)
-                //    .ToList();
-
                 dbModel = dbModel
                     .Where(p => p.Title.Contains(searchString))
                     .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
@@ -43,12 +36,6 @@ namespace DeanAndSons.Controllers
             }
             else
             {
-                //dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images).Include(c => c.Contact)
-                //    .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
-                //    .Where(b => b.NoBedRms > _Beds)
-                //    .Where(a => a.Age == (PropertyAge)_Age)
-                //    .ToList();
-
                 dbModel = dbModel
                         .Where(pm => pm.Price >= _MinPrice && pm.Price <= _MaxPrice)
                         .Where(b => b.NoBedRms >= _Beds);
@@ -94,7 +81,7 @@ namespace DeanAndSons.Controllers
             switch (CategorySort)
             {
                 case "00":
-                    //Alters iavmList SQL to add order params to it, ditto for all of below.
+                    //Alters dbModelList SQL to add order params to it, ditto for all of below.
                     dbModelList = dbModel.OrderBy(a => a.Title).ToList();
                     break;
                 case "01":
@@ -145,14 +132,16 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Property property = db.Propertys.Include(i => i.Images).Include(c => c.Contact).Single(p => p.PropertyID == id);
+            Property property = db.Propertys.Include(i => i.Images)
+                .Include(c => c.Contact)
+                .Include(s => s.StaffOwner)
+                .Single(p => p.PropertyID == id);
 
             if (property == null)
             {
                 return HttpNotFound();
             }
 
-            //.Include(i => i.Images).Include(c => c.Contact)
             var vm = new PropertyDetailsViewModel(property);
 
             return View(vm);
@@ -161,8 +150,8 @@ namespace DeanAndSons.Controllers
         // GET: Propertys/Create
         public ActionResult Create()
         {
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
             PropertyCreateViewModel vm = new PropertyCreateViewModel();
-
             return View(vm);
         }
 
@@ -171,7 +160,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "PropertyID,Title,Description,Type,Price,PropertyNo,Street,Town,PostCode,TelephoneNo,Email,Images")]*/ PropertyCreateViewModel vm)
+        public ActionResult Create(PropertyCreateViewModel vm)
         {
             if (ModelState.IsValid)
 
@@ -183,6 +172,7 @@ namespace DeanAndSons.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
             return View(vm);
         }
 

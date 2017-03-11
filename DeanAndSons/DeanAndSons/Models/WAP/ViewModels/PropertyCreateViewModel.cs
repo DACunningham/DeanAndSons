@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -80,5 +81,12 @@ namespace DeanAndSons.Models.WAP.ViewModels
         [Display(Name = "Email Address")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }
+
+        //********** Staff Owner **********
+        [Required]
+        public string StaffOwnerID { get; set; }
+
+        [ForeignKey("StaffOwnerID")]
+        public Staff StaffOwner { get; set; }
     }
 }
