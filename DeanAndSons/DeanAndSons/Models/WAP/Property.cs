@@ -106,6 +106,7 @@ namespace DeanAndSons.Models
             NoBedRms = vm.NoBedRms;
             NoBathRms = vm.NoBathRms;
             NoSittingRms = vm.NoSittingRms;
+            StaffOwnerID = vm.StaffOwnerID;
 
             Contact.Add(new ContactProperty(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
             Images = addImages(vm.Images);

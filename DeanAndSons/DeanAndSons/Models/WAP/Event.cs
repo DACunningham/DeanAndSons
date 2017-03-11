@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeanAndSons.Models.WAP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -46,6 +47,15 @@ namespace DeanAndSons.Models.WAP
         public Event()
         {
 
+        }
+
+        public Event(EventCreateViewModel vm)
+        {
+            Title = vm.Title;
+            Description = vm.Description;
+            StaffOwnerID = vm.StaffOwnerID;
+            Images = addImages(vm.Images);
+            Contact.Add(new ContactEvent(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
         }
 
         //Checks if property's contact value is null

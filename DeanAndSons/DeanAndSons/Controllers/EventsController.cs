@@ -28,12 +28,7 @@ namespace DeanAndSons.Controllers
 
             foreach (var item in events)
             {
-                var vm = new EventIndexViewModel();
-
-                vm.Title = item.Title;
-                vm.EventID = item.EventID;
-                vm.Image = item.Images.Single(i => i.Type == ImageType.EventHeader);
-
+                var vm = new EventIndexViewModel(item);
                 vmList.Add(vm);
             }
 
@@ -91,6 +86,7 @@ namespace DeanAndSons.Controllers
         public ActionResult Create()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
+            var vm = new EventCreateViewModel();
             return View();
         }
 
@@ -99,17 +95,18 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventID,Title,Description,Created,LastModified,Deleted,StaffOwnerID")] Event @event)
+        public ActionResult Create(EventCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                var @event = new Event(vm);
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", @event.StaffOwnerID);
-            return View(@event);
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
+            return View(vm);
         }
 
         // GET: Events/Edit/5

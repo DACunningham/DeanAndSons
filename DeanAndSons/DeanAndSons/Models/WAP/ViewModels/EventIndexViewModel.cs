@@ -23,9 +23,14 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public DateTime Created { get; set; }
 
-        public EventIndexViewModel()
+        public EventIndexViewModel(Event e)
         {
-
+            EventID = e.EventID;
+            Title = e.Title;
+            Description = e.Description;
+            Contact = e.getContact(e.Contact);
+            Image = getImage(e);
+            Created = e.Created;
         }
 
         //Takes the description and cuts it down to 200 chars if required

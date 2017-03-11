@@ -273,6 +273,7 @@
     <Compile Include="Models\WAP\ImageAppUser.cs" />
     <Compile Include="Models\WAP\Property.cs" />
     <Compile Include="Models\WAP\Service.cs" />
+    <Compile Include="Models\WAP\ViewModels\EventCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
@@ -393,10 +394,14 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\_ImageUpload.cshtml" />
+    <Content Include="Views\Events\IndexCustomer.cshtml" />
+    <Content Include="Views\Events\DetailsCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\CMS\" />
+    <Folder Include="Storage\Events\" />
     <Folder Include="Storage\Propertys\" />
     <Folder Include="Storage\Services\" />
   </ItemGroup>
