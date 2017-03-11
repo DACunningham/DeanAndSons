@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeanAndSons.Models.WAP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -10,11 +11,16 @@ namespace DeanAndSons.Models.WAP
 {
     public class Service
     {
+        [Key]
         public int ServiceID { get; set; }
 
         [Required]
-        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
+        [StringLength(35, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string Title { get; set; }
+
+        [Required]
+        [StringLength(65, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
+        public string SubTitle { get; set; }
 
         [Required]
         [StringLength(10000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
@@ -42,6 +48,16 @@ namespace DeanAndSons.Models.WAP
         public Service()
         {
 
+        }
+
+        public Service(ServiceCreateViewModel vm)
+        {
+            Title = vm.Title;
+            SubTitle = vm.SubTitle;
+            Description = vm.Description;
+            StaffOwner = vm.StaffOwner;
+            Images = addImages(vm.Images);
+            StaffOwnerID = vm.StaffOwnerID;
         }
 
         //Takes a collectin of uploaded images and creates a new ImpageProperty for each non null && non empty entry

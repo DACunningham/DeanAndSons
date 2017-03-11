@@ -1,4 +1,4 @@
-﻿@model DeanAndSons.Models.WAP.Service
+﻿@model DeanAndSons.Models.WAP.ViewModels.ServiceCreateViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -20,7 +20,7 @@
 </div>
 
 <div class="container body-content">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Services", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -32,6 +32,14 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SubTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubTitle, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -49,6 +57,35 @@
                     @Html.DropDownList("StaffOwnerID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.StaffOwnerID, "", new { @class = "text-danger" })
                 </div>
+            </div>
+
+            @* ********** Image Info ********** *@
+
+            <div class="col-md-12">
+                @Ajax.ActionLink("Upload More Images...", "MoreImages", "Propertys", new { },
+                   new AjaxOptions
+                   {
+                       HttpMethod = "GET",
+                       InsertionMode = InsertionMode.InsertAfter,
+                       UpdateTargetId = "moreImages"
+                   })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Images, "Header Image", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Images, new { type = "file" })
+                    @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @for (int i = 0; i < 3; i++)
+            {
+                @Html.Partial("_ImageUpload", Model)
+            }
+
+            <div id="moreImages">
+
             </div>
 
             <div class="form-group">

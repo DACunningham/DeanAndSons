@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DeanAndSons.Models;
+using DeanAndSons.Models.WAP;
+using DeanAndSons.Models.WAP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,14 +9,38 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DeanAndSons.Models;
-using DeanAndSons.Models.WAP;
 
 namespace DeanAndSons.Controllers
 {
     public class ServicesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        // ********** Customer Views **********
+        public ActionResult IndexCustomer()
+        {
+            var services = db.Services.Include(i => i.Images).Include(s => s.StaffOwner).ToList();
+            var vmList = new List<ServiceIndexViewModel>();
+
+            foreach (var item in services)
+            {
+                var vm = new ServiceIndexViewModel();
+
+                vm.Title = item.Title;
+                vm.SubTitle = item.SubTitle;
+                vm.ServiceID = item.ServiceID;
+                vm.Image = item.Images.Single(i => i.Type == ImageType.ServiceHeader);
+
+                vmList.Add(vm);
+            }
+
+            return View(vmList);
+        }
+
+
+
+
+        // ********** CRUD Views **********
 
         // GET: Services
         public ActionResult Index()
@@ -41,7 +68,8 @@ namespace DeanAndSons.Controllers
         public ActionResult Create()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
-            return View();
+            var vm = new ServiceCreateViewModel();
+            return View(vm);
         }
 
         // POST: Services/Create
@@ -49,17 +77,18 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ServiceID,Title,Description,StaffOwnerID")] Service service)
+        public ActionResult Create(ServiceCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                var service = new Service(vm);
                 db.Services.Add(service);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
-            return View(service);
+            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
+            return View(vm);
         }
 
         // GET: Services/Edit/5
