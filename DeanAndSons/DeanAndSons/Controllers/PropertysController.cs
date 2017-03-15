@@ -124,6 +124,24 @@ namespace DeanAndSons.Controllers
             return View(indexList.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult IndexL()
+        {
+            // ********** Database Access **********
+            var dbModel = db.Propertys.ToList();
+
+            //var indexList = new List<PropertyIndexViewModel>();
+            //var dbModelList = dbModel.ToList();
+
+            //foreach (var item in dbModelList)
+            //{
+            //    var vm = new PropertyIndexViewModel(item);
+
+            //    indexList.Add(vm);
+            //}
+
+            return View(dbModel);
+        }
+
         // GET: Propertys/Details/5
         public ActionResult Details(int? id)
         {

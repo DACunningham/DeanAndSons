@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
@@ -12,7 +11,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Information Management System</p>
+                <p class="pageTitle">Content Management System</p>
             </div>
 
         </header>
@@ -23,46 +22,7 @@
 <div class="container body-content">
     <div class="row">
 
-        <a id="tab" href="@Url.Action("TeamViewer", "IMS", null)">
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="/Storage/Global/Hierarchy.png" style="background-color: transparent; height: 175px; width: 175px;" class="img-responsive center-block" alt="image" />
-                    </div>
-                    <div class="col-md-12">
-                        <h3 class="text-center">Hierarchy Viewer</h3>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a id="tab" href="@Url.Action("ProfileDetails", "Account", new { userID = User.Identity.GetUserId() })">
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="/Storage/Global/Profile.png" style="background-color: transparent; height: 175px; width: 175px;" class="img-responsive center-block" alt="image" />
-                    </div>
-                    <div class="col-md-12">
-                        <h3 class="text-center">Staff Profile</h3>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a id="tab" href="@Url.Action("TeamViewer", "IMS", null)">
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="/Storage/Global/AddRemove.png" style="background-color: transparent; height: 175px; width: 175px;" class="img-responsive center-block" alt="image" />
-                    </div>
-                    <div class="col-md-12">
-                        <h3 class="text-center">Add & Remove Staff</h3>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a id="tab" href="@Url.Action("Index", "Propertys", null)">
+        <a id="tab" href="@Url.Action("IndexL", "Propertys", null)">
             <div class="col-md-4">
                 <div class="row">
                     <div class="col-md-12">

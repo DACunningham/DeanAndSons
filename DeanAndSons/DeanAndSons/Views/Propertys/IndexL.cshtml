@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DeanAndSons.Models.WAP.Event>
+﻿@model IEnumerable<DeanAndSons.Models.Property>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Event Index</p>
+                <p class="pageTitle">Property Index</p>
             </div>
 
         </header>
@@ -27,19 +27,19 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StaffOwner.Forename)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleState)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastModified)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Deleted)
@@ -51,27 +51,27 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StaffOwner.Forename)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleState)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Created)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastModified)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Deleted)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EventID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.EventID }) |
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.EventID })*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PropertyID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PropertyID }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.PropertyID })*@
                 </td>
             </tr>
         }

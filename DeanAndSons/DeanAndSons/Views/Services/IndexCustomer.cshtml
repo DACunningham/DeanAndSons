@@ -26,17 +26,17 @@
 
         @foreach (var item in Model)
         {
-            <a href="@Url.Action("DetailsCustomer", "Services", new { id = item.ServiceID })">
+            <a id="tab" href="@Url.Action("DetailsCustomer", "Services", new { id = item.ServiceID })">
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12">
                             <img src="@item.Image.Location" style="background-color: transparent" class="img-responsive center-block" alt="@item.Title image" />
                         </div>
                         <div class="col-md-12">
-                            <h3>@item.Title</h3>
+                            <h3 class="text-center">@item.Title</h3>
                         </div>
                         <div class="col-md-12">
-                            <p>@item.SubTitle</p>
+                            <p class="text-center">@item.SubTitle</p>
                         </div>
                     </div>
                 </div>

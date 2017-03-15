@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DeanAndSons.Models.WAP;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -45,5 +46,7 @@ namespace DeanAndSons.Models
         // List of properties this user has sold
         [InverseProperty("Seller")]
         public ICollection<Property> PropertysSell { get; set; } = new Collection<Property>();
+
+        //public ICollection<Service> Serivces { get; set; }
     }
 }
