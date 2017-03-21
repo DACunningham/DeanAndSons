@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DeanAndSons.Models;
+using DeanAndSons.Models.Global.ViewModels;
 
 namespace DeanAndSons.Controllers
 {
@@ -445,17 +446,18 @@ namespace DeanAndSons.Controllers
 
             if (user is Customer)
             {
-                var vm = new ProfileDetailsViewModel((Customer)user);
-                return View("ProfileDetails", vm);
+                var vm = new ProfileCustDetailsViewModel((Customer)user);
+                return View("ProfileCustDetails", vm);
             }
             else
             {
-                //TODO - Implement logic for Staff members
+                var vm = new ProfileStaffDetailsViewModel((Staff)user);
+                return View("ProfileStaffDetails", vm);
             }
 
             //TODO - Implement error logic
 
-            return View();
+            //return View();
         }
 
         #region Helpers

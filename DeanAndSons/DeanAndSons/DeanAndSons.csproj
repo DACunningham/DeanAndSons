@@ -260,6 +260,8 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
+    <Compile Include="Models\Global\ViewModels\ProfileCustDetailsViewModel.cs" />
+    <Compile Include="Models\Global\ViewModels\ProfileStaffDetailsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -272,7 +274,7 @@
     <Compile Include="Models\WAP\ImageProperty.cs" />
     <Compile Include="Models\WAP\ImageService.cs" />
     <Compile Include="Models\WAP\ImageAppUser.cs" />
-    <Compile Include="Models\WAP\Property.cs" />
+    <Compile Include="Models\Property.cs" />
     <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\WAP\ViewModels\EventCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
@@ -382,7 +384,7 @@
     <Content Include="Views\IMS\Index.cshtml" />
     <Content Include="Views\IMS\TeamViewer.cshtml" />
     <Content Include="Views\Propertys\_IndexList.cshtml" />
-    <Content Include="Views\Account\ProfileDetails.cshtml" />
+    <Content Include="Views\Account\ProfileCustDetails.cshtml" />
     <Content Include="Views\Services\Create.cshtml" />
     <Content Include="Views\Services\Delete.cshtml" />
     <Content Include="Views\Services\Details.cshtml" />
@@ -402,6 +404,10 @@
     <Content Include="Views\Events\_IndexList.cshtml" />
     <Content Include="Views\CMS\Index.cshtml" />
     <Content Include="Views\Propertys\IndexL.cshtml" />
+    <Content Include="Views\Account\ProfileStaffDetails.cshtml" />
+    <Content Include="Views\Account\_PropertyProfile.cshtml" />
+    <Content Include="Views\Account\_ServiceProfile.cshtml" />
+    <Content Include="Views\Account\_EventProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,24 @@
+﻿@using DeanAndSons.Models
+@using DeanAndSons.Models.WAP
+
+@model Event
+
+@{
+    var img = Model.Images.Where(i => i.Type == ImageType.EventHeader).Single();
+}
+
+<div class="col-md-3">
+
+    <div class="row">
+        <div class="col-md-12">
+            <img src="@img.Location" class="img-responsive center-block" alt="@Model.Title image" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center">@Model.Title</p>
+        </div>
+    </div>
+
+</div>

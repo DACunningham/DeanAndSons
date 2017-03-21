@@ -1,5 +1,6 @@
 ﻿using DeanAndSons.Models.WAP;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeanAndSons.Models
@@ -14,12 +15,12 @@ namespace DeanAndSons.Models
         public Staff Superior { get; set; }
 
         // List of subordinates of this user
-        public ICollection<Staff> Subordinates { get; set; }
+        public ICollection<Staff> Subordinates { get; set; } = new Collection<Staff>();
 
-        public ICollection<Service> ServicesOwned { get; set; }
+        public ICollection<Service> ServicesOwned { get; set; } = new Collection<Service>();
 
-        public ICollection<Event> EventsOwned { get; set; }
+        public ICollection<Event> EventsOwned { get; set; } = new Collection<Event>();
 
-        public ICollection<Property> PropertysOwned { get; set; }
+        public ICollection<Property> PropertysOwned { get; set; } = new Collection<Property>();
     }
 }
