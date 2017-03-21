@@ -3,12 +3,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DeanAndSons.Models
 {
@@ -40,10 +42,12 @@ namespace DeanAndSons.Models
         public bool Deleted { get; set; }
 
         // List of one contact details for this user (some reason EF won't let me have 1-1 relationship here)
-        public ICollection<ContactUser> Contact { get; set; }
+        public ICollection<ContactUser> Contact { get; set; } = new Collection<ContactUser>();
 
         // List of images associated with this user
-        public ICollection<ImageAppUser> Image { get; set; }
+        public ICollection<ImageAppUser> Image { get; set; } = new Collection<ImageAppUser>();
+
+        private string imgLocation = "/Storage/Users";
 
         //Checks if property's contact value is null
         public ContactUser getContact(ICollection<ContactUser> contactCol)
@@ -80,6 +84,21 @@ namespace DeanAndSons.Models
             return image;
         }
 
+        public void addImage(HttpPostedFileBase img)
+        {
+            //Ensures there is only ever one image in collection (stupid EF relationship rules stopped me just having one like normal)
+            Image.Clear();
+
+            Image.Add(new ImageAppUser(img, ImageType.ProfileHeader, imgLocation, this));
+        }
+
+        public void addContact(string propNo, string street, string town, string postCode, int? telNo, string email, ApplicationUser usrObj)
+        {
+            Contact.Clear();
+            var _contact = new ContactUser(propNo, street, town, postCode, telNo, email, usrObj);
+            Contact.Add(_contact);
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -106,5 +125,7 @@ namespace DeanAndSons.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<DeanAndSons.Models.Staff> ApplicationUsers { get; set; }
     }
 }

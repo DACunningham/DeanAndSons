@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DeanAndSons.Models;
 using DeanAndSons.Models.Global.ViewModels;
+using System.Net;
+using System.Data.Entity;
+using DeanAndSons.Models.WAP;
 
 namespace DeanAndSons.Controllers
 {
@@ -18,6 +21,8 @@ namespace DeanAndSons.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -442,6 +447,11 @@ namespace DeanAndSons.Controllers
 
         public ActionResult ProfileDetails(string userID)
         {
+            if (String.IsNullOrEmpty(userID))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var user = UserManager.FindById(userID);
 
             if (user is Customer)
@@ -458,6 +468,86 @@ namespace DeanAndSons.Controllers
             //TODO - Implement error logic
 
             //return View();
+        }
+
+        public ActionResult ProfileEdit(string userID)
+        {
+            if (String.IsNullOrEmpty(userID))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = UserManager.FindById(userID);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            //if (user is Customer)
+            //{
+            //    //TODO - FIX var vm = new ProfileCustEditViewModel((Customer)user);
+            //    //return View("ProfileCustEdit", vm);
+            //}
+            //else
+            //{
+                var vm = new ProfileStaffEditViewModel((Staff)user);
+                return View("ProfileStaffEdit", vm);
+            //}
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ProfileCustEdit()
+        //{
+        //    if (String.IsNullOrEmpty(userID))
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    var user = UserManager.FindById(userID);
+
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    if (user is Customer)
+        //    {
+        //        var vm = new ProfileCustDetailsViewModel((Customer)user);
+        //        return View("ProfileCustEdit", vm);
+        //    }
+        //    else
+        //    {
+        //        var vm = new ProfileStaffDetailsViewModel((Staff)user);
+        //        return View("ProfileStaffEdit", vm);
+        //    }
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfileStaffEdit(ProfileStaffEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var staff = db.Users.Include(i => i.Image).Include(c => c.Contact)
+                    .Where(s => s.Id == vm.ID).Single();
+
+                staff.Forename = vm.Forename;
+                staff.Surname = vm.Surname;
+                staff.About = vm.About;
+                staff.Email = vm.Email;
+                staff.UserNameDisp = vm.UserNameDisp;
+
+                staff.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, staff);
+                staff.addImage(vm.Image);
+
+                db.Entry(staff).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ProfileStaffDetails", vm);
+            }
+
+            return View(vm);
         }
 
         #region Helpers

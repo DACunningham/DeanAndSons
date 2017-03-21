@@ -261,7 +261,9 @@
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileCustDetailsViewModel.cs" />
+    <Compile Include="Models\Global\ViewModels\ProfileCustEditViewModel.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileStaffDetailsViewModel.cs" />
+    <Compile Include="Models\Global\ViewModels\ProfileStaffEditViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -408,6 +410,7 @@
     <Content Include="Views\Account\_PropertyProfile.cshtml" />
     <Content Include="Views\Account\_ServiceProfile.cshtml" />
     <Content Include="Views\Account\_EventProfile.cshtml" />
+    <Content Include="Views\Account\ProfileStaffEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -415,6 +418,7 @@
     <Folder Include="Storage\Events\" />
     <Folder Include="Storage\Propertys\" />
     <Folder Include="Storage\Services\" />
+    <Folder Include="Storage\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
