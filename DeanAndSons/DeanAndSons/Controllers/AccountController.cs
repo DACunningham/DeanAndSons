@@ -477,7 +477,9 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var user = UserManager.FindById(userID);
+            //var user = UserManager.FindById(userID);
+            var user = db.Users.Include(c => c.Contact)
+                .Where(u => u.Id == userID).Single();
 
             if (user == null)
             {
@@ -544,7 +546,11 @@ namespace DeanAndSons.Controllers
 
                 db.Entry(staff).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("ProfileStaffDetails", vm);
+
+                //Create details view model
+                var dvm = new ProfileStaffDetailsViewModel((Staff)staff);
+
+                return View("ProfileStaffDetails", dvm);
             }
 
             return View(vm);

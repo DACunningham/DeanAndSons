@@ -89,7 +89,10 @@ namespace DeanAndSons.Models
             //Ensures there is only ever one image in collection (stupid EF relationship rules stopped me just having one like normal)
             Image.Clear();
 
-            Image.Add(new ImageAppUser(img, ImageType.ProfileHeader, imgLocation, this));
+            if (img != null && img.ContentLength > 0)
+            {
+                Image.Add(new ImageAppUser(img, ImageType.ProfileHeader, imgLocation, this));
+            }
         }
 
         public void addContact(string propNo, string street, string town, string postCode, int? telNo, string email, ApplicationUser usrObj)
