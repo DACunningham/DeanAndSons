@@ -1,19 +1,19 @@
 ﻿@using DeanAndSons.Models.Global.ViewModels
-@model ProfileStaffEditViewModel
+@model ProfileCustEditViewModel
 
 @{
-    ViewBag.Title = "ProfileStaffEdit";
+    ViewBag.Title = "ProfileCustEdit";
 }
 
-<h2>ProfileStaffEdit</h2>
+<h2>ProfileCustEdit</h2>
 
 
-@using (Html.BeginForm("ProfileStaffEdit", "Account", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("ProfileCustEdit", "Account", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Staff</h4>
+        <h4>Customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -55,6 +55,70 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UserNameDisp, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserNameDisp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BudgetLower, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BudgetLower, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BudgetLower, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BudgetHigher, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BudgetHigher, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BudgetHigher, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefPropertyType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.PrefPropertyType, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrefPropertyType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefPropertyStyle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.PrefPropertyStyle, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrefPropertyStyle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefPropertyAge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.PrefPropertyAge, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrefPropertyAge, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefNoBedRms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PrefNoBedRms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrefNoBedRms, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefNoBathRms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PrefNoBathRms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrefNoBathRms, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrefNoSittingRms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PrefNoSittingRms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrefNoSittingRms, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -127,8 +191,6 @@
         </div>*@
     </div>
 }
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

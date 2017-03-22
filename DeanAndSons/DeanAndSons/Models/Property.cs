@@ -176,7 +176,6 @@ namespace DeanAndSons.Models
         UpperFloorFlat = 32
     }
 
-    [Flags]
     public enum PropertyAge
     {
         Any = 0,

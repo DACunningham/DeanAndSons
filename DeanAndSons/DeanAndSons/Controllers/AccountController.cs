@@ -464,10 +464,6 @@ namespace DeanAndSons.Controllers
                 var vm = new ProfileStaffDetailsViewModel((Staff)user);
                 return View("ProfileStaffDetails", vm);
             }
-
-            //TODO - Implement error logic
-
-            //return View();
         }
 
         public ActionResult ProfileEdit(string userID)
@@ -477,7 +473,6 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //var user = UserManager.FindById(userID);
             var user = db.Users.Include(c => c.Contact)
                 .Where(u => u.Id == userID).Single();
 
@@ -486,45 +481,57 @@ namespace DeanAndSons.Controllers
                 return HttpNotFound();
             }
 
-            //if (user is Customer)
-            //{
-            //    //TODO - FIX var vm = new ProfileCustEditViewModel((Customer)user);
-            //    //return View("ProfileCustEdit", vm);
-            //}
-            //else
-            //{
+            if (user is Customer)
+            {
+                var vm = new ProfileCustEditViewModel((Customer)user);
+                return View("ProfileCustEdit", vm);
+            }
+            else
+            {
                 var vm = new ProfileStaffEditViewModel((Staff)user);
                 return View("ProfileStaffEdit", vm);
-            //}
+            }
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ProfileCustEdit()
-        //{
-        //    if (String.IsNullOrEmpty(userID))
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfileCustEdit(ProfileCustEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var _cust = db.Users.Include(i => i.Image).Include(c => c.Contact)
+                    .Where(s => s.Id == vm.ID).Single();
 
-        //    var user = UserManager.FindById(userID);
+                var cust = (Customer)_cust;
 
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
+                cust.Forename = vm.Forename;
+                cust.Surname = vm.Surname;
+                cust.About = vm.About;
+                cust.Email = vm.Email;
+                cust.UserNameDisp = vm.UserNameDisp;
+                cust.BudgetLower = vm.BudgetLower;
+                cust.BudgetHigher = vm.BudgetHigher;
+                cust.PrefPropertyType = vm.PrefPropertyType;
+                cust.PrefPropertyStyle = vm.PrefPropertyStyle;
+                cust.PrefPropertyAge = vm.PrefPropertyAge;
+                cust.PrefNoBedRms = vm.PrefNoBedRms;
+                cust.PrefNoBathRms = vm.PrefNoBathRms;
+                cust.PrefNoSittingRms = vm.PrefNoSittingRms;
 
-        //    if (user is Customer)
-        //    {
-        //        var vm = new ProfileCustDetailsViewModel((Customer)user);
-        //        return View("ProfileCustEdit", vm);
-        //    }
-        //    else
-        //    {
-        //        var vm = new ProfileStaffDetailsViewModel((Staff)user);
-        //        return View("ProfileStaffEdit", vm);
-        //    }
-        //}
+                cust.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, cust);
+                cust.addImage(vm.Image);
+
+                db.Entry(cust).State = EntityState.Modified;
+                db.SaveChanges();
+
+                //Create details view model
+                var dvm = new ProfileCustDetailsViewModel(cust);
+
+                return View("ProfileCustDetails", dvm);
+            }
+
+            return View(vm);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

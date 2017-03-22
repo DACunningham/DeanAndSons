@@ -411,6 +411,7 @@
     <Content Include="Views\Account\_ServiceProfile.cshtml" />
     <Content Include="Views\Account\_EventProfile.cshtml" />
     <Content Include="Views\Account\ProfileStaffEdit.cshtml" />
+    <Content Include="Views\Account\ProfileCustEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
