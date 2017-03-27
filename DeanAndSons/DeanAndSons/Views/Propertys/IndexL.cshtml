@@ -69,8 +69,8 @@
                     @Html.DisplayFor(modelItem => item.Deleted)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.PropertyID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.PropertyID }) |
+                    @Html.ActionLink("Edit", "EditCMS", new { id = item.PropertyID }) @*|
+                    @Html.ActionLink("Details", "Details", new { id = item.PropertyID }) |*@
                     @*@Html.ActionLink("Delete", "Delete", new { id = item.PropertyID })*@
                 </td>
             </tr>

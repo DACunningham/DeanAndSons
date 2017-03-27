@@ -142,6 +142,42 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
+        // GET: Propertys/Edit/5
+        public ActionResult EditCMS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Property property = db.Propertys.Find(id);
+
+            PropertyEditCMSViewModel vm = new PropertyEditCMSViewModel(property);
+
+            if (property == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vm);
+        }
+
+        // POST: Propertys/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCMS(PropertyEditCMSViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(vm).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("IndexL");
+            }
+            return View(vm);
+        }
+
         // GET: Propertys/Details/5
         public ActionResult Details(int? id)
         {

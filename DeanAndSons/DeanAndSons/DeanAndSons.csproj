@@ -283,6 +283,7 @@
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
+    <Compile Include="Models\WAP\ViewModels\PropertyEditCMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceDetailsViewModel.cs" />
@@ -412,6 +413,7 @@
     <Content Include="Views\Account\_EventProfile.cshtml" />
     <Content Include="Views\Account\ProfileStaffEdit.cshtml" />
     <Content Include="Views\Account\ProfileCustEdit.cshtml" />
+    <Content Include="Views\Propertys\EditCMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
