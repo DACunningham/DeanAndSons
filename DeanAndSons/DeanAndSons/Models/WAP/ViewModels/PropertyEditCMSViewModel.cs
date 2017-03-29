@@ -29,6 +29,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public PropertyEditCMSViewModel(Property obj)
         {
+            PropertyID = obj.PropertyID;
             Title = obj.Title;
             Description = obj.Description;
         }

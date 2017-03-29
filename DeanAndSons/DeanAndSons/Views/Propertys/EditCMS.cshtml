@@ -21,8 +21,7 @@
 
 <div class="container body-content">
 
-
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("EditCMS", "Propertys", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -31,20 +30,18 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.PropertyID)
+            @Html.HiddenFor(model => model.Title, new { id = "hTitle" })
+            @Html.HiddenFor(model => model.Description, new { id = "hDescription" })           
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "TitleTMCE" } })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <h1 id="titleDisp" class="edit">@Model.Title</h1>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2", id = "DescTMCE" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <p id="descriptionDisp" class="edit">@Model.Description</p>
                 </div>
             </div>
 
@@ -70,7 +67,7 @@
 
             @for (int i = 0; i < 3; i++)
             {
-                @Html.Partial("_ImageUpload", Model)
+                @Html.Partial("_ImageUploadCMS", Model)
             }
 
             <div id="moreImages">
@@ -79,7 +76,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input id="submit" type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -91,5 +88,8 @@
 </div>
 
 @section Scripts {
+<script src="~/Scripts/tinymce/tinymce.min.js"></script>
+<script src="~/Scripts/Custom/EditorCMS.js"></script>
+<script src="~/Scripts/Custom/CMSEditProp.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

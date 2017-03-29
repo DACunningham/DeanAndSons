@@ -171,7 +171,13 @@ namespace DeanAndSons.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vm).State = EntityState.Modified;
+                var property = db.Propertys.Include(i => i.Images).Single(p => p.PropertyID == vm.PropertyID);
+
+                property.Title = vm.Title;
+                property.Description = vm.Description;
+                // TODO VM Images need to be handled
+
+                db.Entry(property).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("IndexL");
             }
