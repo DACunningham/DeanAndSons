@@ -69,7 +69,7 @@ namespace DeanAndSons.Models
         /// Physically delete image from file store.  File checked for existance before delete.
         /// </summary>
         /// <param name="img">Image to delete</param>
-        public void P(Image img)
+        public void DeleteImage(Image img)
         {
             var fileToDelete = HttpContext.Current.Server.MapPath(img.Location);
 
