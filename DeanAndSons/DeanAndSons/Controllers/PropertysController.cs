@@ -124,20 +124,21 @@ namespace DeanAndSons.Controllers
             return View(indexList.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult IndexL()
+        public ActionResult IndexL(string searchString)
         {
             // ********** Database Access **********
-            var dbModel = db.Propertys.ToList();
+            var dbModel = db.Propertys.AsQueryable();
 
-            //var indexList = new List<PropertyIndexViewModel>();
-            //var dbModelList = dbModel.ToList();
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
+            }
 
-            //foreach (var item in dbModelList)
-            //{
-            //    var vm = new PropertyIndexViewModel(item);
-
-            //    indexList.Add(vm);
-            //}
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexLList", dbModel);
+            }
 
             return View(dbModel);
         }

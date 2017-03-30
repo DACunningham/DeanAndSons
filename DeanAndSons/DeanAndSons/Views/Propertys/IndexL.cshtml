@@ -12,7 +12,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Property Index</p>
+                <p class="pageTitle">Property Index - CMS</p>
             </div>
 
         </header>
@@ -21,60 +21,31 @@
 
 <div class="container body-content">
 
-    <p>
-        @*@Html.ActionLink("Create New", "Create")*@
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SaleState)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Deleted)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
+    @* ********** Sort and Search Bar ********** *@
+    <div class="row dc-search">
+        @using (Ajax.BeginForm("IndexL", "Propertys", new { },
+                                            new AjaxOptions
+                                            {
+                                                HttpMethod = "GET",
+                                                InsertionMode = InsertionMode.Replace,
+                                                UpdateTargetId = "indexList"
+                                            }))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SaleState)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Created)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Deleted)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditCMS", new { id = item.PropertyID }) @*|
-                    @Html.ActionLink("Details", "Details", new { id = item.PropertyID }) |*@
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.PropertyID })*@
-                </td>
-            </tr>
+            <div class="col-md-12">
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
+            </div>
         }
+    </div>
 
-    </table>
+    @* ********** Property List ********** *@
+    <div id="indexList">
+
+        @Html.Partial("_IndexLList", Model)
+
+    </div>
+
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
