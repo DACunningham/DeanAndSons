@@ -64,6 +64,20 @@ namespace DeanAndSons.Models
                 throw new Exception("The image was not saved for some reason");
             }
         }
+
+        /// <summary>
+        /// Physically delete image from file store.  File checked for existance before delete.
+        /// </summary>
+        /// <param name="img">Image to delete</param>
+        public void P(Image img)
+        {
+            var fileToDelete = HttpContext.Current.Server.MapPath(img.Location);
+
+            if (File.Exists(fileToDelete))
+            {
+                System.IO.File.Delete(fileToDelete);
+            }
+        }
     }
 
     public enum ImageType

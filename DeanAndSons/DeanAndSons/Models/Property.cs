@@ -133,7 +133,7 @@ namespace DeanAndSons.Models
         }
 
         //Takes a collectin of uploaded images and creates a new ImpageProperty for each non null && non empty entry
-        private ICollection<ImageProperty> addImages(ICollection<HttpPostedFileBase> files)
+        public ICollection<ImageProperty> addImages(ICollection<HttpPostedFileBase> files)
         {
             var images = new Collection<ImageProperty>();
             ImageType imgType = ImageType.PropertyHeader;
@@ -150,6 +150,16 @@ namespace DeanAndSons.Models
             }
 
             return images;
+        }
+
+        /// <summary>
+        /// Remove image from file store on server only.  Doesn't remove item from property collection
+        /// or DB
+        /// </summary>
+        /// <param name="img">The image to remove</param>
+        public void removeImage(ImageProperty img)
+        {
+            img.DeleteImage(img);
         }
     }
 

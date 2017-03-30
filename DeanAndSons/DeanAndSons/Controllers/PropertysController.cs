@@ -172,10 +172,35 @@ namespace DeanAndSons.Controllers
             if (ModelState.IsValid)
             {
                 var property = db.Propertys.Include(i => i.Images).Single(p => p.PropertyID == vm.PropertyID);
+                var _hasNewImage = -1;
 
                 property.Title = vm.Title;
                 property.Description = vm.Description;
-                // TODO VM Images need to be handled
+
+                //Checks if any of the image objs has a valid file uploaded
+                foreach (var item in vm.Images)
+                {
+                    if (item != null && item.ContentLength != 0)
+                    {
+                        _hasNewImage = 1;
+                        break;
+                    }
+                }
+
+                //If image obj has valid file uploaded clear original image list and add new images.
+                if (_hasNewImage == 1)
+                {
+                    //Remove all images from file store and DB
+                    foreach (var item in property.Images.ToList())
+                    {
+                        property.removeImage(item);
+                        db.Images.Remove(item);
+                    }
+
+                    //Add images to property.  Will only add images if there is an image in the list and if there is an image in the list it would have
+                    //already been emptied by the foreach loop above.
+                    property.Images = property.addImages(vm.Images);
+                }
 
                 db.Entry(property).State = EntityState.Modified;
                 db.SaveChanges();
