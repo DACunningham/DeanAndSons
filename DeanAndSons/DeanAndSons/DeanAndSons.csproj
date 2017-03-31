@@ -588,6 +588,9 @@
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Propertys\_ImageUploadCMS.cshtml" />
     <Content Include="Views\Propertys\_IndexLList.cshtml" />
+    <Content Include="Views\Propertys\IndexIMS.cshtml" />
+    <Content Include="Views\Propertys\_IndexIMSList.cshtml" />
+    <Content Include="Views\Propertys\EditIMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

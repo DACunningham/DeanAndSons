@@ -88,10 +88,9 @@ namespace DeanAndSons.Models
 
         public string imgLocation = "/Storage/Propertys";
 
-        protected Property()
+        public Property()
         {
-            Contact = new Collection<ContactProperty>();
-            Images = new Collection<ImageProperty>();
+
         }
 
         public Property(PropertyCreateViewModel vm)

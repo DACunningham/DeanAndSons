@@ -143,6 +143,26 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
+        public ActionResult IndexIMS(string searchString)
+        {
+            // ********** Database Access **********
+            //var dbModel = db.Propertys.AsQueryable();
+            var dbModel = db.Propertys.Include(b => b.Buyer).Include(s => s.Seller);
+
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
+            }
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexIMSList", dbModel);
+            }
+
+            return View(dbModel);
+        }
+
         // GET: Propertys/Edit/5
         public ActionResult EditCMS(int? id)
         {
@@ -263,7 +283,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult EditIMS(int? id)
         {
             if (id == null)
             {
@@ -274,6 +294,10 @@ namespace DeanAndSons.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
+            ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
             return View(property);
         }
 
@@ -282,14 +306,18 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PropertyID,Title,Description,Type,Price")] Property property)
+        public ActionResult EditIMS(Property property)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(property).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexIMS");
             }
+
+            ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
+            ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
             return View(property);
         }
 
@@ -317,6 +345,23 @@ namespace DeanAndSons.Controllers
             db.Propertys.Remove(property);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        
+        /// <summary>
+        /// Sets DB flag to deleted but doesn't physically remove the item
+        /// </summary>
+        /// <param name="id">ID of item to set delete flag</param>
+        /// <returns></returns>
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteLogical(int id)
+        {
+            Property property = db.Propertys.Find(id);
+            property.Deleted = true;
+            db.Entry(property).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("IndexIMS");
         }
 
         protected override void Dispose(bool disposing)
