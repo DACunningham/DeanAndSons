@@ -215,9 +215,10 @@ namespace DeanAndSons.Controllers
             {
                 var _subordinates = new Collection<Staff>();
 
+                // Add all users seleced in listBox to newly created Staff member's subordinate list
+                // This changes the subordinate's superior ID via EF framework magic
                 foreach (var item in model.SubordinateIds)
                 {
-                    //var _tmpUsr = db.Users.OfType<Staff>().Where(u => u.Id == item).Single();
                     var _tmpUsr = (Staff)UserManager.FindById(item);
                     _subordinates.Add(_tmpUsr);
                 }
@@ -254,6 +255,9 @@ namespace DeanAndSons.Controllers
                 AddErrors(result);
             }
 
+            var subordinateList = new MultiSelectList(db.Users.OfType<Staff>(), "Id", "Forename", model.SubordinateIds);
+            model.Subordinates = subordinateList;
+            ViewBag.SuperiorID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", model.SuperiorID);
             // If we got this far, something failed, redisplay form
             return View(model);
         }

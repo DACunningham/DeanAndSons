@@ -47,7 +47,7 @@
                     <p>Are you sure you want to permanently delete this property?</p>
                 </div>
                 <div class="modal-footer">
-                    @using (Html.BeginForm("DeleteLogical", "Propertys", new { id = 123456789 }, FormMethod.Post, new { id = "deleteForm" }))
+                    @using (Html.BeginForm("StaffManagerDelete", "IMS", new { id = 123456789 }, FormMethod.Post, new { id = "deleteForm" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="col-md-6">

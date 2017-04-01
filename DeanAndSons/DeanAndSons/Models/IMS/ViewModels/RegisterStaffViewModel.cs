@@ -41,7 +41,7 @@ namespace DeanAndSons.Models.IMS.ViewModels
 
         public Staff Superior { get; set; }
 
-        public List<string> SubordinateIds { get; set; }
+        public List<string> SubordinateIds { get; set; } = new List<string>();
 
         [Display(Name = "Subordinates")]
         public MultiSelectList Subordinates { get; set; }

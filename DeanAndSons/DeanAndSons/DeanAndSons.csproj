@@ -271,6 +271,7 @@
     <Compile Include="Models\Global\ViewModels\ProfileStaffEditViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMS\ViewModels\RegisterStaffViewModel.cs" />
+    <Compile Include="Models\IMS\ViewModels\StaffManagerEditViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerIndexIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -601,6 +602,7 @@
     <Content Include="Views\IMS\StaffManagerIndex.cshtml" />
     <Content Include="Views\IMS\_StaffManagerIndex.cshtml" />
     <Content Include="Views\Account\StaffManagerCreate.cshtml" />
+    <Content Include="Views\IMS\StaffManagerEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
