@@ -30,11 +30,9 @@
         </th>
         <th>
             Buyer
-            @*@Html.DisplayNameFor(model => model.Buyer.Forename)*@
         </th>
         <th>
             Seller
-            @*@Html.DisplayNameFor(model => model.Seller.Forename)*@
         </th>
         <th></th>
     </tr>
@@ -73,7 +71,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditIMS", new { id = item.PropertyID }) |
-                @Html.ActionLink("DeleteLogical", "DeleteLogical", new { id = item.PropertyID })
+                <a id=@item.PropertyID class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
             </td>
         </tr>
     }

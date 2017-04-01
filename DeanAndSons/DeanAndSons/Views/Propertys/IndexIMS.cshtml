@@ -4,6 +4,10 @@
     ViewBag.Title = "IndexIMS";
 }
 
+<script>
+    var selectedPropID = 0
+</script>
+
 @* ********** Page Header ********** *@
 
 <div class="container-fluid dc-header">
@@ -38,7 +42,7 @@
     </div>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "CreateIMS")
     </p>
 
     @* ********** Property List ********** *@
@@ -48,8 +52,40 @@
 
     </div>
 
+    @* ********** START Delete Section ********** *@
+
+    @*Modal*@
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            @*Modal content*@
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Property</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to permanently delete this property?</p>
+                </div>
+                <div class="modal-footer">
+                    @using (Html.BeginForm("DeleteLogical", "Propertys", new { id = 123456789 }, FormMethod.Post, new { id = "deleteForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="col-md-6">
+                            <a id="cancelDelete" class="btn btn-default btn-block">Cancel</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-danger btn-block">Permanently Delete</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @section Scripts {
+<script src="~/Scripts/Custom/DeleteModal.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -93,7 +93,7 @@ namespace DeanAndSons.Models
 
         }
 
-        public Property(PropertyCreateViewModel vm)
+        public Property(PropertyCreateIMSViewModel vm)
         {
             Title = vm.Title;
             Description = vm.Description;
@@ -108,7 +108,7 @@ namespace DeanAndSons.Models
             StaffOwnerID = vm.StaffOwnerID;
 
             Contact.Add(new ContactProperty(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
-            Images = addImages(vm.Images);
+            //Images = addImages(vm.Images);
 
             Buyer = null;
             Seller = vm.Seller;

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace DeanAndSons.Models.WAP.ViewModels
 {
-    public class PropertyCreateViewModel
+    public class PropertyCreateIMSViewModel
     {
         [Key]
         public int PropertyID { get; set; }
@@ -18,7 +18,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         [Required]
         [MaxLength(3000), MinLength(10)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "**********Placeholder text to be replaced in CMS**********";
 
         [Required]
         [Display(Name = "Property Type")]
@@ -51,13 +51,16 @@ namespace DeanAndSons.Models.WAP.ViewModels
         [Display(Name = "No# Sitting Rooms")]
         public int NoSittingRms { get; set; }
 
-        //********** Image **********
-        [DataType(DataType.Upload)]
-        public ICollection<HttpPostedFileBase> Images { get; set; }
+        ////********** Image **********
+        //[DataType(DataType.Upload)]
+        //public ICollection<HttpPostedFileBase> Images { get; set; }
 
         //********** Users **********
+        public string BuyerID { get; set; }
         public Customer Buyer { get; set; }
 
+        [Required]
+        public string SellerID { get; set; }
         public Customer Seller { get; set; }
 
         //********** Contact **********

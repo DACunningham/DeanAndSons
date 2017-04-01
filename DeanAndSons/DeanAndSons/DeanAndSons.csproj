@@ -282,7 +282,7 @@
     <Compile Include="Models\WAP\ViewModels\EventCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
-    <Compile Include="Models\WAP\ViewModels\PropertyCreateViewModel.cs" />
+    <Compile Include="Models\IMS\ViewModels\PropertyCreateIMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyEditCMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
@@ -327,6 +327,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Custom\CMSEditProp.js" />
+    <Content Include="Scripts\Custom\DeleteModal.js" />
     <Content Include="Scripts\Custom\EditorCMS.js" />
     <Content Include="Scripts\Custom\IndexSort.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -540,7 +541,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Propertys\Create.cshtml" />
+    <Content Include="Views\Propertys\CreateIMS.cshtml" />
     <Content Include="Views\Propertys\Delete.cshtml" />
     <Content Include="Views\Propertys\Details.cshtml" />
     <Content Include="Views\Propertys\Edit.cshtml" />

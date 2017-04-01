@@ -254,10 +254,15 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Create
-        public ActionResult Create()
+        public ActionResult CreateIMS()
         {
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
-            PropertyCreateViewModel vm = new PropertyCreateViewModel();
+            //Populate drop down lists with data from DB
+            ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename");
+            ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename");
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename");
+
+            PropertyCreateIMSViewModel vm = new PropertyCreateIMSViewModel();
+
             return View(vm);
         }
 
@@ -266,7 +271,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PropertyCreateViewModel vm)
+        public ActionResult Create(PropertyCreateIMSViewModel vm)
         {
             if (ModelState.IsValid)
 
@@ -278,7 +283,11 @@ namespace DeanAndSons.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
+            //Populate drop down lists with data from DB
+            ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.BuyerID);
+            ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.SellerID);
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+
             return View(vm);
         }
 
@@ -295,9 +304,11 @@ namespace DeanAndSons.Controllers
                 return HttpNotFound();
             }
 
+            //Populate drop down lists with data from DB
             ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
             ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
             ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
+
             return View(property);
         }
 
@@ -353,7 +364,7 @@ namespace DeanAndSons.Controllers
         /// </summary>
         /// <param name="id">ID of item to set delete flag</param>
         /// <returns></returns>
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteLogical")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteLogical(int id)
         {
@@ -373,7 +384,7 @@ namespace DeanAndSons.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult MoreImages(PropertyCreateViewModel vm)
+        public ActionResult MoreImages(PropertyCreateIMSViewModel vm)
         {
             return PartialView("_ImageUpload", vm);
         }
