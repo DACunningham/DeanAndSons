@@ -13,6 +13,8 @@ using DeanAndSons.Models.Global.ViewModels;
 using System.Net;
 using System.Data.Entity;
 using DeanAndSons.Models.WAP;
+using DeanAndSons.Models.IMS.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace DeanAndSons.Controllers
 {
@@ -184,6 +186,70 @@ namespace DeanAndSons.Controllers
 
                     // Find newly created user ID and pass to Profile Details method
                     return RedirectToAction("ProfileDetails", "Account", new { userID = user.Id });
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult StaffManagerCreate()
+        {
+            var vm = new RegisterStaffViewModel();
+            var subordinateList = new MultiSelectList(db.Users.OfType<Staff>(), "Id", "Forename");
+            vm.Subordinates = subordinateList;
+            ViewBag.SuperiorID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename");
+
+            return View(vm);
+        }
+
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous] //TODO Remove anonymous
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> StaffManagerCreate([Bind(Exclude = "Subordinates")] RegisterStaffViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var _subordinates = new Collection<Staff>();
+
+                foreach (var item in model.SubordinateIds)
+                {
+                    //var _tmpUsr = db.Users.OfType<Staff>().Where(u => u.Id == item).Single();
+                    var _tmpUsr = (Staff)UserManager.FindById(item);
+                    _subordinates.Add(_tmpUsr);
+                }
+
+                var user = new Staff
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Forename = model.Forename,
+                    Surname = model.Surname,
+                    Rank = model.Rank,
+                    SuperiorID = model.SuperiorID,
+                    Subordinates = _subordinates,
+                    UserNameDisp = model.Email,
+                    Deleted = false
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    //Adds this user to the Staff role on account creation
+                    await UserManager.AddToRoleAsync(user.Id, "Staff");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    // Find newly created user ID and pass to Profile Details method
+                    return RedirectToAction("StaffManagerIndex", "IMS", null);
                 }
                 AddErrors(result);
             }

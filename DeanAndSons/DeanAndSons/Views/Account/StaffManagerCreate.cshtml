@@ -1,0 +1,98 @@
+﻿@using DeanAndSons.Models.IMS.ViewModels
+@model RegisterStaffViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@* ********** Page Header ********** *@
+
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+            <div class="col-md-12 dc-pageHead">
+                <p class="pageTitle">Create New Staff Member - IMS</p>
+            </div>
+
+        </header>
+    </div>
+</div>
+
+<div class="container body-content">
+    @using (Html.BeginForm("StaffManagerCreate", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        @* ********** Custom Customer Info ********** *@
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Forename, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Forename, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Rank, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.Rank, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Superior, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("SuperiorID", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Subordinates, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(m => m.SubordinateIds, Model.Subordinates, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        @* ********** END Custom Customer Info ********** *@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

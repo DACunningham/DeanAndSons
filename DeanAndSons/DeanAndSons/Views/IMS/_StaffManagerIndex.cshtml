@@ -23,20 +23,20 @@
     @foreach (var item in Model.Directors)
     {
         <tr>
-            <td>
+            <td class="col-md-3">
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Forename)
             </td>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
-            <td>
+            <td class="col-md-3">
                 @Html.DisplayFor(modelItem => item.Superior.Forename)
                 @Html.DisplayFor(modelItem => item.Superior.Surname)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.ActionLink("Edit", "EditIMS", new { id = item.Id }) |
                 <a id=@item.Id class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
             </td>
@@ -68,20 +68,20 @@
     @foreach (var item in Model.Managers)
     {
         <tr>
-            <td>
+            <td class="col-md-3">
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Forename)
             </td>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
-            <td>
+            <td class="col-md-3">
                 @Html.DisplayFor(modelItem => item.Superior.Forename)
                 @Html.DisplayFor(modelItem => item.Superior.Surname)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.ActionLink("Edit", "EditIMS", new { id = item.Id }) |
                 <a id=@item.Id class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
             </td>
@@ -113,20 +113,20 @@
     @foreach (var item in Model.Agents)
     {
         <tr>
-            <td>
+            <td class="col-md-3">
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Forename)
             </td>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
-            <td>
+            <td class="col-md-3">
                 @Html.DisplayFor(modelItem => item.Superior.Forename)
                 @Html.DisplayFor(modelItem => item.Superior.Surname)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.ActionLink("Edit", "EditIMS", new { id = item.Id }) |
                 <a id=@item.Id class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
             </td>
