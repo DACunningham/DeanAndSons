@@ -1,0 +1,136 @@
+﻿@model DeanAndSons.Models.IMS.ViewModels.StaffManagerIndexIMSViewModel
+
+@* ********** Director's ********** *@
+
+<table class="table">
+    <tr>
+
+        <th>
+            UserName
+        </th>
+        <th>
+            Forename
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Superior
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Directors)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Superior.Forename)
+                @Html.DisplayFor(modelItem => item.Superior.Surname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditIMS", new { id = item.Id }) |
+                <a id=@item.Id class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@* ********** Manager's ********** *@
+
+<table class="table">
+    <tr>
+
+        <th>
+            UserName
+        </th>
+        <th>
+            Forename
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Superior
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Managers)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Superior.Forename)
+                @Html.DisplayFor(modelItem => item.Superior.Surname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditIMS", new { id = item.Id }) |
+                <a id=@item.Id class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@* ********** Agent's ********** *@
+
+<table class="table">
+    <tr>
+
+        <th>
+            UserName
+        </th>
+        <th>
+            Forename
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Superior
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Agents)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Superior.Forename)
+                @Html.DisplayFor(modelItem => item.Superior.Surname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditIMS", new { id = item.Id }) |
+                <a id=@item.Id class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>

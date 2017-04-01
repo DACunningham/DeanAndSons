@@ -36,6 +36,17 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
+        public ActionResult StaffManagerIndex()
+        {
+            var Directors = db.Users.OfType<Staff>().Where(s => s.Rank == Rank.Director).ToList();
+            var Managers = db.Users.OfType<Staff>().Where(s => s.Rank == Rank.Manager).ToList();
+            var Agents = db.Users.OfType<Staff>().Where(s => s.Rank == Rank.Agent).ToList();
+
+            var vm = new StaffManagerIndexIMSViewModel(Directors, Managers, Agents);
+
+            return View("StaffManagerindex", vm);
+        }
+
         // GET: IMS/Details/5
         public ActionResult Details(int id)
         {

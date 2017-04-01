@@ -1,12 +1,16 @@
 ﻿using DeanAndSons.Models.WAP;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeanAndSons.Models
 {
     public class Staff : ApplicationUser
     {
+        [Required]
+        public Rank Rank { get; set; }
+
         // Foreign Key for superior object
         [ForeignKey("Superior")]
         public string SuperiorID { get; set; }
@@ -22,5 +26,12 @@ namespace DeanAndSons.Models
         public ICollection<Event> EventsOwned { get; set; } = new Collection<Event>();
 
         public ICollection<Property> PropertysOwned { get; set; } = new Collection<Property>();
+    }
+
+    public enum Rank
+    {
+        Director = 0,
+        Manager = 1,
+        Agent = 2
     }
 }
