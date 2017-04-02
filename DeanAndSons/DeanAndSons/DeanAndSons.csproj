@@ -270,6 +270,7 @@
     <Compile Include="Models\Global\ViewModels\ProfileStaffDetailsViewModel.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileStaffEditViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IMS\ViewModels\PropertyEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\RegisterStaffViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerEditViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerIndexIMSViewModel.cs" />
@@ -583,11 +584,11 @@
     <Content Include="Views\Services\IndexCustomer.cshtml" />
     <Content Include="Views\Services\_ImageUpload.cshtml" />
     <Content Include="Views\Services\DetailsCustomer.cshtml" />
-    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\CreateIMS.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Events\Edit.cshtml" />
-    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\EditIMS.cshtml" />
+    <Content Include="Views\Events\IndexIMS.cshtml" />
     <Content Include="Views\Events\_ImageUpload.cshtml" />
     <Content Include="Views\Events\IndexCustomer.cshtml" />
     <Content Include="Views\Events\DetailsCustomer.cshtml" />
@@ -620,6 +621,7 @@
     <Content Include="Views\IMS\_StaffManagerIndex.cshtml" />
     <Content Include="Views\Account\StaffManagerCreate.cshtml" />
     <Content Include="Views\IMS\StaffManagerEdit.cshtml" />
+    <Content Include="Views\Events\_IndexIMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP.ViewModels;
 using PagedList;
 using System;
@@ -298,18 +299,24 @@ namespace DeanAndSons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Property property = db.Propertys.Find(id);
+            var vm = new PropertyEditIMSViewModel(property);
+            vm.Buyer = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.BuyerID);
+            vm.Seller = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.SellerID);
+            vm.StaffOwner = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+
             if (property == null)
             {
                 return HttpNotFound();
             }
 
             //Populate drop down lists with data from DB
-            ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
-            ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
-            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
-
-            return View(property);
+            //ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
+            //ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
+            //ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
+            
+            return View(vm);
         }
 
         // POST: Propertys/Edit/5
@@ -317,19 +324,27 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditIMS(Property property)
+        public ActionResult EditIMS(PropertyEditIMSViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(property).State = EntityState.Modified;
+                //Get object to edit from DB
+                var _obj = db.Propertys.Find(vm.PropertyID);
+                //Apply view model properties to EF tracked DB object
+                _obj.ApplyEditIMS(vm);
+
+                db.Entry(_obj).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("IndexIMS");
             }
 
-            ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
-            ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
-            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
-            return View(property);
+            //ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
+            //ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
+            //ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
+            vm.Buyer = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.BuyerID);
+            vm.Seller = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.SellerID);
+            vm.StaffOwner = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+            return View(vm);
         }
 
         // GET: Propertys/Delete/5

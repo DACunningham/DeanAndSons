@@ -96,6 +96,25 @@ namespace DeanAndSons.Controllers
             return View(indexList.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult IndexIMS(string searchString)
+        {
+            // ********** Database Access **********
+            var dbModel = db.Events.AsQueryable<Event>();
+
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
+            }
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexIMS", dbModel);
+            }
+
+            return View(dbModel);
+        }
+
         public ActionResult DetailsCustomer(int? id)
         {
             if (id == null)
@@ -204,6 +223,43 @@ namespace DeanAndSons.Controllers
             return View(@event);
         }
 
+        // GET: Events/Edit/5
+        public ActionResult EditIMS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+
+            //Populate drop down lists with data from DB
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", @event.StaffOwnerID);
+
+            return View(@event);
+        }
+
+        // POST: Events/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditIMS(Event @event)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("IndexIMS");
+            }
+
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", @event.StaffOwnerID);
+            return View(@event);
+        }
+
         // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -228,6 +284,22 @@ namespace DeanAndSons.Controllers
             db.Events.Remove(@event);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Sets DB flag to deleted but doesn't physically remove the item
+        /// </summary>
+        /// <param name="id">ID of item to set delete flag</param>
+        /// <returns></returns>
+        [HttpPost, ActionName("DeleteLogical")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteLogical(int id)
+        {
+            Event @event = db.Events.Find(id);
+            @event.Deleted = true;
+            db.Entry(@event).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("IndexIMS");
         }
 
         protected override void Dispose(bool disposing)

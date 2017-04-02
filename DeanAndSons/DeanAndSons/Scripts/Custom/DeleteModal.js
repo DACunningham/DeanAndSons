@@ -26,3 +26,13 @@ $(document).on("click", ".deleteStaff", function (event) {
     $("#deleteForm").attr("action", selectedStaffID);
 
 });
+
+//Dynamically attaches onclick event to all delete links.
+$(document).on("click", ".deleteEvent", function (event) {
+    //console.log(event.target.id);
+    //Takes controller and action URL and adds clicked link property ID to end ready for transmission to server delete method
+    var selectedPropID = "/Events/DeleteLogical/" + event.target.id;
+    //Changes action attr on modal submit form to correct property ID
+    $("#deleteForm").attr("action", selectedPropID);
+
+});

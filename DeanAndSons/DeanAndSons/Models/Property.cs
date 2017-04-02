@@ -1,4 +1,5 @@
-﻿using DeanAndSons.Models.WAP.ViewModels;
+﻿using DeanAndSons.Models.IMS.ViewModels;
+using DeanAndSons.Models.WAP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -159,6 +160,21 @@ namespace DeanAndSons.Models
         public void removeImage(ImageProperty img)
         {
             img.DeleteImage(img);
+        }
+
+        public void ApplyEditIMS(PropertyEditIMSViewModel obj)
+        {
+            Type = obj.Type;
+            Price = obj.Price;
+            SaleState = obj.SaleState;
+            Style = obj.Style;
+            Age = obj.Age;
+            NoBedRms = obj.NoBedRms;
+            NoBathRms = obj.NoBathRms;
+            NoSittingRms = obj.NoSittingRms;
+            BuyerID = obj.BuyerID;
+            SellerID = obj.SellerID;
+            StaffOwnerID = obj.StaffOwnerID;
         }
     }
 
