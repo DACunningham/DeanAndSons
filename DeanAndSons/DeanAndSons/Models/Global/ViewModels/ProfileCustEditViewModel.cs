@@ -18,9 +18,9 @@ namespace DeanAndSons.Models.Global.ViewModels
         // Information about this user
         public string About { get; set; }
 
-        [Display(Name = "Email Address")]
-        [EmailAddress(ErrorMessage = "Please enter a valid email address")]
-        public string Email { get; set; }
+        //[Display(Name = "Email Address")]
+        //[EmailAddress(ErrorMessage = "Please enter a valid email address")]
+        //public string Email { get; set; }
 
         // The user name that should be displayed around the site (not used for validation)
         [Display(Name = "User Name")]
@@ -58,16 +58,20 @@ namespace DeanAndSons.Models.Global.ViewModels
 
         //********** Contact **********
         [Required]
+        [StringLength(50, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 1)]
         [Display(Name = "Property Number/Name")]
         public string PropertyNo { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Street { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Town { get; set; }
 
         [Required]
+        [StringLength(9, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         [Display(Name = "Post Code")]
         public string PostCode { get; set; }
 
@@ -89,7 +93,7 @@ namespace DeanAndSons.Models.Global.ViewModels
             Forename = usr.Forename;
             Surname = usr.Surname;
             About = usr.About;
-            Email = usr.Email;
+            //Email = usr.Email;
             UserNameDisp = usr.UserNameDisp;
             BudgetLower = usr.BudgetLower;
             BudgetHigher = usr.BudgetHigher;

@@ -163,8 +163,10 @@
         </div>
     </div>
 
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.PropertyID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-default text-center", role = "button" })
+        </div>
+    </div>
+
 </div>

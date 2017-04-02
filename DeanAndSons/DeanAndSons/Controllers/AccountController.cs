@@ -522,7 +522,8 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var user = UserManager.FindById(userID);
+            var user = db.Users.Include(i => i.Image).Include(c => c.Contact)
+                    .Where(s => s.Id == userID).Single();
 
             if (user is Customer)
             {
@@ -569,33 +570,33 @@ namespace DeanAndSons.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _cust = db.Users.Include(i => i.Image).Include(c => c.Contact)
+                var _cust = db.Users.OfType<Customer>().Include(i => i.Image).Include(c => c.Contact)
                     .Where(s => s.Id == vm.ID).Single();
 
-                var cust = (Customer)_cust;
+                //var cust = (Customer)_cust;
 
-                cust.Forename = vm.Forename;
-                cust.Surname = vm.Surname;
-                cust.About = vm.About;
-                cust.Email = vm.Email;
-                cust.UserNameDisp = vm.UserNameDisp;
-                cust.BudgetLower = vm.BudgetLower;
-                cust.BudgetHigher = vm.BudgetHigher;
-                cust.PrefPropertyType = vm.PrefPropertyType;
-                cust.PrefPropertyStyle = vm.PrefPropertyStyle;
-                cust.PrefPropertyAge = vm.PrefPropertyAge;
-                cust.PrefNoBedRms = vm.PrefNoBedRms;
-                cust.PrefNoBathRms = vm.PrefNoBathRms;
-                cust.PrefNoSittingRms = vm.PrefNoSittingRms;
+                _cust.Forename = vm.Forename;
+                _cust.Surname = vm.Surname;
+                _cust.About = vm.About;
+                //_cust.Email = vm.Email;
+                _cust.UserNameDisp = vm.UserNameDisp;
+                _cust.BudgetLower = vm.BudgetLower;
+                _cust.BudgetHigher = vm.BudgetHigher;
+                _cust.PrefPropertyType = vm.PrefPropertyType;
+                _cust.PrefPropertyStyle = vm.PrefPropertyStyle;
+                _cust.PrefPropertyAge = vm.PrefPropertyAge;
+                _cust.PrefNoBedRms = vm.PrefNoBedRms;
+                _cust.PrefNoBathRms = vm.PrefNoBathRms;
+                _cust.PrefNoSittingRms = vm.PrefNoSittingRms;
 
-                cust.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, cust);
-                cust.addImage(vm.Image);
+                _cust.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, null, _cust);
+                _cust.addImage(vm.Image);
 
-                db.Entry(cust).State = EntityState.Modified;
+                db.Entry(_cust).State = EntityState.Modified;
                 db.SaveChanges();
 
                 //Create details view model
-                var dvm = new ProfileCustDetailsViewModel(cust);
+                var dvm = new ProfileCustDetailsViewModel(_cust);
 
                 return View("ProfileCustDetails", dvm);
             }
@@ -609,23 +610,23 @@ namespace DeanAndSons.Controllers
         {
             if (ModelState.IsValid)
             {
-                var staff = db.Users.Include(i => i.Image).Include(c => c.Contact)
+                var _staff = db.Users.OfType<Staff>().Include(i => i.Image).Include(c => c.Contact)
                     .Where(s => s.Id == vm.ID).Single();
 
-                staff.Forename = vm.Forename;
-                staff.Surname = vm.Surname;
-                staff.About = vm.About;
-                staff.Email = vm.Email;
-                staff.UserNameDisp = vm.UserNameDisp;
+                _staff.Forename = vm.Forename;
+                _staff.Surname = vm.Surname;
+                _staff.About = vm.About;
+                _staff.Email = vm.Email;
+                _staff.UserNameDisp = vm.UserNameDisp;
 
-                staff.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, staff);
-                staff.addImage(vm.Image);
+                _staff.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, _staff);
+                _staff.addImage(vm.Image);
 
-                db.Entry(staff).State = EntityState.Modified;
+                db.Entry(_staff).State = EntityState.Modified;
                 db.SaveChanges();
 
                 //Create details view model
-                var dvm = new ProfileStaffDetailsViewModel((Staff)staff);
+                var dvm = new ProfileStaffDetailsViewModel(_staff);
 
                 return View("ProfileStaffDetails", dvm);
             }
