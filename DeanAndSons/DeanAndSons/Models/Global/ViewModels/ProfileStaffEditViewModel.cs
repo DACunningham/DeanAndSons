@@ -11,33 +11,42 @@ namespace DeanAndSons.Models.Global.ViewModels
     {
         public string ID { get; set; }
 
+        // User's first name
+        [Required]
+        [StringLength(60, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Forename")]
         public string Forename { get; set; }
 
+        // User's second name
+        [Required]
+        [StringLength(60, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
 
         // Information about this user
         public string About { get; set; }
 
-        [Display(Name = "Email Address")]
-        [EmailAddress(ErrorMessage = "Please enter a valid email address")]
-        public string Email { get; set; }
-
         // The user name that should be displayed around the site (not used for validation)
-        [Display(Name = "User Name")]
+        [Required]
+        [Display(Name = "User Name to Display")]
         public string UserNameDisp { get; set; }
 
         //********** Contact **********
         [Required]
+        [StringLength(50, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 1)]
         [Display(Name = "Property Number/Name")]
         public string PropertyNo { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Street { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Town { get; set; }
 
         [Required]
+        [StringLength(9, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         [Display(Name = "Post Code")]
         public string PostCode { get; set; }
 
@@ -59,7 +68,7 @@ namespace DeanAndSons.Models.Global.ViewModels
             Forename = usr.Forename;
             Surname = usr.Surname;
             About = usr.About;
-            Email = usr.Email;
+            //Email = usr.Email;
             UserNameDisp = usr.UserNameDisp;
 
             ContactUser addr = usr.getContact(usr.Contact);

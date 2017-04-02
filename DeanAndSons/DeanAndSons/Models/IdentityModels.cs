@@ -86,11 +86,10 @@ namespace DeanAndSons.Models
 
         public void addImage(HttpPostedFileBase img)
         {
-            //Ensures there is only ever one image in collection (stupid EF relationship rules stopped me just having one like normal)
-            Image.Clear();
-
             if (img != null && img.ContentLength > 0)
             {
+                //Ensures there is only ever one image in collection (stupid EF relationship rules stopped me just having one like normal)
+                Image.Clear();
                 Image.Add(new ImageAppUser(img, ImageType.ProfileHeader, imgLocation, this));
             }
         }

@@ -616,10 +616,10 @@ namespace DeanAndSons.Controllers
                 _staff.Forename = vm.Forename;
                 _staff.Surname = vm.Surname;
                 _staff.About = vm.About;
-                _staff.Email = vm.Email;
+                //_staff.Email = vm.Email;
                 _staff.UserNameDisp = vm.UserNameDisp;
 
-                _staff.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, _staff);
+                _staff.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, null, _staff);
                 _staff.addImage(vm.Image);
 
                 db.Entry(_staff).State = EntityState.Modified;

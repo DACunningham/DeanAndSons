@@ -11,19 +11,24 @@ namespace DeanAndSons.Models.Global.ViewModels
     {
         public string ID { get; set; }
 
+        // User's first name
+        [Required]
+        [StringLength(60, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Forename")]
         public string Forename { get; set; }
 
+        // User's second name
+        [Required]
+        [StringLength(60, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
 
         // Information about this user
         public string About { get; set; }
 
-        //[Display(Name = "Email Address")]
-        //[EmailAddress(ErrorMessage = "Please enter a valid email address")]
-        //public string Email { get; set; }
-
         // The user name that should be displayed around the site (not used for validation)
-        [Display(Name = "User Name")]
+        [Required]
+        [Display(Name = "User Name to Display")]
         public string UserNameDisp { get; set; }
 
         [Range(50000, 100000000, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
