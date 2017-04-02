@@ -6,7 +6,7 @@
 }
 
 <link href="~/Content/Custom/Carousel.css" rel="stylesheet" />
-
+<link href="~/Content/Custom/PropertyDetailsWAP.css" rel="stylesheet" />
 
 @* ********** Page Header ********** *@
 
@@ -82,11 +82,69 @@
                 </a>
             </div>
         </div>
+
+        <div class="col-md-4">
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="~/Storage/Global/bed.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
+                </div>
+                <div class="col-xs-8 dc-PropWAPIconText">
+                    @Model.NoBedRms
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="~/Storage/Global/bathroom.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
+                </div>
+                <div class="col-xs-8 dc-PropWAPIconText">
+                    @Model.NoBathRms
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="~/Storage/Global/Sofa.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
+                </div>
+                <div class="col-xs-8 dc-PropWAPIconText">
+                    @Model.NoSittingRms
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <b>Type:</b>
+                </div>
+                <div class="col-xs-8">
+                    @Model.Type
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <b>Style:</b>
+                </div>
+                <div class="col-xs-8">
+                    @Model.Style
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <b>Age:</b>
+                </div>
+                <div class="col-xs-8">
+                    @Model.Age
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <p>@Model.PropertyNo @Model.Street, @Model.Town, @Model.PostCode</p>
+            <p><b>Address: </b>@Model.PropertyNo @Model.Street, @Model.Town, @Model.PostCode</p>
         </div>
     </div>
 

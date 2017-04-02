@@ -12,6 +12,16 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public PropertyType Type { get; set; }
 
+        public PropertyAge Age { get; set; }
+
+        public PropertyStyle Style { get; set; }
+
+        public int NoBedRms { get; set; }
+
+        public int NoBathRms { get; set; }
+
+        public int NoSittingRms { get; set; }
+
         public int Price { get; set; }
 
         //********** Images **********
@@ -46,7 +56,12 @@ namespace DeanAndSons.Models.WAP.ViewModels
             Title = property.Title;
             Description = property.Description;
             Type = property.Type;
+            Age = property.Age;
+            Style = property.Style;
             Price = property.Price;
+            NoBedRms = property.NoBedRms;
+            NoBathRms = property.NoBathRms;
+            NoSittingRms = property.NoSittingRms;
 
             Images = property.Images;
 

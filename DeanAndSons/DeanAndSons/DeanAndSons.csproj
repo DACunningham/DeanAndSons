@@ -306,6 +306,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom\Carousel.css" />
     <Content Include="Content\Custom\FamilyTree.css" />
+    <Content Include="Content\Custom\PropertyDetailsWAP.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -513,7 +514,23 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Storage\Global\AddRemove.png" />
+    <Content Include="Storage\Global\Agency.png" />
+    <Content Include="Storage\Global\Auction.png" />
+    <Content Include="Storage\Global\bathroom.png" />
+    <Content Include="Storage\Global\bed.png" />
+    <Content Include="Storage\Global\Event.png" />
+    <Content Include="Storage\Global\Hierarchy.png" />
+    <Content Include="Storage\Global\Mortgage.png" />
     <Content Include="Storage\Global\NoImg.jpg" />
+    <Content Include="Storage\Global\Profile.png" />
+    <Content Include="Storage\Global\Property.png" />
+    <Content Include="Storage\Global\Removals.png" />
+    <Content Include="Storage\Global\Renting.png" />
+    <Content Include="Storage\Global\Service.png" />
+    <Content Include="Storage\Global\Sofa.png" />
+    <Content Include="Storage\Global\SoldHouse.jpg" />
+    <Content Include="Storage\Global\Surveying.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
