@@ -274,6 +274,7 @@
     <Compile Include="Models\IMS\ViewModels\PropertyEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\RegisterStaffViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\ServiceCreateIMSViewModel.cs" />
+    <Compile Include="Models\IMS\ViewModels\ServiceEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerEditViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerIndexIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
@@ -581,7 +582,7 @@
     <Content Include="Views\Services\CreateIMS.cshtml" />
     <Content Include="Views\Services\Delete.cshtml" />
     <Content Include="Views\Services\Details.cshtml" />
-    <Content Include="Views\Services\Edit.cshtml" />
+    <Content Include="Views\Services\EditIMS.cshtml" />
     <Content Include="Views\Services\IndexIMS.cshtml" />
     <Content Include="Views\Services\IndexCustomer.cshtml" />
     <Content Include="Views\Services\_ImageUpload.cshtml" />

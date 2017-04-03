@@ -80,5 +80,11 @@ namespace DeanAndSons.Models.WAP
 
             return images;
         }
+
+        public void ApplyEditIMS(ServiceEditIMSViewModel obj)
+        {
+            LastModified = obj.LastModified;
+            StaffOwnerID = obj.StaffOwnerID;
+        }
     }
 }

@@ -103,7 +103,7 @@ namespace DeanAndSons.Controllers
             return View(service);
         }
 
-        // GET: Events/Create
+        // GET: Services/Create
         public ActionResult CreateIMS()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
@@ -111,7 +111,7 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
-        // POST: Events/Create
+        // POST: Services/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -193,6 +193,50 @@ namespace DeanAndSons.Controllers
             return View(service);
         }
 
+        // GET: Services/Edit/5
+        public ActionResult EditIMS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Service service = db.Services.Single(e => e.ServiceID == id);
+            var vm = new ServiceEditIMSViewModel(service);
+            //Populate drop down lists with data from DB
+            vm.StaffOwner = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+
+            if (service == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vm);
+        }
+
+        // POST: Services/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditIMS(ServiceEditIMSViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                //Get object to edit from DB
+                var _obj = db.Services.Find(vm.ServiceID);
+                //Apply view model properties to EF tracked DB object
+                _obj.ApplyEditIMS(vm);
+
+                db.Entry(_obj).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("IndexIMS");
+            }
+
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+            return View(vm);
+        }
+
         // GET: Services/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -217,6 +261,24 @@ namespace DeanAndSons.Controllers
             db.Services.Remove(service);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Sets DB flag to deleted but doesn't physically remove the item
+        /// </summary>
+        /// <param name="id">ID of item to set delete flag</param>
+        /// <returns></returns>
+        [HttpPost, ActionName("DeleteLogical")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteLogical(int id)
+        {
+            var service = db.Services.Find(id);
+            service.Deleted = true;
+            service.LastModified = DateTime.Now;
+
+            db.Entry(service).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("IndexIMS");
         }
 
         protected override void Dispose(bool disposing)
