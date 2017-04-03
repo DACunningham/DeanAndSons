@@ -1,4 +1,5 @@
-﻿using DeanAndSons.Models.WAP.ViewModels;
+﻿using DeanAndSons.Models.IMS.ViewModels;
+using DeanAndSons.Models.WAP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,6 +94,20 @@ namespace DeanAndSons.Models.WAP
             }
 
             return images;
+        }
+
+        public void ApplyEditIMS(EventEditIMSViewModel obj)
+        {
+            StaffOwnerID = obj.StaffOwnerID;
+
+            addContact(obj.PropertyNo, obj.Street, obj.Town, obj.PostCode, obj.TelephoneNo, obj.Email, this);
+        }
+
+        private void addContact(string propNo, string street, string town, string postCode, int? telNo, string email, Event usrObj)
+        {
+            Contact.Clear();
+            var _contact = new ContactEvent(propNo, street, town, postCode, telNo, email, usrObj);
+            Contact.Add(_contact);
         }
     }
 }

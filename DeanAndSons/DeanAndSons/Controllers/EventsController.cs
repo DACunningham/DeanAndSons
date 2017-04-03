@@ -1,4 +1,5 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
 using PagedList;
@@ -99,7 +100,7 @@ namespace DeanAndSons.Controllers
         public ActionResult IndexIMS(string searchString)
         {
             // ********** Database Access **********
-            var dbModel = db.Events.AsQueryable<Event>();
+            var dbModel = db.Events.Include(e => e.StaffOwner);
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
@@ -230,16 +231,19 @@ namespace DeanAndSons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+
+            Event @event = db.Events.Include(a => a.Contact)
+                .Single(e => e.EventID == id);
+            var vm = new EventEditIMSViewModel(@event);
+            //Populate drop down lists with data from DB
+            vm.StaffOwner = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+
             if (@event == null)
             {
                 return HttpNotFound();
             }
 
-            //Populate drop down lists with data from DB
-            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", @event.StaffOwnerID);
-
-            return View(@event);
+            return View(vm);
         }
 
         // POST: Events/Edit/5
@@ -247,17 +251,22 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditIMS(Event @event)
+        public ActionResult EditIMS(EventEditIMSViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event).State = EntityState.Modified;
+                //Get object to edit from DB
+                var _obj = db.Events.Find(vm.EventID);
+                //Apply view model properties to EF tracked DB object
+                _obj.ApplyEditIMS(vm);
+
+                db.Entry(_obj).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("IndexIMS");
             }
 
-            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", @event.StaffOwnerID);
-            return View(@event);
+            ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+            return View(vm);
         }
 
         // GET: Events/Delete/5

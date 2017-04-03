@@ -270,6 +270,7 @@
     <Compile Include="Models\Global\ViewModels\ProfileStaffDetailsViewModel.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileStaffEditViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IMS\ViewModels\EventEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\PropertyEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\RegisterStaffViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerEditViewModel.cs" />
