@@ -1,4 +1,5 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.CMS.ViewModels;
 using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
@@ -111,6 +112,25 @@ namespace DeanAndSons.Controllers
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_IndexIMS", dbModel);
+            }
+
+            return View(dbModel);
+        }
+
+        public ActionResult IndexCMS(string searchString)
+        {
+            // ********** Database Access **********
+            var dbModel = db.Events.Include(e => e.StaffOwner);
+
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
+            }
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexCMS", dbModel);
             }
 
             return View(dbModel);
@@ -233,6 +253,76 @@ namespace DeanAndSons.Controllers
             }
 
             ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);
+            return View(vm);
+        }
+
+        // GET: Propertys/Edit/5
+        public ActionResult EditCMS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var @event = db.Events.Include(i => i.Images)
+                .Include(s => s.StaffOwner)
+                .Include(a => a.Contact)
+                .Single(p => p.EventID == id);
+
+            var vm = new EventEditCMSViewModel(@event);
+
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vm);
+        }
+
+        // POST: Propertys/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCMS(EventEditCMSViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var @event = db.Events.Include(i => i.Images).Single(p => p.EventID == vm.EventID);
+                var _hasNewImage = -1;
+
+                @event.Title = vm.Title;
+                @event.Description = vm.Description;
+
+                //Checks if any of the image objs has a valid file uploaded
+                foreach (var item in vm.Images)
+                {
+                    if (item != null && item.ContentLength != 0)
+                    {
+                        _hasNewImage = 1;
+                        break;
+                    }
+                }
+
+                //If image obj has valid file uploaded clear original image list and add new images.
+                if (_hasNewImage == 1)
+                {
+                    //Remove all images from file store and DB
+                    foreach (var item in @event.Images.ToList())
+                    {
+                        @event.removeImage(item);
+                        db.Images.Remove(item);
+                    }
+
+                    //Add images to property.  Will only add images if there is an image in the list and if there is an image in the list it would have
+                    //already been emptied by the foreach loop above.
+                    @event.Images = @event.addImages(vm.Images);
+                }
+
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("IndexCMS");
+            }
             return View(vm);
         }
 

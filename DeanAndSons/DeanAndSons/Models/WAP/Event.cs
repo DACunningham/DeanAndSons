@@ -77,7 +77,7 @@ namespace DeanAndSons.Models.WAP
         }
 
         //Takes a collectin of uploaded images and creates a new ImpageProperty for each non null && non empty entry
-        private ICollection<ImageEvent> addImages(ICollection<HttpPostedFileBase> files)
+        public ICollection<ImageEvent> addImages(ICollection<HttpPostedFileBase> files)
         {
             var images = new Collection<ImageEvent>();
             ImageType imgType = ImageType.EventHeader;
@@ -94,6 +94,16 @@ namespace DeanAndSons.Models.WAP
             }
 
             return images;
+        }
+
+        /// <summary>
+        /// Remove image from file store on server only.  Doesn't remove item from property collection
+        /// or DB
+        /// </summary>
+        /// <param name="img">The image to remove</param>
+        public void removeImage(ImageEvent img)
+        {
+            img.DeleteImage(img);
         }
 
         public void ApplyEditIMS(EventEditIMSViewModel obj)

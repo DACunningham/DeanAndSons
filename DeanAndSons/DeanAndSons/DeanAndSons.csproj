@@ -262,7 +262,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CMS\ViewModels\tester.cs" />
+    <Compile Include="Models\CMS\ViewModels\EventEditCMSViewModel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
@@ -627,6 +627,10 @@
     <Content Include="Views\IMS\StaffManagerEdit.cshtml" />
     <Content Include="Views\Events\_IndexIMS.cshtml" />
     <Content Include="Views\Services\_IndexIMS.cshtml" />
+    <Content Include="Views\Events\IndexCMS.cshtml" />
+    <Content Include="Views\Events\_IndexCMS.cshtml" />
+    <Content Include="Views\Events\EditCMS.cshtml" />
+    <Content Include="Views\Events\_ImageUploadCMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

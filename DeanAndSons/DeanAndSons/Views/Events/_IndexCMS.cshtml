@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DeanAndSons.Models.WAP.Event>
+
+<table class="table">
+    <tr>
+        <th>
+            Staff Owner
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StaffOwner.Forename)
+                @Html.DisplayFor(modelItem => item.StaffOwner.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deleted)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditCMS", new { id = item.EventID })
+            </td>
+        </tr>
+    }
+</table>
