@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 
-namespace DeanAndSons.Models.WAP.ViewModels
+namespace DeanAndSons.Models.CMS.ViewModels
 {
     public class ServiceCreateCMSViewModel
     {

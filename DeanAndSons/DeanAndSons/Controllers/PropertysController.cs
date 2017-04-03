@@ -1,4 +1,5 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.CMS.ViewModels;
 using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP.ViewModels;
 using PagedList;
@@ -172,7 +173,7 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Property property = db.Propertys.Find(id);
+            Property property = db.Propertys.Include(i => i.Images).Single(p => p.PropertyID == id);
 
             PropertyEditCMSViewModel vm = new PropertyEditCMSViewModel(property);
 

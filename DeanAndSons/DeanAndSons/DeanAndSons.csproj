@@ -262,6 +262,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CMS\ViewModels\tester.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
@@ -295,7 +296,7 @@
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\PropertyCreateIMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
-    <Compile Include="Models\WAP\ViewModels\PropertyEditCMSViewModel.cs" />
+    <Compile Include="Models\CMS\ViewModels\PropertyEditCMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
     <Compile Include="Models\CMS\ViewModels\ServiceCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceDetailsViewModel.cs" />
