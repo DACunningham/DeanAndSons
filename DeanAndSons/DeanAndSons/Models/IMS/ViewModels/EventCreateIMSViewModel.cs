@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
-namespace DeanAndSons.Models.WAP.ViewModels
+namespace DeanAndSons.Models.IMS.ViewModels
 {
-    public class EventCreateViewModel
+    public class EventCreateIMSViewModel
     {
-        [Key]
         public int EventID { get; set; }
 
         [Required]
@@ -52,7 +50,6 @@ namespace DeanAndSons.Models.WAP.ViewModels
         [Required]
         public string StaffOwnerID { get; set; }
 
-        [ForeignKey("StaffOwnerID")]
         public Staff StaffOwner { get; set; }
     }
 }

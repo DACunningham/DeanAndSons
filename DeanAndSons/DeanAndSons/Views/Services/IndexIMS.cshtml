@@ -1,0 +1,86 @@
+﻿@model IEnumerable<DeanAndSons.Models.WAP.Service>
+
+@{
+    ViewBag.Title = "IndexIMS";
+}
+
+@* ********** Page Header ********** *@
+
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+            <div class="col-md-12 dc-pageHead">
+                <p class="pageTitle">Service Index - IMS</p>
+            </div>
+
+        </header>
+    </div>
+</div>
+
+<div class="container body-content">
+    @* ********** Sort and Search Bar ********** *@
+    <div class="row dc-search">
+        @using (Ajax.BeginForm("IndexIMS", "Services", new { },
+                                                        new AjaxOptions
+                                                        {
+                                                            HttpMethod = "GET",
+                                                            InsertionMode = InsertionMode.Replace,
+                                                            UpdateTargetId = "indexList"
+                                                        }))
+        {
+            <div class="col-md-12">
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by service title" })
+            </div>
+        }
+    </div>
+
+    <p>
+        @Html.ActionLink("Create New", "CreateIMS")
+    </p>
+
+    @* ********** Property List ********** *@
+    <div id="indexList">
+
+        @Html.Partial("_IndexIMS", Model)
+
+    </div>
+
+    @* ********** START Delete Section ********** *@
+
+    @*Modal*@
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            @*Modal content*@
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Service</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to permanently delete this service?</p>
+                </div>
+                <div class="modal-footer">
+                    @using (Html.BeginForm("DeleteLogical", "Propertys", new { id = 123456789 }, FormMethod.Post, new { id = "deleteForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="col-md-6">
+                            <a id="cancelDelete" class="btn btn-default btn-block">Cancel</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-danger btn-block">Permanently Delete</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/Custom/DeleteModal.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

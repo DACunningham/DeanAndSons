@@ -273,6 +273,7 @@
     <Compile Include="Models\IMS\ViewModels\EventEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\PropertyEditIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\RegisterStaffViewModel.cs" />
+    <Compile Include="Models\IMS\ViewModels\ServiceCreateIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerEditViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerIndexIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
@@ -288,14 +289,14 @@
     <Compile Include="Models\WAP\ImageAppUser.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="Models\WAP\Service.cs" />
-    <Compile Include="Models\WAP\ViewModels\EventCreateViewModel.cs" />
+    <Compile Include="Models\IMS\ViewModels\EventCreateIMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\PropertyCreateIMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyEditCMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
-    <Compile Include="Models\WAP\ViewModels\ServiceCreateViewModel.cs" />
+    <Compile Include="Models\CMS\ViewModels\ServiceCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\ServiceIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -577,11 +578,11 @@
     <Content Include="Views\IMS\TeamViewer.cshtml" />
     <Content Include="Views\Propertys\_IndexList.cshtml" />
     <Content Include="Views\Account\ProfileCustDetails.cshtml" />
-    <Content Include="Views\Services\Create.cshtml" />
+    <Content Include="Views\Services\CreateIMS.cshtml" />
     <Content Include="Views\Services\Delete.cshtml" />
     <Content Include="Views\Services\Details.cshtml" />
     <Content Include="Views\Services\Edit.cshtml" />
-    <Content Include="Views\Services\Index.cshtml" />
+    <Content Include="Views\Services\IndexIMS.cshtml" />
     <Content Include="Views\Services\IndexCustomer.cshtml" />
     <Content Include="Views\Services\_ImageUpload.cshtml" />
     <Content Include="Views\Services\DetailsCustomer.cshtml" />
@@ -623,10 +624,10 @@
     <Content Include="Views\Account\StaffManagerCreate.cshtml" />
     <Content Include="Views\IMS\StaffManagerEdit.cshtml" />
     <Content Include="Views\Events\_IndexIMS.cshtml" />
+    <Content Include="Views\Services\_IndexIMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\CMS\" />
     <Folder Include="Storage\Events\" />
     <Folder Include="Storage\Propertys\" />
     <Folder Include="Storage\Services\" />

@@ -50,7 +50,7 @@ namespace DeanAndSons.Models.WAP
 
         }
 
-        public Event(EventCreateViewModel vm)
+        public Event(EventCreateIMSViewModel vm)
         {
             Title = vm.Title;
             Description = vm.Description;

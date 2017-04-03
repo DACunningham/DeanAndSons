@@ -168,7 +168,7 @@ namespace DeanAndSons.Controllers
         public ActionResult CreateIMS()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
-            var vm = new EventCreateViewModel();
+            var vm = new EventCreateIMSViewModel();
             return View(vm);
         }
 
@@ -177,7 +177,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateIMS(EventCreateViewModel vm)
+        public ActionResult CreateIMS(EventCreateIMSViewModel vm)
         {
             if (ModelState.IsValid)
             {

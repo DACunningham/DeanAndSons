@@ -1,13 +1,12 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
@@ -35,6 +34,25 @@ namespace DeanAndSons.Controllers
             }
 
             return View(vmList);
+        }
+
+        public ActionResult IndexIMS(string searchString)
+        {
+            // ********** Database Access **********
+            var dbModel = db.Services.Include(e => e.StaffOwner);
+
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
+            }
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexIMS", dbModel);
+            }
+
+            return View(dbModel);
         }
 
         public ActionResult DetailsCustomer(int? id)
@@ -85,32 +103,59 @@ namespace DeanAndSons.Controllers
             return View(service);
         }
 
-        // GET: Services/Create
-        public ActionResult Create()
+        // GET: Events/Create
+        public ActionResult CreateIMS()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
-            var vm = new ServiceCreateViewModel();
+            var vm = new ServiceCreateIMSViewModel();
             return View(vm);
         }
 
-        // POST: Services/Create
+        // POST: Events/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ServiceCreateViewModel vm)
+        public ActionResult CreateIMS(ServiceCreateIMSViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 var service = new Service(vm);
                 db.Services.Add(service);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexIMS");
             }
 
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
             return View(vm);
         }
+
+        //// GET: Services/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
+        //    var vm = new ServiceCreateIMSViewModel();
+        //    return View(vm);
+        //}
+
+        //// POST: Services/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(ServiceCreateIMSViewModel vm)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var service = new Service(vm);
+        //        db.Services.Add(service);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
+        //    return View(vm);
+        //}
 
         // GET: Services/Edit/5
         public ActionResult Edit(int? id)

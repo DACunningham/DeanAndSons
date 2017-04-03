@@ -1,4 +1,5 @@
-﻿using DeanAndSons.Models.WAP.ViewModels;
+﻿using DeanAndSons.Models.IMS.ViewModels;
+using DeanAndSons.Models.WAP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,13 +51,13 @@ namespace DeanAndSons.Models.WAP
 
         }
 
-        public Service(ServiceCreateViewModel vm)
+        public Service(ServiceCreateIMSViewModel vm)
         {
             Title = vm.Title;
             SubTitle = vm.SubTitle;
             Description = vm.Description;
-            StaffOwner = vm.StaffOwner;
-            Images = addImages(vm.Images);
+            Created = vm.Created;
+            LastModified = vm.LastModified;
             StaffOwnerID = vm.StaffOwnerID;
         }
 
