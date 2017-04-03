@@ -29,7 +29,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <p>Address: @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
+                    <p><b>Address:</b> @item.Contact.PropertyNo @item.Contact.Street, @item.Contact.Town, @item.Contact.PostCode</p>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <p>Listed On: @item.Created.ToLongDateString() </p>
+                    <p><b>Listed On:</b> @item.Created.ToLongDateString() </p>
                 </div>
             </div>
 
@@ -52,5 +52,5 @@
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
+@Html.PagedListPager(Model, page => Url.Action("IndexCustomer",
     new { page, CategorySort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

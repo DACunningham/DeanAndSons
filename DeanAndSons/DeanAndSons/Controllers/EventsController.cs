@@ -165,11 +165,11 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Events/Create
-        public ActionResult Create()
+        public ActionResult CreateIMS()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
             var vm = new EventCreateViewModel();
-            return View();
+            return View(vm);
         }
 
         // POST: Events/Create
@@ -177,51 +177,18 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EventCreateViewModel vm)
+        public ActionResult CreateIMS(EventCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 var @event = new Event(vm);
                 db.Events.Add(@event);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexIMS");
             }
 
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
             return View(vm);
-        }
-
-        // GET: Events/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", @event.StaffOwnerID);
-            return View(@event);
-        }
-
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventID,Title,Description,Created,LastModified,Deleted,StaffOwnerID")] Event @event)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(@event).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", @event.StaffOwnerID);
-            return View(@event);
         }
 
         // GET: Events/Edit/5
@@ -306,6 +273,8 @@ namespace DeanAndSons.Controllers
         {
             Event @event = db.Events.Find(id);
             @event.Deleted = true;
+            @event.LastModified = DateTime.Now;
+
             db.Entry(@event).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("IndexIMS");

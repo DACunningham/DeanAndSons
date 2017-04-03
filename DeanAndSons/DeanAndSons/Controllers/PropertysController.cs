@@ -385,6 +385,7 @@ namespace DeanAndSons.Controllers
         {
             Property property = db.Propertys.Find(id);
             property.Deleted = true;
+            property.LastModified = DateTime.Now;
             db.Entry(property).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("IndexIMS");

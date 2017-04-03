@@ -12,7 +12,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Create Event</p>
+                <p class="pageTitle">Create Event - IMS</p>
             </div>
 
         </header>
@@ -22,13 +22,15 @@
 <div class="container body-content">
 
 
-    @using (Html.BeginForm("Create", "Events", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateIMS", "Events", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Event</h4>
+
+            <h3>General</h3>
             <hr />
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -41,7 +43,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -55,6 +57,8 @@
             </div>
 
             @* ********** Address Info ********** *@
+            <h3>Address</h3>
+            <hr />
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PropertyNo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -105,6 +109,8 @@
             </div>
 
             @* ********** Image Info ********** *@
+            <h3>Images</h3>
+            <hr />
 
             <div class="col-md-12">
                 @Ajax.ActionLink("Upload More Images...", "MoreImages", "Propertys", new { },
@@ -133,19 +139,29 @@
 
             </div>
 
-            <div class="form-group">
+            @* ********** Buttons ********** *@
+
+            <div class="row">
+
+                <div class="col-md-offset-2 col-md-6">
+                    @Html.ActionLink("Cancel", "IndexIMS", null, new { @class = "btn btn-default text-center", role = "button" })
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-success pull-right">Create</button>
+                </div>
+
+            </div>
+
+            @*<div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
-            </div>
+            </div>*@
         </div>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
