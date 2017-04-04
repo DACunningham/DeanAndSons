@@ -118,12 +118,12 @@ footer {
 
 a {
   color: #6d7993;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 a:hover,
 a:focus {
   color: #333333;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
