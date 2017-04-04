@@ -1,5 +1,4 @@
 ﻿using DeanAndSons.Models.IMS.ViewModels;
-using DeanAndSons.Models.WAP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DeanAndSons.Models.WAP
 {
@@ -24,6 +24,7 @@ namespace DeanAndSons.Models.WAP
         public string SubTitle { get; set; }
 
         [Required]
+        [AllowHtml]
         [StringLength(10000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string Description { get; set; }
 
