@@ -12,6 +12,8 @@ namespace DeanAndSons.Models.IMS.ViewModels
     {
         public string Id { get; set; }
 
+        public string Forename { get; set; }
+
         [Required]
         public Rank Rank { get; set; }
 
@@ -27,6 +29,7 @@ namespace DeanAndSons.Models.IMS.ViewModels
         public StaffManagerEditViewModel(Staff vm)
         {
             Id = vm.Id;
+            Forename = vm.Forename;
             Rank = vm.Rank;
             SuperiorID = vm.SuperiorID;
             Superior = vm.Superior;

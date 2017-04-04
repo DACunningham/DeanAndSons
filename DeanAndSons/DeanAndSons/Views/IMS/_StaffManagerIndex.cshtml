@@ -2,6 +2,8 @@
 
 @* ********** Director's ********** *@
 
+<h3>Directors</h3>
+
 <table class="table">
     <tr>
 
@@ -36,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.Superior.Forename)
                 @Html.DisplayFor(modelItem => item.Superior.Surname)
             </td>
-            <td class="col-md-1">
-                @Html.ActionLink("Edit", "StaffManagerEdit", new { id = item.Id }) |
-                <a id=@item.Id class="deleteStaff" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            <td class="col-md-2">
+                <a id=@item.Id class="deleteStaff btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                @Html.ActionLink("Edit", "StaffManagerEdit", new { id = item.Id }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
             </td>
         </tr>
     }
@@ -46,6 +48,8 @@
 </table>
 
 @* ********** Manager's ********** *@
+
+<h3>Managers</h3>
 
 <table class="table">
     <tr>
@@ -81,9 +85,9 @@
                 @Html.DisplayFor(modelItem => item.Superior.Forename)
                 @Html.DisplayFor(modelItem => item.Superior.Surname)
             </td>
-            <td class="col-md-1">
-                @Html.ActionLink("Edit", "StaffManagerEdit", new { id = item.Id }) |
-                <a id=@item.Id class="deleteStaff" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            <td class="col-md-2">
+                <a id=@item.Id class="deleteStaff btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                @Html.ActionLink("Edit", "StaffManagerEdit", new { id = item.Id }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
             </td>
         </tr>
     }
@@ -91,6 +95,8 @@
 </table>
 
 @* ********** Agent's ********** *@
+
+<h3>Agents</h3>
 
 <table class="table">
     <tr>
@@ -126,9 +132,9 @@
                 @Html.DisplayFor(modelItem => item.Superior.Forename)
                 @Html.DisplayFor(modelItem => item.Superior.Surname)
             </td>
-            <td class="col-md-1">
-                @Html.ActionLink("Edit", "StaffManagerEdit", new { id = item.Id }) |
-                <a id=@item.Id class="deleteStaff" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            <td class="col-md-2">
+                <a id=@item.Id class="deleteStaff btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                @Html.ActionLink("Edit", "StaffManagerEdit", new { id = item.Id }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
             </td>
         </tr>
     }

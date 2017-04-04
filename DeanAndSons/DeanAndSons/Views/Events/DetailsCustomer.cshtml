@@ -106,7 +106,9 @@
         </div>
     </div>
 
-    <p>
-        @Html.ActionLink("Back to List", "IndexCustomer")
-    </p>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Back", "IndexCustomer", new { }, new { @class = "btn btn-default text-center", role = "button" })
+        </div>
+    </div>
 </div>

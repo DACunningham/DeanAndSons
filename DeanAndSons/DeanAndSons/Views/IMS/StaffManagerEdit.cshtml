@@ -12,7 +12,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Staff Manager Index - IMS</p>
+                <p class="pageTitle">Edit Staff Details - IMS</p>
             </div>
 
         </header>
@@ -29,6 +29,9 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
+
+            <h3>@Model.Forename's Team</h3>
+            <hr />
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Rank, new { @class = "col-md-2 control-label" })
@@ -52,11 +55,11 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-6">
-                    @Html.ActionLink("Cancel", "StaffManagerIndex", null, new { @class = "btn btn-default btn-block" })
+                <div class="col-md-offset-2 col-md-6">
+                    @Html.ActionLink("Cancel", "StaffManagerIndex", null, new { @class = "btn btn-default" })
                 </div>
-                <div class="col-md-6">
-                    <input id="submit" type="submit" value="Save" class="btn btn-block btn-success" />
+                <div class="col-md-4">
+                    <input id="submit" type="submit" value="Save" class="btn btn-success pull-right" />
                 </div>
             </div>
         </div>

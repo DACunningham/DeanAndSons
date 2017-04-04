@@ -34,44 +34,44 @@
         <th>
             Seller
         </th>
-        <th></th>
+        <th class="col-md-1"></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="col-md-2">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.SaleState)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.LastModified)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.Deleted)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.Buyer.Forename) 
                 @Html.DisplayFor(modelItem => item.Buyer.Surname)
             </td>
-            <td>
+            <td class="col-md-1">
                 @Html.DisplayFor(modelItem => item.Seller.Forename) 
                 @Html.DisplayFor(modelItem => item.Seller.Surname)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "EditIMS", new { id = item.PropertyID }) |
-                <a id=@item.PropertyID class="deleteProp" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            <td class="col-md-2">
+                <a id=@item.PropertyID class="deleteStaff btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                @Html.ActionLink("Edit", "EditIMS", new { id = item.PropertyID }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
             </td>
         </tr>
     }

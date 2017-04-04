@@ -37,10 +37,6 @@
         }
     </div>
 
-    <p>
-        @Html.ActionLink("Create New", "CreateIMS")
-    </p>
-
     @* ********** Property List ********** *@
     <div id="indexList">
 
@@ -76,6 +72,12 @@
                     }
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Add Event", "CreateIMS", null, new { @class = "btn btn-success pull-right", role = "button" })
         </div>
     </div>
 

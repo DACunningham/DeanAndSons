@@ -39,6 +39,10 @@ textarea {
   border: 1px solid #DDDDDD;
 }*/
 
+.dc-profileImg{
+    max-height: 250px;
+}
+
 .dc-Tiles{
     background-color: transparent;
     max-height: 175px;

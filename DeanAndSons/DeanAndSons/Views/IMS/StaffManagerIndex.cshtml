@@ -20,9 +20,6 @@
 </div>
 
 <div class="container body-content">
-    <p>
-        @Html.ActionLink("Create New", "StaffManagerCreate", "Account")
-    </p>
 
     @* ********** Item List ********** *@
     <div id="indexList">
@@ -41,10 +38,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete Property</h4>
+                    <h4 class="modal-title">Delete Staff Member</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to permanently delete this property?</p>
+                    <p>Are you sure you want to permanently delete this staff member?</p>
                 </div>
                 <div class="modal-footer">
                     @using (Html.BeginForm("StaffManagerDelete", "IMS", new { id = 123456789 }, FormMethod.Post, new { id = "deleteForm" }))
@@ -59,6 +56,12 @@
                     }
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Add Staff Member", "StaffManagerCreate", "Account", null, new { @class = "btn btn-success pull-right", role = "button" })
         </div>
     </div>
 

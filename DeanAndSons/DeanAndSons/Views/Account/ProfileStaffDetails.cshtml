@@ -24,7 +24,7 @@
     <div class="row">
         @* ********** Image ********** *@
         <div class="col-md-3">
-            <img src="@Model.Image.Location" class="img-responsive center-block" alt="@Model.Surname image" />
+            <img src="@Model.Image.Location" class="img-responsive center-block dc-profileImg" alt="@Model.Surname image" />
         </div>
 
         @* ********** Body ********** *@
@@ -109,8 +109,9 @@
 
     </div>
 
-    <div class="col-md-6">
-        @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default text-center", role = "button" })
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right", role = "button" })
+        </div>
     </div>
-
 </div>
