@@ -26,5 +26,15 @@ namespace DeanAndSons.Controllers
 
             return View();
         }
+
+        /// <summary>
+        /// Inserts partial view for another image upload
+        /// </summary>
+        /// <param name="obj">File field Collection</param>
+        /// <returns></returns>
+        public ActionResult MoreImages(ICollection<HttpPostedFileBase> obj)
+        {
+            return PartialView("_ImageUpload", obj);
+        }
     }
 }

@@ -125,7 +125,7 @@
             <hr />
 
             <div class="col-md-12">
-                @Ajax.ActionLink("Upload More Images...", "MoreImages", "Propertys", new { },
+                @Ajax.ActionLink("Upload More Images...", "MoreImages", "Home", new { },
                    new AjaxOptions
                    {
                        HttpMethod = "GET",
@@ -144,7 +144,7 @@
 
             @for (int i = 0; i < 3; i++)
             {
-                @Html.Partial("_ImageUploadCMS", Model)
+                @Html.Partial("_ImageUpload")
             }
 
             <div id="moreImages">

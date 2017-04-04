@@ -401,11 +401,6 @@ namespace DeanAndSons.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult MoreImages(PropertyCreateIMSViewModel vm)
-        {
-            return PartialView("_ImageUpload", vm);
-        }
-
         //Populate category and sort drop down lists
         private List<SelectListItem> populateLocation()
         {

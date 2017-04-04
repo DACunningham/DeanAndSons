@@ -576,7 +576,6 @@
     <Content Include="Views\Propertys\Details.cshtml" />
     <Content Include="Views\Propertys\Edit.cshtml" />
     <Content Include="Views\Propertys\Index.cshtml" />
-    <Content Include="Views\Propertys\_ImageUpload.cshtml" />
     <Content Include="Views\IMS\Index.cshtml" />
     <Content Include="Views\IMS\TeamViewer.cshtml" />
     <Content Include="Views\Propertys\_IndexList.cshtml" />
@@ -587,14 +586,13 @@
     <Content Include="Views\Services\EditIMS.cshtml" />
     <Content Include="Views\Services\IndexIMS.cshtml" />
     <Content Include="Views\Services\IndexCustomer.cshtml" />
-    <Content Include="Views\Services\_ImageUpload.cshtml" />
+    <Content Include="Views\Shared\_ImageUpload.cshtml" />
     <Content Include="Views\Services\DetailsCustomer.cshtml" />
     <Content Include="Views\Events\CreateIMS.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\EditIMS.cshtml" />
     <Content Include="Views\Events\IndexIMS.cshtml" />
-    <Content Include="Views\Events\_ImageUpload.cshtml" />
     <Content Include="Views\Events\IndexCustomer.cshtml" />
     <Content Include="Views\Events\DetailsCustomer.cshtml" />
     <Content Include="Views\Events\_IndexList.cshtml" />
@@ -617,7 +615,6 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Propertys\_ImageUploadCMS.cshtml" />
     <Content Include="Views\Propertys\_IndexLList.cshtml" />
     <Content Include="Views\Propertys\IndexIMS.cshtml" />
     <Content Include="Views\Propertys\_IndexIMSList.cshtml" />
@@ -631,7 +628,6 @@
     <Content Include="Views\Events\IndexCMS.cshtml" />
     <Content Include="Views\Events\_IndexCMS.cshtml" />
     <Content Include="Views\Events\EditCMS.cshtml" />
-    <Content Include="Views\Events\_ImageUploadCMS.cshtml" />
     <Content Include="Views\Services\_IndexCMS.cshtml" />
     <Content Include="Views\Services\IndexCMS.cshtml" />
     <Content Include="Views\Services\EditCMS.cshtml" />

@@ -379,10 +379,5 @@ namespace DeanAndSons.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult MoreImages(ICollection<HttpPostedFileBase> obj)
-        {
-            return PartialView("_ImageUpload", obj);
-        }
     }
 }
