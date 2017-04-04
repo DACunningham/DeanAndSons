@@ -1,4 +1,5 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.CMS.ViewModels;
 using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
@@ -50,6 +52,25 @@ namespace DeanAndSons.Controllers
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_IndexIMS", dbModel);
+            }
+
+            return View(dbModel);
+        }
+
+        public ActionResult IndexCMS(string searchString)
+        {
+            // ********** Database Access **********
+            var dbModel = db.Services.Include(e => e.StaffOwner);
+
+            if (!String.IsNullOrWhiteSpace(searchString))
+            {
+                dbModel = dbModel.Where(p => p.Title.Contains(searchString));
+            }
+
+            //If the user has called this action via AJAX (ie search field) then only update the partial view.
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_IndexCMS", dbModel);
             }
 
             return View(dbModel);
@@ -193,6 +214,75 @@ namespace DeanAndSons.Controllers
             return View(service);
         }
 
+        // GET: Propertys/Edit/5
+        public ActionResult EditCMS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var service = db.Services.Include(i => i.Images)
+                .Include(s => s.StaffOwner)
+                .Single(p => p.ServiceID == id);
+
+            var vm = new ServiceEditCMSViewModel(service);
+
+            if (service == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vm);
+        }
+
+        // POST: Propertys/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCMS(ServiceEditCMSViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = db.Services.Include(i => i.Images).Single(p => p.ServiceID == vm.ServiceID);
+                var _hasNewImage = -1;
+
+                service.Title = vm.Title;
+                service.Description = vm.Description;
+
+                //Checks if any of the image objs has a valid file uploaded
+                foreach (var item in vm.Images)
+                {
+                    if (item != null && item.ContentLength != 0)
+                    {
+                        _hasNewImage = 1;
+                        break;
+                    }
+                }
+
+                //If image obj has valid file uploaded clear original image list and add new images.
+                if (_hasNewImage == 1)
+                {
+                    //Remove all images from file store and DB
+                    foreach (var item in service.Images.ToList())
+                    {
+                        service.removeImage(item);
+                        db.Images.Remove(item);
+                    }
+
+                    //Add images to property.  Will only add images if there is an image in the list and if there is an image in the list it would have
+                    //already been emptied by the foreach loop above.
+                    service.Images = service.addImages(vm.Images);
+                }
+
+                db.Entry(service).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("IndexCMS");
+            }
+            return View(vm);
+        }
+
         // GET: Services/Edit/5
         public ActionResult EditIMS(int? id)
         {
@@ -288,6 +378,11 @@ namespace DeanAndSons.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult MoreImages(ICollection<HttpPostedFileBase> obj)
+        {
+            return PartialView("_ImageUpload", obj);
         }
     }
 }

@@ -263,6 +263,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CMS\ViewModels\EventEditCMSViewModel.cs" />
+    <Compile Include="Models\CMS\ViewModels\ServiceEditCMSViewModel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
@@ -631,6 +632,9 @@
     <Content Include="Views\Events\_IndexCMS.cshtml" />
     <Content Include="Views\Events\EditCMS.cshtml" />
     <Content Include="Views\Events\_ImageUploadCMS.cshtml" />
+    <Content Include="Views\Services\_IndexCMS.cshtml" />
+    <Content Include="Views\Services\IndexCMS.cshtml" />
+    <Content Include="Views\Services\EditCMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

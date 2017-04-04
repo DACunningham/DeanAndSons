@@ -63,7 +63,7 @@ namespace DeanAndSons.Models.WAP
         }
 
         //Takes a collectin of uploaded images and creates a new ImpageProperty for each non null && non empty entry
-        private ICollection<ImageService> addImages(ICollection<HttpPostedFileBase> files)
+        public ICollection<ImageService> addImages(ICollection<HttpPostedFileBase> files)
         {
             var images = new Collection<ImageService>();
             ImageType imgType = ImageType.ServiceHeader;
@@ -80,6 +80,16 @@ namespace DeanAndSons.Models.WAP
             }
 
             return images;
+        }
+
+        /// <summary>
+        /// Remove image from file store on server only.  Doesn't remove item from property collection
+        /// or DB
+        /// </summary>
+        /// <param name="img">The image to remove</param>
+        public void removeImage(ImageService img)
+        {
+            img.DeleteImage(img);
         }
 
         public void ApplyEditIMS(ServiceEditIMSViewModel obj)
