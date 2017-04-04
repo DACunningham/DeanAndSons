@@ -21,6 +21,19 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         public ImageService Image { get; set; }
 
+        public ServiceIndexViewModel()
+        {
+
+        }
+
+        public ServiceIndexViewModel(Service e)
+        {
+            ServiceID = e.ServiceID;
+            Title = e.Title;
+            SubTitle = e.SubTitle;
+            Image = getImage(e);
+        }
+
         /// <summary>
         /// Takes the description and cuts it down to 200 chars if required
         /// </summary>
@@ -36,6 +49,23 @@ namespace DeanAndSons.Models.WAP.ViewModels
             {
                 return desc + "...";
             }
+        }
+
+        //Checks if event's image value is null
+        private ImageService getImage(Service item)
+        {
+            ImageService image = null;
+            try
+            {
+                image = item.Images.First(i => i.Type == ImageType.ServiceHeader);
+            }
+            catch (InvalidOperationException)
+            {
+                image = new ImageService();
+                image.Location = ImageService.defaultImgLocation;
+            }
+
+            return image;
         }
     }
 }

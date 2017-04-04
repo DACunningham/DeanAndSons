@@ -39,6 +39,12 @@ textarea {
   border: 1px solid #DDDDDD;
 }*/
 
+.dc-Tiles{
+    background-color: transparent;
+    max-height: 175px;
+    max-width: 175px;
+}
+
 .logo1 {
     color: #ffffff;
     letter-spacing: 0.4em;
