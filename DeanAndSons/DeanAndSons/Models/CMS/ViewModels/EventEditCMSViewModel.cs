@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DeanAndSons.Models.CMS.ViewModels
 {
@@ -15,6 +16,7 @@ namespace DeanAndSons.Models.CMS.ViewModels
         public string Title { get; set; }
 
         [Required]
+        [AllowHtml]
         [StringLength(10000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
         public string Description { get; set; }
 

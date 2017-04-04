@@ -39,16 +39,21 @@ namespace DeanAndSons.Models.WAP.ViewModels
             Created = item.Created;
         }
 
-        //Takes the description and cuts it down to 200 chars if required
+
+        /// <summary>
+        /// Takes the description and cuts it down to 200 chars if required
+        /// </summary>
+        /// <param name="desc">The string to cut</param>
+        /// <returns></returns>
         private string createDescription(string desc)
         {
             if (desc.Length > 200)
             {
-                return desc.Substring(0, 200);
+                return desc.Substring(0, 200) + "...";
             }
             else
             {
-                return desc;
+                return desc + "...";
             }
         }
 

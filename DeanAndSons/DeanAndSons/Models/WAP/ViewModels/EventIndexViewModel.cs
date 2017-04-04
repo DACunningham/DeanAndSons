@@ -27,22 +27,26 @@ namespace DeanAndSons.Models.WAP.ViewModels
         {
             EventID = e.EventID;
             Title = e.Title;
-            Description = e.Description;
+            Description = createDescription(e.Description);
             Contact = e.getContact(e.Contact);
             Image = getImage(e);
             Created = e.Created;
         }
 
-        //Takes the description and cuts it down to 200 chars if required
+        /// <summary>
+        /// Takes the description and cuts it down to 200 chars if required
+        /// </summary>
+        /// <param name="desc">The string to cut</param>
+        /// <returns></returns>
         private string createDescription(string desc)
         {
             if (desc.Length > 200)
             {
-                return desc.Substring(0, 200);
+                return desc.Substring(0, 200) + "...";
             }
             else
             {
-                return desc;
+                return desc + "...";
             }
         }
 
