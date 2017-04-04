@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Deleted)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditCMS", new { id = item.ServiceID })
+                @Html.ActionLink("Edit", "EditCMS", new { id = item.ServiceID }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
             </td>
         </tr>
     }

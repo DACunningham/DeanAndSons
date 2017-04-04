@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Deleted)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditCMS", new { id = item.PropertyID })
+                @Html.ActionLink("Edit", "EditCMS", new { id = item.PropertyID }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
             </td>
         </tr>
     }
