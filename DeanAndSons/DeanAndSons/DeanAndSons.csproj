@@ -631,6 +631,9 @@
     <Content Include="Views\Services\_IndexCMS.cshtml" />
     <Content Include="Views\Services\IndexCMS.cshtml" />
     <Content Include="Views\Services\EditCMS.cshtml" />
+    <Content Include="Views\Account\_StaffPropertyList.cshtml" />
+    <Content Include="Views\Account\_StaffEventList.cshtml" />
+    <Content Include="Views\Account\_StaffServiceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

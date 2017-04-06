@@ -62,56 +62,49 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2>Properties Owned...</h2>
+            <h3>Properties Owned...</h3>
         </div>
-    </div>
-
-    <div class="row">
-
-        @foreach (var item in Model.PropertysOwned)
-        {
-            @Html.Partial("_PropertyProfile", item)
-        }
-
-    </div>
-
-    <hr />
-
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Services Owned...</h2>
-        </div>
-    </div>
-
-    <div class="row">
-
-        @foreach (var item in Model.ServicesOwned)
-        {
-            @Html.Partial("_PropertyProfile", item)
-        }
-
-    </div>
-
-    <hr />
-
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Events Owned...</h2>
-        </div>
-    </div>
-
-    <div class="row">
-
-        @foreach (var item in Model.EventsOwned)
-        {
-            @Html.Partial("_PropertyProfile", item)
-        }
-
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right", role = "button" })
+            @Html.Partial("_StaffPropertyList", Model.PropertysOwned)
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Services Owned...</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Partial("_StaffServiceList", Model.ServicesOwned)
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Events Owned...</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Partial("_StaffEventList", Model.EventsOwned)
+        </div>
+    </div>
+
+    @{
+        if (Model.ID == Model.CurrentUserID)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right", role = "button" })
+                </div>
+            </div>
+        }
+    }
 </div>

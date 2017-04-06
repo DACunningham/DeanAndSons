@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DeanAndSons.Models.WAP.Event>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            Staff Owner
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-4">
+                @Html.ActionLink(item.Title, "DetailsCustomer", "Events", new { id = item.EventID }, null)
+            </td>
+            <td class="col-md-3">
+                @Html.DisplayFor(modelItem => item.StaffOwner.Forename)
+                @Html.DisplayFor(modelItem => item.StaffOwner.Surname)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.LastModified)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Deleted)
+            </td>
+        </tr>
+    }
+</table>

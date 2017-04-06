@@ -523,7 +523,7 @@ namespace DeanAndSons.Controllers
             }
 
             var user = db.Users.Include(i => i.Image).Include(c => c.Contact)
-                    .Where(s => s.Id == userID).Single();
+                    .Where(s => s.Id == userID);
 
             if (user is Customer)
             {
@@ -532,7 +532,12 @@ namespace DeanAndSons.Controllers
             }
             else
             {
-                var vm = new ProfileStaffDetailsViewModel((Staff)user);
+                var _tmp = user.OfType<Staff>().Include(e => e.EventsOwned)
+                    .Include(p => p.PropertysOwned)
+                    .Include(s => s.ServicesOwned)
+                    .Single();
+                var vm = new ProfileStaffDetailsViewModel(_tmp);
+                vm.CurrentUserID = User.Identity.GetUserId();
                 return View("ProfileStaffDetails", vm);
             }
         }

@@ -1,9 +1,6 @@
 ﻿using DeanAndSons.Models.WAP;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace DeanAndSons.Models.Global.ViewModels
 {
@@ -33,6 +30,8 @@ namespace DeanAndSons.Models.Global.ViewModels
         public ContactUser Contact { get; set; }
 
         public ImageAppUser Image { get; set; }
+
+        public string CurrentUserID { get; set; }
 
         public ProfileStaffDetailsViewModel(Staff usr)
         {
