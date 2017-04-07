@@ -687,6 +687,26 @@ namespace DeanAndSons.Controllers
             return "{\"response\":\"Property Save Successful!\"}";
         }
 
+        [HttpPost, ActionName("DeletePropFav")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePropFav(int id)
+        {
+            var _userID = User.Identity.GetUserId();
+
+            var user = db.Users.OfType<Customer>()
+                .Include(sp => sp.SavedPropertys)
+                .Single(u => u.Id == _userID);
+
+            var property = db.Propertys.Find(id);
+
+            user.SavedPropertys.Remove(property);
+
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("ProfileDetails", new { userID = _userID });
+        }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
