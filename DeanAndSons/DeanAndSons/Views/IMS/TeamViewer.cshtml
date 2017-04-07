@@ -16,7 +16,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Information Management System - Team Viewer</p>
+                <p class="pageTitle">Team Viewer - IMS</p>
             </div>
 
         </header>
@@ -26,66 +26,74 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+
+            <h3>Your Immediate Hierarchical Tree</h3>
+            <hr />
+
             <div class="tree">
                 <ul>
                     <li>
-                        <a href="#"> @Model.Superior.Forename @Model.Superior.Surname </a>
+                        <a href=@Url.Action("ProfileDetails", "Account", new { userID = Model.Superior.SuperiorID })>
+                            <div class="row">
+                                <div class="col-md-12">
 
-                        <ul>
-                            <li>
-                                <a href="#"> @Model.Forename @Model.Surname </a>
+                                    <img src=@Model.Superior.getImage(Model.Superior.Image).Location class="dc-FamilyTreeImg" alt="Profile Image" />
 
-                                @if (Model.Subordinates.Count != 0)
-                                {
-                                    <ul>
-                                        @foreach (var item in Model.Subordinates)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Model.Superior.Forename @Model.Superior.Surname
+                                </div>
+                            </div>
+                        </a>
+                                <ul>
+                                    <li>
+                                        <a href=@Url.Action("ProfileDetails", "Account", new { userID = Model.StaffID })>
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <img src=@Model.Image.Location class="dc-FamilyTreeImg" alt="Profile Image" />
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @Model.Forename @Model.Surname
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        @if (Model.Subordinates.Count != 0)
                                         {
-
-                                            <li>
-                                                <a href="#"> @item.Forename @item.Surname </a>
-                                            </li>
-
-                                        }
-                                    </ul>
-                                }
-
-
-                            </li>
-                        </ul>
-
-
-
-                        @*<ul>
-                                <li>
-                                    <a href="#">Child</a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Grand Child</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Child</a>
-                                    <ul>
-                                        <li><a href="#">Grand Child</a></li>
-                                        <li>
-                                            <a href="#">Grand Child</a>
                                             <ul>
-                                                <li>
-                                                    <a href="#">Great Grand Child</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Great Grand Child</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Great Grand Child</a>
-                                                </li>
+                                                @foreach (var item in Model.Subordinates)
+                                                {
+
+                                                    <li>
+                                                        <a href=@Url.Action("ProfileDetails", "Account", new { userID = item.Id })>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+
+                                                                    <img src=@item.getImage(item.Image).Location class="dc-FamilyTreeImg" alt="Profile Image" />
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    @item.Forename @item.Surname
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+
+                                                }
                                             </ul>
-                                        </li>
-                                        <li><a href="#">Grand Child</a></li>
-                                    </ul>
-                                </li>
-                            </ul>*@
+                                        }
+
+
+                                    </li>
+                                </ul>
                     </li>
                 </ul>
             </div>

@@ -45,7 +45,7 @@ namespace DeanAndSons.Models
         public ICollection<ContactUser> Contact { get; set; } = new Collection<ContactUser>();
 
         // List of images associated with this user
-        public ICollection<ImageAppUser> Image { get; set; } = new Collection<ImageAppUser>();
+        public virtual ICollection<ImageAppUser> Image { get; set; } = new Collection<ImageAppUser>();
 
         private string imgLocation = "/Storage/Users";
 

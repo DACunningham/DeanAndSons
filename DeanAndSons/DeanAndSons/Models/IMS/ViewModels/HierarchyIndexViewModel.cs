@@ -1,7 +1,5 @@
-﻿using System;
+﻿using DeanAndSons.Models.WAP;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DeanAndSons.Models.IMS.ViewModels
 {
@@ -17,11 +15,14 @@ namespace DeanAndSons.Models.IMS.ViewModels
 
         public ICollection<Staff> Subordinates { get; set; }
 
+        public ImageAppUser Image { get; set; }
+
         public HierarchyIndexViewModel(Staff staff)
         {
             StaffID = staff.Id;
             Forename = staff.Forename;
             Surname = staff.Surname;
+            Image = staff.getImage(staff.Image);
 
             if (staff.Superior == null)
             {

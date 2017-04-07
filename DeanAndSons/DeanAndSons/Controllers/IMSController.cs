@@ -22,12 +22,13 @@ namespace DeanAndSons.Controllers
 
         public ActionResult TeamViewer()
         {
-            //var a = db.Users.OfType<Staff>().Where(s => s.SuperiorID == null);
-
             //Get logged in user ID then use this ID to get ApplicationUser instance
             var usrID = User.Identity.GetUserId();
-            var appUser = db.Users.Where(usr => usr.Id == usrID).OfType<Staff>()
-                .Include(s => s.Subordinates).Include(su => su.Superior).Single();
+            var appUser = db.Users.OfType<Staff>()
+                .Include(s => s.Subordinates)
+                .Include(su => su.Superior)
+                .Where(usr => usr.Id == usrID)
+                .Single();
 
             var vm = new HierarchyIndexViewModel(appUser);
 

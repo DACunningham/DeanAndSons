@@ -49,6 +49,12 @@ textarea {
     max-width: 175px;
 }
 
+.dc-FamilyTreeImg{
+    background-color: transparent;
+    height: 100px;
+    width: 100px;
+}
+
 .logo1 {
     color: #ffffff;
     letter-spacing: 0.4em;
