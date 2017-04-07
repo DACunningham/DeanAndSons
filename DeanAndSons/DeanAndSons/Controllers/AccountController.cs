@@ -707,6 +707,26 @@ namespace DeanAndSons.Controllers
             return RedirectToAction("ProfileDetails", new { userID = _userID });
         }
 
+        [HttpPost, ActionName("DeleteSearch")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteSearch(int id)
+        {
+            var _userID = User.Identity.GetUserId();
+
+            var user = db.Users.OfType<Customer>()
+                .Include(s => s.SavedSearches)
+                .Single(u => u.Id == _userID);
+
+            var search = db.SavedSearches.Find(id);
+
+            user.SavedSearches.Remove(search);
+
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("ProfileDetails", new { userID = _userID });
+        }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
