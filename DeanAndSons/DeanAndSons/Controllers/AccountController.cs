@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,6 +16,8 @@ using System.Data.Entity;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.IMS.ViewModels;
 using System.Collections.ObjectModel;
+using System.Web.Script.Serialization;
+using DeanAndSons.Models.JSONClasses;
 
 namespace DeanAndSons.Controllers
 {
@@ -523,19 +526,31 @@ namespace DeanAndSons.Controllers
             }
 
             var user = db.Users.Include(i => i.Image).Include(c => c.Contact)
-                    .Where(s => s.Id == userID);
+                    .Single(s => s.Id == userID);
 
             if (user is Customer)
             {
-                var vm = new ProfileCustDetailsViewModel((Customer)user);
+                //var _tmp = user.Include(e => e.SavedSearches)
+                //    .Single();
+                var _tmp = db.Users.OfType<Customer>().Include(i => i.Image)
+                    .Include(c => c.Contact)
+                    .Include(e => e.SavedSearches)
+                    .Single(s => s.Id == userID);
+                var vm = new ProfileCustDetailsViewModel(_tmp);
                 return View("ProfileCustDetails", vm);
             }
             else
             {
-                var _tmp = user.OfType<Staff>().Include(e => e.EventsOwned)
+                //var _tmp = user.OfType<Staff>().Include(e => e.EventsOwned)
+                //    .Include(p => p.PropertysOwned)
+                //    .Include(s => s.ServicesOwned)
+                //    .Single();
+                var _tmp = db.Users.OfType<Staff>().Include(i => i.Image)
+                    .Include(c => c.Contact)
+                    .Include(e => e.EventsOwned)
                     .Include(p => p.PropertysOwned)
                     .Include(s => s.ServicesOwned)
-                    .Single();
+                    .Single(s => s.Id == userID);
                 var vm = new ProfileStaffDetailsViewModel(_tmp);
                 vm.CurrentUserID = User.Identity.GetUserId();
                 return View("ProfileStaffDetails", vm);
@@ -637,6 +652,18 @@ namespace DeanAndSons.Controllers
             }
 
             return View(vm);
+        }
+
+        public string SaveSearch(string obj)
+        {
+            JavaScriptSerializer s = new JavaScriptSerializer();
+            var _temp = s.Deserialize<SaveSearchJSON>(obj);
+
+            var savedSearch = new SavedSearch(_temp, User.Identity.GetUserId());
+            db.SavedSearches.Add(savedSearch);
+            db.SaveChanges();
+
+            return "{\"response\":\"Save Successful!\"}";
         }
 
         #region Helpers

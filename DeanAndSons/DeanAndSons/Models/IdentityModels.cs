@@ -117,6 +117,7 @@ namespace DeanAndSons.Models
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<SavedSearch> SavedSearches { get; set; }
 
         public ApplicationDbContext()
             : base("LocalDB", throwIfV1Schema: false)

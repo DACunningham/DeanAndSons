@@ -47,6 +47,8 @@ namespace DeanAndSons.Models
         [InverseProperty("Seller")]
         public ICollection<Property> PropertysSell { get; set; } = new Collection<Property>();
 
+        public ICollection<SavedSearch> SavedSearches { get; set; }
+
         //public ICollection<Service> Serivces { get; set; }
     }
 }

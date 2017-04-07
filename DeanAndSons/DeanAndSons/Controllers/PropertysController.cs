@@ -421,13 +421,13 @@ namespace DeanAndSons.Controllers
         {
             List<SelectListItem> items = new List<SelectListItem>();
 
-            items.Add(new SelectListItem { Text = "1 Mile", Value = "0" });
-            items.Add(new SelectListItem { Text = "2 Miles", Value = "1" });
-            items.Add(new SelectListItem { Text = "5 Miles", Value = "2" });
-            items.Add(new SelectListItem { Text = "10 Miles", Value = "3" });
-            items.Add(new SelectListItem { Text = "15 Miles", Value = "4" });
-            items.Add(new SelectListItem { Text = "20 Miles", Value = "5" });
-            items.Add(new SelectListItem { Text = "30 Miles", Value = "6", Selected = true });
+            items.Add(new SelectListItem { Text = "1 Mile", Value = "1" });
+            items.Add(new SelectListItem { Text = "2 Miles", Value = "2" });
+            items.Add(new SelectListItem { Text = "5 Miles", Value = "5" });
+            items.Add(new SelectListItem { Text = "10 Miles", Value = "10" });
+            items.Add(new SelectListItem { Text = "15 Miles", Value = "15" });
+            items.Add(new SelectListItem { Text = "20 Miles", Value = "20" });
+            items.Add(new SelectListItem { Text = "30 Miles", Value = "30", Selected = true });
 
             return items;
         }

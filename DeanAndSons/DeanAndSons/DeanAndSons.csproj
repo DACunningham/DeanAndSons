@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201704011455369_AddStaffRank.Designer.cs">
       <DependentUpon>201704011455369_AddStaffRank.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704061836255_SavedSearch.cs" />
+    <Compile Include="Migrations\201704061836255_SavedSearch.Designer.cs">
+      <DependentUpon>201704061836255_SavedSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CMS\ViewModels\EventEditCMSViewModel.cs" />
@@ -280,6 +284,7 @@
     <Compile Include="Models\IMS\ViewModels\StaffManagerEditViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\StaffManagerIndexIMSViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\HierarchyIndexViewModel.cs" />
+    <Compile Include="Models\JSONClasses\SaveSearchJSON.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\WAP\ContactEvent.cs" />
@@ -291,6 +296,7 @@
     <Compile Include="Models\WAP\ImageService.cs" />
     <Compile Include="Models\WAP\ImageAppUser.cs" />
     <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\WAP\SavedSearch.cs" />
     <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\IMS\ViewModels\EventCreateIMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
@@ -344,6 +350,7 @@
     <Content Include="Scripts\Custom\DeleteModal.js" />
     <Content Include="Scripts\Custom\EditorCMS.js" />
     <Content Include="Scripts\Custom\IndexSort.js" />
+    <Content Include="Scripts\Custom\SavePropertySearch.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -634,6 +641,7 @@
     <Content Include="Views\Account\_StaffPropertyList.cshtml" />
     <Content Include="Views\Account\_StaffEventList.cshtml" />
     <Content Include="Views\Account\_StaffServiceList.cshtml" />
+    <Content Include="Views\Account\_SaveSearches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -681,6 +689,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704011455369_AddStaffRank.resx">
       <DependentUpon>201704011455369_AddStaffRank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704061836255_SavedSearch.resx">
+      <DependentUpon>201704061836255_SavedSearch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

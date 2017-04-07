@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DeanAndSons.Models.WAP.SavedSearch>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Radius)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beds)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-4">
+                @Html.ActionLink(item.Location, "Index", "Propertys", new
+           {
+               CategorySort = item.CategorySort,
+               OrderSort = item.OrderSort,
+               Location = item.Location,
+               MinPrice = item.MinPrice,
+               Beds = item.Beds,
+               Radius = item.Radius,
+               MaxPrice = item.MaxPrice,
+               Age = (Int32)item.Age
+           }, null)
+            </td>
+            <td class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Radius)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.MinPrice)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.MaxPrice)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Beds)
+            </td>
+        </tr>
+    }
+</table>
