@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DeanAndSons.Models.Property>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-4">
+                @Html.ActionLink(item.Title, "Details", "Propertys", new { id = item.PropertyID }, null)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.SaleState)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+        </tr>
+    }
+</table>

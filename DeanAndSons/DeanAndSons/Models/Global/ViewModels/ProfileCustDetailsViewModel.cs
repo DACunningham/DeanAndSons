@@ -54,6 +54,7 @@ namespace DeanAndSons.Models.Global.ViewModels
         public ContactUser Contact { get; set; }
         public ImageAppUser Image { get; set; }
         public ICollection<SavedSearch> SavedSearches { get; set; }
+        public ICollection<Property> SavedProperties { get; set; }
 
         public ProfileCustDetailsViewModel(Customer usr)
         {
@@ -75,6 +76,7 @@ namespace DeanAndSons.Models.Global.ViewModels
             Contact = usr.getContact(usr.Contact);
             Image = usr.getImage(usr.Image);
             SavedSearches = usr.SavedSearches;
+            SavedProperties = usr.SavedPropertys;
         }
     }
 }

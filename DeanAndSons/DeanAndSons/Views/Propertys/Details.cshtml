@@ -27,6 +27,8 @@
     <div class="row">
         <div class="col-md-12">
             <h2>@Model.Title - @Model.Type - £@Model.Price</h2>
+            <a id="saveProperty" href="#">Favourite</a>
+            @Html.HiddenFor(p => p.PropertyID)
         </div>
     </div>
 
@@ -170,3 +172,8 @@
     </div>
 
 </div>
+
+@section Scripts {
+<script src="~/Scripts/Custom/FavouriteProperty.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

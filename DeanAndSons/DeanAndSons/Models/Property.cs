@@ -89,6 +89,8 @@ namespace DeanAndSons.Models
         [ForeignKey("StaffOwnerID")]
         public Staff StaffOwner { get; set; }
 
+        public ICollection<Customer> SavingUsers { get; set; } = new Collection<Customer>();
+
         public string imgLocation = "/Storage/Propertys";
 
         public Property()

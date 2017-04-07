@@ -49,6 +49,8 @@ namespace DeanAndSons.Models
 
         public ICollection<SavedSearch> SavedSearches { get; set; }
 
+        public ICollection<Property> SavedPropertys { get; set; } = new Collection<Property>();
+
         //public ICollection<Service> Serivces { get; set; }
     }
 }

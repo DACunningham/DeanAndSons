@@ -128,6 +128,17 @@
     <hr />
 
     <div class="row">
+
+        <div class="col-md-12">
+            <h3>Saved Searches</h3>
+            @Html.Partial("_FavProperties", Model.SavedProperties)
+        </div>
+
+    </div>
+
+    <hr />
+
+    <div class="row">
         <div class="col-md-12">
             @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right", role = "button" })
         </div>

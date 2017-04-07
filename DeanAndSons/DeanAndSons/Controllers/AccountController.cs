@@ -535,6 +535,7 @@ namespace DeanAndSons.Controllers
                 var _tmp = db.Users.OfType<Customer>().Include(i => i.Image)
                     .Include(c => c.Contact)
                     .Include(e => e.SavedSearches)
+                    .Include(p=>p.SavedPropertys)
                     .Single(s => s.Id == userID);
                 var vm = new ProfileCustDetailsViewModel(_tmp);
                 return View("ProfileCustDetails", vm);
@@ -664,6 +665,26 @@ namespace DeanAndSons.Controllers
             db.SaveChanges();
 
             return "{\"response\":\"Save Successful!\"}";
+        }
+
+        public string SaveProperty(string obj)
+        {
+            JavaScriptSerializer s = new JavaScriptSerializer();
+            var _temp = s.Deserialize<SavePropertyJSON>(obj);
+            var _userID = User.Identity.GetUserId();
+
+            var user = db.Users.OfType<Customer>()
+                .Include(sp => sp.SavedPropertys)
+                .Single(u => u.Id == _userID);
+
+            var property = db.Propertys.Find(_temp.PropertyID);
+
+            user.SavedPropertys.Add(property);
+
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return "{\"response\":\"Property Save Successful!\"}";
         }
 
         #region Helpers
