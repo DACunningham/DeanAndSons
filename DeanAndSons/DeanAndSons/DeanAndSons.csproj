@@ -649,6 +649,7 @@
     <Content Include="Views\Account\_StaffServiceList.cshtml" />
     <Content Include="Views\Account\_SaveSearches.cshtml" />
     <Content Include="Views\Account\_FavProperties.cshtml" />
+    <Content Include="Views\Account\ProfileAnonDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

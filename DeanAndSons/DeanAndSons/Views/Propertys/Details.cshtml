@@ -27,7 +27,15 @@
     <div class="row">
         <div class="col-md-12">
             <h2>@Model.Title - @Model.Type - £@Model.Price</h2>
-            <a id="saveProperty" href="#">Favourite</a>
+            @if (Request.IsAuthenticated)
+            {
+                <a id="saveProperty" class="btn btn-success btn-sm pull-right" href="#">Add To Favourites</a>
+            }
+            else
+            {
+                <a id="savePropertyAnon" class="btn btn-success btn-sm pull-right" href="#">Add To Temporary Favourites</a>
+            }
+
             @Html.HiddenFor(p => p.PropertyID)
         </div>
     </div>

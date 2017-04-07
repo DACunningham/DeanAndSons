@@ -18,6 +18,7 @@ using DeanAndSons.Models.IMS.ViewModels;
 using System.Collections.ObjectModel;
 using System.Web.Script.Serialization;
 using DeanAndSons.Models.JSONClasses;
+using System.Collections.Generic;
 
 namespace DeanAndSons.Controllers
 {
@@ -725,6 +726,43 @@ namespace DeanAndSons.Controllers
             db.SaveChanges();
 
             return RedirectToAction("ProfileDetails", new { userID = _userID });
+        }
+
+        [AllowAnonymous]
+        public ActionResult AnonProfileDetails()
+        {
+            var _sessionPropertys = Session["Propertys"] as List<Property>;
+
+            if (_sessionPropertys == null)
+            {
+                _sessionPropertys = new List<Property>();
+            }
+
+            return View("ProfileAnonDetails", _sessionPropertys);
+        }
+
+        [AllowAnonymous]
+        public string SavePropertyAnon(string obj)
+        {
+            JavaScriptSerializer s = new JavaScriptSerializer();
+            var _temp = s.Deserialize<SavePropertyJSON>(obj);
+
+            var property = db.Propertys.Find(_temp.PropertyID);
+            var _sessionPropertys = Session["Propertys"] as List<Property>;
+
+            if (_sessionPropertys != null)
+            {
+                _sessionPropertys.Add(property);
+                Session["Propertys"] = _sessionPropertys;
+            }
+            else
+            {
+                _sessionPropertys = new List<Property>();
+                _sessionPropertys.Add(property);
+                Session["Propertys"] = _sessionPropertys;
+            }
+
+            return "{\"response\":\"Property Save Successful!\"}";
         }
 
         #region Helpers
