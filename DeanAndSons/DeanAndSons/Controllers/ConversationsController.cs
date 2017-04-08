@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using DeanAndSons.Models;
 using DeanAndSons.Models.WAP;
+using DeanAndSons.Models.WAP.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace DeanAndSons.Controllers
 {
@@ -19,9 +21,8 @@ namespace DeanAndSons.Controllers
         public ActionResult Index(string userId)
         {
             var conversations = db.Conversations.Include(c => c.Receiver).Include(c => c.Sender)
-                .Where(c=>c.SenderID==userId || c.ReceiverID==userId)
-                .OrderByDescending(c=>c.LastNewMessage);
-
+                .Where(c => c.SenderID == userId || c.ReceiverID == userId)
+                .OrderByDescending(c => c.LastNewMessage);
             return View(conversations.ToList());
         }
 
@@ -43,9 +44,9 @@ namespace DeanAndSons.Controllers
         // GET: Conversations/Create
         public ActionResult Create()
         {
+            var vm = new ConversationCreateViewModel();
             ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename");
-            ViewBag.SenderID = new SelectList(db.ApplicationUsers, "Id", "Forename");
-            return View();
+            return View(vm);
         }
 
         // POST: Conversations/Create
@@ -53,18 +54,23 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ConversationID,SenderID,ReceiverID,LastNewMessage,LastCheckedSender,LastCheckedReceiver")] Conversation conversation)
+        public ActionResult Create(ConversationCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.Conversations.Add(conversation);
+                var _currentUser = User.Identity.GetUserId();
+                var _conv = new Conversation(vm, _currentUser);
+                var _msg = new Message(_conv, vm.Body, _currentUser);
+
+                _conv.Messages.Add(_msg);
+
+                db.Conversations.Add(_conv);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { userId = _currentUser });
             }
 
-            ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename", conversation.ReceiverID);
-            ViewBag.SenderID = new SelectList(db.ApplicationUsers, "Id", "Forename", conversation.SenderID);
-            return View(conversation);
+            ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename", vm.ReceiverID);
+            return View(vm);
         }
 
         // GET: Conversations/Edit/5

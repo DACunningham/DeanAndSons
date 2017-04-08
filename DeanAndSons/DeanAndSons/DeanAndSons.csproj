@@ -311,6 +311,7 @@
     <Compile Include="Models\WAP\SavedSearch.cs" />
     <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\IMS\ViewModels\EventCreateIMSViewModel.cs" />
+    <Compile Include="Models\WAP\ViewModels\ConversationCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\PropertyCreateIMSViewModel.cs" />

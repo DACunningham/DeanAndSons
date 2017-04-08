@@ -18,7 +18,7 @@ namespace DeanAndSons.Models.WAP
         [StringLength(5000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
         public string Body { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         [ForeignKey("Author")]
         [Required]
@@ -29,6 +29,13 @@ namespace DeanAndSons.Models.WAP
         public Message()
         {
 
+        }
+
+        public Message(Conversation con, string msg, string author)
+        {
+            Conversation = con;
+            Body = msg;
+            AuthorID = author;
         }
     }
 }
