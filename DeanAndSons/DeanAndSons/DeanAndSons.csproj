@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CMSController.cs" />
+    <Compile Include="Controllers\ConversationsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IMSController.cs" />
@@ -295,12 +296,14 @@
     <Compile Include="Models\WAP\ContactEvent.cs" />
     <Compile Include="Models\WAP\ContactProperty.cs" />
     <Compile Include="Models\WAP\ContactUser.cs" />
+    <Compile Include="Models\WAP\Conversation.cs" />
     <Compile Include="Models\WAP\Event.cs" />
     <Compile Include="Models\WAP\ImageEvent.cs" />
     <Compile Include="Models\WAP\ImageProperty.cs" />
     <Compile Include="Models\WAP\ImageService.cs" />
     <Compile Include="Models\WAP\ImageAppUser.cs" />
     <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\WAP\Message.cs" />
     <Compile Include="Models\WAP\SavedSearch.cs" />
     <Compile Include="Models\WAP\Service.cs" />
     <Compile Include="Models\IMS\ViewModels\EventCreateIMSViewModel.cs" />
@@ -650,6 +653,11 @@
     <Content Include="Views\Account\_SaveSearches.cshtml" />
     <Content Include="Views\Account\_FavProperties.cshtml" />
     <Content Include="Views\Account\ProfileAnonDetails.cshtml" />
+    <Content Include="Views\Conversations\Create.cshtml" />
+    <Content Include="Views\Conversations\Delete.cshtml" />
+    <Content Include="Views\Conversations\Details.cshtml" />
+    <Content Include="Views\Conversations\Edit.cshtml" />
+    <Content Include="Views\Conversations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
