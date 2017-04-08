@@ -269,6 +269,10 @@
     <Compile Include="Migrations\201704071115212_SavedProperties.Designer.cs">
       <DependentUpon>201704071115212_SavedProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704080924250_ConversationInitial.cs" />
+    <Compile Include="Migrations\201704080924250_ConversationInitial.Designer.cs">
+      <DependentUpon>201704080924250_ConversationInitial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CMS\ViewModels\EventEditCMSViewModel.cs" />
@@ -711,6 +715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704071115212_SavedProperties.resx">
       <DependentUpon>201704071115212_SavedProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704080924250_ConversationInitial.resx">
+      <DependentUpon>201704080924250_ConversationInitial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

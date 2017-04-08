@@ -47,6 +47,12 @@ namespace DeanAndSons.Models
         // List of images associated with this user
         public virtual ICollection<ImageAppUser> Image { get; set; } = new Collection<ImageAppUser>();
 
+        [InverseProperty("Sender")]
+        public ICollection<Conversation> ConversationsSent { get; set; }
+
+        [InverseProperty("Receiver")]
+        public ICollection<Conversation> ConversationsReceived { get; set; }
+
         private string imgLocation = "/Storage/Users";
 
         //Checks if property's contact value is null
@@ -118,6 +124,9 @@ namespace DeanAndSons.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<SavedSearch> SavedSearches { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public System.Data.Entity.DbSet<DeanAndSons.Models.Staff> ApplicationUsers { get; set; }
 
         public ApplicationDbContext()
             : base("LocalDB", throwIfV1Schema: false)
@@ -128,9 +137,5 @@ namespace DeanAndSons.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<DeanAndSons.Models.Staff> ApplicationUsers { get; set; }
-
-        public System.Data.Entity.DbSet<DeanAndSons.Models.WAP.Conversation> Conversations { get; set; }
     }
 }

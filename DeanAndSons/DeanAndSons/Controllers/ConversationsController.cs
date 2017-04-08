@@ -16,9 +16,12 @@ namespace DeanAndSons.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Conversations
-        public ActionResult Index()
+        public ActionResult Index(string userId)
         {
-            var conversations = db.Conversations.Include(c => c.Receiver).Include(c => c.Sender);
+            var conversations = db.Conversations.Include(c => c.Receiver).Include(c => c.Sender)
+                .Where(c=>c.SenderID==userId || c.ReceiverID==userId)
+                .OrderByDescending(c=>c.LastNewMessage);
+
             return View(conversations.ToList());
         }
 

@@ -10,14 +10,14 @@ namespace DeanAndSons.Models.WAP
         [Key]
         public int ConversationID { get; set; }
 
-        [ForeignKey("Sender")]
         public string SenderID { get; set; }
 
-        [ForeignKey("Receiver")]
         public string ReceiverID { get; set; }
 
+        [ForeignKey("SenderID")]
         public ApplicationUser Sender { get; set; }
 
+        [ForeignKey("ReceiverID")]
         public ApplicationUser Receiver { get; set; }
 
         public ICollection<Message> Messages { get; set; }
