@@ -314,11 +314,6 @@ namespace DeanAndSons.Controllers
             {
                 return HttpNotFound();
             }
-
-            //Populate drop down lists with data from DB
-            //ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
-            //ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
-            //ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
             
             return View(vm);
         }
@@ -342,9 +337,6 @@ namespace DeanAndSons.Controllers
                 return RedirectToAction("IndexIMS");
             }
 
-            //ViewBag.BuyerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.BuyerID);
-            //ViewBag.SellerID = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", property.SellerID);
-            //ViewBag.StaffOwnerID = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", property.StaffOwnerID);
             vm.Buyer = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.BuyerID);
             vm.Seller = new SelectList(db.Users.OfType<Customer>(), "Id", "Forename", vm.SellerID);
             vm.StaffOwner = new SelectList(db.Users.OfType<Staff>(), "Id", "Forename", vm.StaffOwnerID);

@@ -68,7 +68,6 @@ namespace DeanAndSons.Models.Global.ViewModels
             Forename = usr.Forename;
             Surname = usr.Surname;
             About = usr.About;
-            //Email = usr.Email;
             UserNameDisp = usr.UserNameDisp;
 
             ContactUser addr = usr.getContact(usr.Contact);

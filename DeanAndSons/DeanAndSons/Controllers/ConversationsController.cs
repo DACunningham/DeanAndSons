@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DeanAndSons.Models;
+using DeanAndSons.Models.WAP;
+using DeanAndSons.Models.WAP.ViewModels;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using DeanAndSons.Models;
-using DeanAndSons.Models.WAP;
-using DeanAndSons.Models.WAP.ViewModels;
-using Microsoft.AspNet.Identity;
 
 namespace DeanAndSons.Controllers
 {
@@ -23,6 +21,7 @@ namespace DeanAndSons.Controllers
             var conversations = db.Conversations.Include(c => c.Receiver).Include(c => c.Sender)
                 .Where(c => c.SenderID == userId || c.ReceiverID == userId)
                 .OrderByDescending(c => c.LastNewMessage);
+
             return View(conversations.ToList());
         }
 
@@ -51,6 +50,7 @@ namespace DeanAndSons.Controllers
         {
             var vm = new ConversationCreateViewModel();
             ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename");
+
             return View(vm);
         }
 
@@ -75,6 +75,7 @@ namespace DeanAndSons.Controllers
             }
 
             ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename", vm.ReceiverID);
+
             return View(vm);
         }
 

@@ -19,85 +19,6 @@ namespace DeanAndSons.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // ********** Customer Views **********
-        //public ActionResult IndexCustomer(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null)
-        //{
-        //    // ********** Database Access **********
-        //    var dbModel = db.Services.Include(i => i.Images);
-
-        //    // ********** Search string **********
-        //    //if (!String.IsNullOrWhiteSpace(searchString))
-        //    //{
-        //    //    dbModel = dbModel.Where(p => p.Title.Contains(searchString));
-        //    //}
-
-        //    var dbModelList = dbModel.ToList();
-
-        //    //// ********** Paging and Sorting **********
-
-        //    ////Populate lists and add them to ViewBag for assignment to dropDowns in View.
-        //    //ViewBag.CategorySort = populateCategorySort();
-        //    //ViewBag.OrderSort = populateOrderSort();
-
-        //    ////Concatenate both sorting methods for use in select case.
-        //    //CategorySort = CategorySort + OrderSort;
-
-        //    ////Start of pagination addition
-        //    //ViewBag.CurrentSort = CategorySort;
-
-        //    //if (searchString != null)
-        //    //{
-        //    //    page = 1;
-        //    //}
-        //    //else
-        //    //{
-        //    //    searchString = currentFilter;
-        //    //}
-
-        //    //ViewBag.CurrentFilter = searchString;
-
-        //    ////Takes CategorySort var and matches it against case strings to determine how to order the table
-        //    //switch (CategorySort)
-        //    //{
-        //    //    case "00":
-        //    //        //Alters dbModelList SQL to add order params to it, ditto for all of below.
-        //    //        dbModelList = dbModel.OrderBy(a => a.Title).ToList();
-        //    //        break;
-        //    //    case "01":
-        //    //        dbModelList = dbModel.OrderByDescending(a => a.Title).ToList();
-        //    //        break;
-        //    //    case "10":
-        //    //        dbModelList = dbModel.OrderBy(a => a.Created).ToList();
-        //    //        break;
-        //    //    case "11":
-        //    //        dbModelList = dbModel.OrderByDescending(a => a.Created).ToList();
-        //    //        break;
-        //    //    default:
-        //    //        dbModelList = dbModel.OrderBy(a => a.Title).ToList();
-        //    //        break;
-        //    //}
-
-        //    var indexList = new List<ServiceIndexViewModel>();
-        //    foreach (var item in dbModelList)
-        //    {
-        //        var vm = new ServiceIndexViewModel(item);
-
-        //        indexList.Add(vm);
-        //    }
-
-        //    //int pageSize = 3;
-        //    //int pageNumber = (page ?? 1);
-
-        //    //If the user has called this action via AJAX (ie search field) then only update the partial view.
-        //    //if (Request.IsAjaxRequest())
-        //    //{
-        //    //    return PartialView("_IndexList", indexList.ToPagedList(pageNumber, pageSize));
-        //    //}
-
-        //    return View(indexList);
-        //    //return View(indexList.ToPagedList(pageNumber, pageSize));
-        //}
-
-        // ********** Customer Views **********
         public ActionResult IndexCustomer()
         {
             // ********** Database Access **********
@@ -116,23 +37,6 @@ namespace DeanAndSons.Controllers
             }
 
             return View(indexList);
-
-            //var services = db.Services.Include(i => i.Images).Include(s => s.StaffOwner).ToList();
-            //var vmList = new List<ServiceIndexViewModel>();
-
-            //foreach (var item in services)
-            //{
-            //    var vm = new ServiceIndexViewModel();
-
-            //    vm.Title = item.Title;
-            //    vm.SubTitle = item.SubTitle;
-            //    vm.ServiceID = item.ServiceID;
-            //    vm.Image = item.Images.Single(i => i.Type == ImageType.ServiceHeader);
-
-            //    vmList.Add(vm);
-            //}
-
-            //return View(vmList);
         }
 
         public ActionResult IndexIMS(string searchString)
@@ -193,10 +97,6 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
-
-
-
-
         // ********** CRUD Views **********
 
         // GET: Services
@@ -247,33 +147,6 @@ namespace DeanAndSons.Controllers
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
             return View(vm);
         }
-
-        //// GET: Services/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
-        //    var vm = new ServiceCreateIMSViewModel();
-        //    return View(vm);
-        //}
-
-        //// POST: Services/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(ServiceCreateIMSViewModel vm)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var service = new Service(vm);
-        //        db.Services.Add(service);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", vm.StaffOwnerID);
-        //    return View(vm);
-        //}
 
         // GET: Services/Edit/5
         public ActionResult Edit(int? id)
