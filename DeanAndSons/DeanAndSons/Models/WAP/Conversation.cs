@@ -24,12 +24,15 @@ namespace DeanAndSons.Models.WAP
         public ICollection<Message> Messages { get; set; } = new HashSet<Message>();
 
         [Required]
+        [Display(Name = "Last Message Sent")]
         public DateTime LastNewMessage { get; set; } = DateTime.Now;
 
         [Required]
+        [Display(Name = "Checked By Sender")]
         public DateTime LastCheckedSender { get; set; } = DateTime.Now;
 
         [Required]
+        [Display(Name = "Checked By Receiver")]
         public DateTime LastCheckedReceiver { get; set; } = DateTime.Now;
 
         public Conversation()

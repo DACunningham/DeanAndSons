@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DeanAndSons.Models.WAP.Conversation>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<DeanAndSons.Models.WAP.Conversation>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +13,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Create New Conversation</p>
+                <p class="pageTitle">Conversation Index</p>
             </div>
 
         </header>
@@ -21,16 +22,13 @@
 
 <div class="container body-content">
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Receiver.Forename)
+                From
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sender.Forename)
+                To
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastNewMessage)
@@ -48,10 +46,13 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Receiver.Forename)
+                    @Html.DisplayFor(modelItem => item.Sender.Forename) 
+                    @Html.DisplayFor(modelItem => item.Sender.Surname)
+                    
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sender.Forename)
+                    @Html.DisplayFor(modelItem => item.Receiver.Forename)
+                    @Html.DisplayFor(modelItem => item.Receiver.Surname)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LastNewMessage)
@@ -63,14 +64,21 @@
                     @Html.DisplayFor(modelItem => item.LastCheckedReceiver)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ConversationID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ConversationID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ConversationID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ConversationID }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
                 </td>
             </tr>
         }
 
     </table>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ActionLink("My Profile", "ProfileDetails", "Account", new { userID = User.Identity.GetUserId() }, new { @class = "btn btn-default", role = "button" })
+        </div>
+        <div class="col-md-6">
+            @Html.ActionLink("New Conversation", "Create", null, new { @class = "btn btn-success pull-right", role = "button" })
+        </div>
+    </div>
 
 </div>
 

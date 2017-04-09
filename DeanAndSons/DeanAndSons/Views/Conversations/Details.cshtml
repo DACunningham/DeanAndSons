@@ -1,58 +1,72 @@
-﻿@model DeanAndSons.Models.WAP.Conversation
+﻿@using Microsoft.AspNet.Identity
+@model DeanAndSons.Models.WAP.Conversation
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Conversation Details";
 }
 
-<h2>Details</h2>
+@* ********** Page Header ********** *@
 
-<div>
-    <h4>Conversation</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Receiver.Forename)
-        </dt>
+<div class="container-fluid dc-header">
+    <div class="container">
+        <header>
+            <div class="logo1">Dean & Sons.</div>
+            <div class="logo2">Family Estate Agency</div>
+            <div class="col-md-12 dc-pageHead">
+                <p class="pageTitle">Conversation Details</p>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Receiver.Forename)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sender.Forename)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sender.Forename)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastNewMessage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastNewMessage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastCheckedSender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastCheckedSender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastCheckedReceiver)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastCheckedReceiver)
-        </dd>
-
-    </dl>
+        </header>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ConversationID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="container body-content">
+    <h3>Your Conversation...</h3>
+    <hr />
+
+    @foreach (var item in Model.Messages)
+    {
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>From: </b>
+                    </div>
+                    <div class="col-md-10">
+                        @item.Author.Forename
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>Sent on: </b>
+                    </div>
+                    <div class="col-md-10">
+                        @item.Created.ToLongDateString() at @item.Created.ToShortTimeString()
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>Message:</b>
+                    </div>
+                    <div class="col-md-10">
+                        @item.Body
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ActionLink("Message Index", "Index", "Conversations", new { userId = User.Identity.GetUserId() }, new { @class = "btn btn-default pull-left", role = "button" })
+        </div>
+        <div class="col-md-6">
+            @Html.ActionLink("New Message", "NewMessage", new { id = Model.ConversationID }, new { @class = "btn btn-success pull-right", role = "button" })
+        </div>
+    </div>
+
+</div>

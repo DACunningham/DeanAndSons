@@ -33,11 +33,16 @@ namespace DeanAndSons.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conversation conversation = db.Conversations.Find(id);
+
+            var conversation = db.Conversations.Include(c => c.Messages)
+                .Include(c => c.Messages.Select(a => a.Author))
+                .Single(c => c.ConversationID == id);
+
             if (conversation == null)
             {
                 return HttpNotFound();
             }
+
             return View(conversation);
         }
 
@@ -70,6 +75,53 @@ namespace DeanAndSons.Controllers
             }
 
             ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename", vm.ReceiverID);
+            return View(vm);
+        }
+
+        // GET: Conversations/NewMessage
+        public ActionResult NewMessage(int? id)
+        {
+            //Check an int has been passed in correctly
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var _convExists = db.Conversations.Any(c => c.ConversationID == id);
+            
+            //Check if conversation exists in DB
+            if (!_convExists)
+            {
+                return HttpNotFound();
+            }
+
+            var vm = new MessageCreateViewModel((Int32)id);
+
+            return View(vm);
+        }
+
+        // POST: Conversations/NewMessage
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewMessage(MessageCreateViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var _currentUser = User.Identity.GetUserId();
+                var _conv = db.Conversations.Include(m => m.Messages)
+                    .Single(c => c.ConversationID == vm.ConversationID);
+
+                var _msg = new Message(_conv, vm.Body, _currentUser);
+
+                _conv.Messages.Add(_msg);
+
+                db.Entry(_conv).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = _conv.ConversationID });
+            }
+
             return View(vm);
         }
 

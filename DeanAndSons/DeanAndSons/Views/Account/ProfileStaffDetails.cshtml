@@ -101,7 +101,10 @@
         if (Model.ID == Model.CurrentUserID)
         {
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    @Html.ActionLink("Messages", "Index", "Conversations", new { userId = Model.ID }, new { @class = "btn btn-default pull-left", role = "button" })
+                </div>
+                <div class="col-md-6">
                     @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right", role = "button" })
                 </div>
             </div>

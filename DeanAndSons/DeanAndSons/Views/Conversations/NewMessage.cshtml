@@ -1,8 +1,7 @@
-﻿@using Microsoft.AspNet.Identity
-@model DeanAndSons.Models.WAP.ViewModels.ConversationCreateViewModel
+﻿@model DeanAndSons.Models.WAP.ViewModels.MessageCreateViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "NewMessage";
 }
 
 @* ********** Page Header ********** *@
@@ -13,7 +12,7 @@
             <div class="logo1">Dean & Sons.</div>
             <div class="logo2">Family Estate Agency</div>
             <div class="col-md-12 dc-pageHead">
-                <p class="pageTitle">Create New Conversation</p>
+                <p class="pageTitle">Send New Message</p>
             </div>
 
         </header>
@@ -28,18 +27,11 @@
 
         <div class="form-horizontal">
 
-            <h3>Who Would You Like To Talk To?</h3>
+            <h3>What Would You Like To Say?</h3>
             <hr />
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ReceiverID, "Recipient", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ReceiverID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ReceiverID, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            @Html.HiddenFor(model => model.ConversationID)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -54,7 +46,7 @@
             <div class="row">
 
                 <div class="col-md-offset-2 col-md-6">
-                    @Html.ActionLink("Cancel", "Index", "Conversations", new { userId = User.Identity.GetUserId() }, new { @class = "btn btn-default pull-left", role = "button" })
+                    @Html.ActionLink("Cancel", "Details", "Conversations", new { id = Model.ConversationID }, new { @class = "btn btn-default pull-left", role = "button" })
                 </div>
 
                 <div class="col-md-4">
@@ -64,7 +56,6 @@
             </div>
         </div>
     }
-
 </div>
 
 @section Scripts {

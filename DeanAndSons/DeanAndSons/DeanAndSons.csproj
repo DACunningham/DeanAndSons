@@ -315,6 +315,7 @@
     <Compile Include="Models\WAP\ViewModels\EventDetailsViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\EventIndexViewModel.cs" />
     <Compile Include="Models\IMS\ViewModels\PropertyCreateIMSViewModel.cs" />
+    <Compile Include="Models\WAP\ViewModels\MessageCreateViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyDetailsViewModel.cs" />
     <Compile Include="Models\CMS\ViewModels\PropertyEditCMSViewModel.cs" />
     <Compile Include="Models\WAP\ViewModels\PropertyIndexViewModel.cs" />
@@ -663,6 +664,7 @@
     <Content Include="Views\Conversations\Details.cshtml" />
     <Content Include="Views\Conversations\Edit.cshtml" />
     <Content Include="Views\Conversations\Index.cshtml" />
+    <Content Include="Views\Conversations\NewMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

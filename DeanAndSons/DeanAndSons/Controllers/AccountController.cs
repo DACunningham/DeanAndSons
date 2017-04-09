@@ -539,6 +539,7 @@ namespace DeanAndSons.Controllers
                     .Include(p=>p.SavedPropertys)
                     .Single(s => s.Id == userID);
                 var vm = new ProfileCustDetailsViewModel(_tmp);
+                vm.CurrentUserID = User.Identity.GetUserId();
                 return View("ProfileCustDetails", vm);
             }
             else
