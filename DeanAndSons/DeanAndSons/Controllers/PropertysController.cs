@@ -12,11 +12,13 @@ using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
 {
+    [Authorize]
     public class PropertysController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Propertys
+        [AllowAnonymous]
         public ActionResult Index(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null,
             string Location = null, string MinPrice = "50000", string Beds = "1", string Radius = null, string MaxPrice = "1000000", string Age = "0")
         {
@@ -129,6 +131,7 @@ namespace DeanAndSons.Controllers
             return View(indexList.ToPagedList(pageNumber, pageSize));
         }
 
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult IndexL(string searchString)
         {
             // ********** Database Access **********
@@ -148,6 +151,7 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult IndexIMS(string searchString)
         {
             // ********** Database Access **********
@@ -169,6 +173,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Edit/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditCMS(int? id)
         {
             if (id == null)
@@ -193,6 +198,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditCMS(PropertyEditCMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -235,6 +241,7 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
+        [AllowAnonymous]
         // GET: Propertys/Details/5
         public ActionResult Details(int? id)
         {
@@ -259,6 +266,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Create
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult CreateIMS()
         {
             //Populate drop down lists with data from DB
@@ -276,6 +284,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Create(PropertyCreateIMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -297,6 +306,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Edit/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditIMS(int? id)
         {
             if (id == null)
@@ -323,6 +333,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditIMS(PropertyEditIMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -344,6 +355,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -361,6 +373,7 @@ namespace DeanAndSons.Controllers
         // POST: Propertys/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Property property = db.Propertys.Find(id);
@@ -377,6 +390,7 @@ namespace DeanAndSons.Controllers
         /// <returns></returns>
         [HttpPost, ActionName("DeleteLogical")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult DeleteLogical(int id)
         {
             Property property = db.Propertys.Find(id);

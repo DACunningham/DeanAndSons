@@ -195,7 +195,7 @@ namespace DeanAndSons.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult StaffManagerCreate()
         {
             var vm = new RegisterStaffViewModel();
@@ -210,6 +210,7 @@ namespace DeanAndSons.Controllers
         [HttpPost]
         [AllowAnonymous] //TODO Remove anonymous
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> StaffManagerCreate([Bind(Exclude = "Subordinates")] RegisterStaffViewModel model)
         {
             if (ModelState.IsValid)
@@ -516,6 +517,7 @@ namespace DeanAndSons.Controllers
 
         // ********** CUSTOM ACCOUNT CONTROLLER METHODS **********
 
+        [Authorize(Roles = "Admin, Staff, Customer")]
         public ActionResult ProfileDetails(string userID)
         {
             if (String.IsNullOrEmpty(userID))
@@ -580,6 +582,7 @@ namespace DeanAndSons.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Customer")]
         public ActionResult ProfileCustEdit(ProfileCustEditViewModel vm)
         {
             if (ModelState.IsValid)
@@ -618,6 +621,7 @@ namespace DeanAndSons.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult ProfileStaffEdit(ProfileStaffEditViewModel vm)
         {
             if (ModelState.IsValid)

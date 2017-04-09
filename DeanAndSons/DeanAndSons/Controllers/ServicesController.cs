@@ -14,11 +14,13 @@ using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
 {
+    [Authorize]
     public class ServicesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // ********** Customer Views **********
+        [AllowAnonymous]
         public ActionResult IndexCustomer()
         {
             // ********** Database Access **********
@@ -39,6 +41,7 @@ namespace DeanAndSons.Controllers
             return View(indexList);
         }
 
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult IndexIMS(string searchString)
         {
             // ********** Database Access **********
@@ -58,6 +61,7 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult IndexCMS(string searchString)
         {
             // ********** Database Access **********
@@ -77,6 +81,7 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
+        [AllowAnonymous]
         public ActionResult DetailsCustomer(int? id)
         {
             if (id == null)
@@ -100,28 +105,29 @@ namespace DeanAndSons.Controllers
         // ********** CRUD Views **********
 
         // GET: Services
-        public ActionResult Index()
-        {
-            var services = db.Services.Include(s => s.StaffOwner);
-            return View(services.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    var services = db.Services.Include(s => s.StaffOwner);
+        //    return View(services.ToList());
+        //}
 
         // GET: Services/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Service service = db.Services.Find(id);
-            if (service == null)
-            {
-                return HttpNotFound();
-            }
-            return View(service);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Service service = db.Services.Find(id);
+        //    if (service == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(service);
+        //}
 
         // GET: Services/Create
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult CreateIMS()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
@@ -134,6 +140,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult CreateIMS(ServiceCreateIMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -148,43 +155,44 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
-        // GET: Services/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Service service = db.Services.Find(id);
-            if (service == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
-            return View(service);
-        }
+        //// GET: Services/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Service service = db.Services.Find(id);
+        //    if (service == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
+        //    return View(service);
+        //}
 
         // POST: Services/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ServiceID,Title,Description,StaffOwnerID")] Service service)
-        {
-            if (ModelState.IsValid)
-            {
-                //Update last updated field
-                service.LastModified = DateTime.Now;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ServiceID,Title,Description,StaffOwnerID")] Service service)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //Update last updated field
+        //        service.LastModified = DateTime.Now;
 
-                db.Entry(service).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
-            return View(service);
-        }
+        //        db.Entry(service).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename", service.StaffOwnerID);
+        //    return View(service);
+        //}
 
         // GET: Propertys/Edit/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditCMS(int? id)
         {
             if (id == null)
@@ -211,6 +219,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditCMS(ServiceEditCMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -254,6 +263,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Services/Edit/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditIMS(int? id)
         {
             if (id == null)
@@ -277,6 +287,7 @@ namespace DeanAndSons.Controllers
         // POST: Services/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditIMS(ServiceEditIMSViewModel vm)
@@ -298,6 +309,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Services/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -315,6 +327,7 @@ namespace DeanAndSons.Controllers
         // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Service service = db.Services.Find(id);
@@ -330,6 +343,7 @@ namespace DeanAndSons.Controllers
         /// <returns></returns>
         [HttpPost, ActionName("DeleteLogical")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult DeleteLogical(int id)
         {
             var service = db.Services.Find(id);

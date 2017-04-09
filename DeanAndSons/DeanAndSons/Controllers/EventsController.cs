@@ -14,11 +14,13 @@ using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // ********** Customer Views **********
+        [AllowAnonymous]
         public ActionResult IndexCustomer(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null)
         {
             // ********** Database Access **********
@@ -137,6 +139,7 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
+        [AllowAnonymous]
         public ActionResult DetailsCustomer(int? id)
         {
             if (id == null)
@@ -157,9 +160,6 @@ namespace DeanAndSons.Controllers
             }
             return View(vm);
         }
-
-
-
 
         // ********** CRUD Views **********
 
@@ -186,6 +186,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Events/Create
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult CreateIMS()
         {
             ViewBag.StaffOwnerID = new SelectList(db.Users, "Id", "Forename");
@@ -198,6 +199,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult CreateIMS(EventCreateIMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -213,6 +215,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditIMS(int? id)
         {
             if (id == null)
@@ -239,6 +242,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditIMS(EventEditIMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -258,6 +262,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Edit/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditCMS(int? id)
         {
             if (id == null)
@@ -285,6 +290,7 @@ namespace DeanAndSons.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditCMS(EventEditCMSViewModel vm)
         {
             if (ModelState.IsValid)
@@ -328,6 +334,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Events/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -345,6 +352,7 @@ namespace DeanAndSons.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);
@@ -360,6 +368,7 @@ namespace DeanAndSons.Controllers
         /// <returns></returns>
         [HttpPost, ActionName("DeleteLogical")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult DeleteLogical(int id)
         {
             Event @event = db.Events.Find(id);

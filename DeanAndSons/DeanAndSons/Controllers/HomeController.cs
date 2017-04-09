@@ -25,11 +25,19 @@ namespace DeanAndSons.Controllers
             return View();
         }
 
+        // GET: CMSIndex
+        [Authorize(Roles = "Admin, Staff")]
+        public ActionResult IndexCMS()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Inserts partial view for another image upload
         /// </summary>
         /// <param name="obj">File field Collection</param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult MoreImages(ICollection<HttpPostedFileBase> obj)
         {
             return PartialView("_ImageUpload", obj);

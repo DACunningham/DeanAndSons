@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
 {
+    [Authorize(Roles = "Admin, Staff")]
     public class IMSController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -35,6 +36,7 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult StaffManagerIndex()
         {
             var Directors = db.Users.OfType<Staff>().Where(s => s.Rank == Rank.Director).ToList();
@@ -46,6 +48,7 @@ namespace DeanAndSons.Controllers
             return View("StaffManagerindex", vm);
         }
 
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult StaffManagerEdit(string id)
         {
             if (id == null)
@@ -71,6 +74,7 @@ namespace DeanAndSons.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult StaffManagerEdit([Bind(Exclude = "Subordinates")] StaffManagerEditViewModel vm)
         {
             if (ModelState.IsValid)
@@ -98,6 +102,7 @@ namespace DeanAndSons.Controllers
         }
 
         // GET: Propertys/Delete/5
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult StaffManagerDelete(int? id)
         {
             if (id == null)
@@ -115,6 +120,7 @@ namespace DeanAndSons.Controllers
         // POST: Propertys/Delete/5
         [HttpPost, ActionName("StaffManagerDelete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult StaffManagerDelete(string id)
         {
             var staff = db.Users.OfType<Staff>().Include(s => s.Subordinates).Include(su => su.Superior)

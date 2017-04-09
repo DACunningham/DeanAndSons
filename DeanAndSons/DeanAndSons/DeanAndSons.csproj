@@ -617,7 +617,7 @@
     <Content Include="Views\Events\IndexCustomer.cshtml" />
     <Content Include="Views\Events\DetailsCustomer.cshtml" />
     <Content Include="Views\Events\_IndexList.cshtml" />
-    <Content Include="Views\CMS\Index.cshtml" />
+    <Content Include="Views\Home\IndexCMS.cshtml" />
     <Content Include="Views\Propertys\IndexL.cshtml" />
     <Content Include="Views\Account\ProfileStaffDetails.cshtml" />
     <Content Include="Views\Account\_PropertyProfile.cshtml" />
