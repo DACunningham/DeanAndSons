@@ -101,7 +101,11 @@ namespace DeanAndSons.Controllers
         public ActionResult IndexCustomer()
         {
             // ********** Database Access **********
-            var dbModel = db.Services.Include(i => i.Images).Include(s => s.StaffOwner).ToList();
+            var dbModel = db.Services
+                .Include(i => i.Images)
+                .Include(s => s.StaffOwner)
+                .Where(p => p.Deleted != true)
+                .ToList();
 
             var indexList = new List<ServiceIndexViewModel>();
             foreach (var item in dbModel)

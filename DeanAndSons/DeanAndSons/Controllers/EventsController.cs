@@ -23,8 +23,10 @@ namespace DeanAndSons.Controllers
         public ActionResult IndexCustomer(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null)
         {
             // ********** Database Access **********
-            var dbModel = db.Events.Include(i => i.Images)
-                .Include(c => c.Contact);
+            var dbModel = db.Events
+                .Include(i => i.Images)
+                .Include(c => c.Contact)
+                .Where(p => p.Deleted != true);
 
             // ********** Search string **********
             if (!String.IsNullOrWhiteSpace(searchString))

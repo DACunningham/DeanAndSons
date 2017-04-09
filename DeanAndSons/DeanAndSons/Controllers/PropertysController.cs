@@ -27,7 +27,10 @@ namespace DeanAndSons.Controllers
 
             // ********** Database Access **********
             //var dbModel = new List<Property>();
-            var dbModel = db.Propertys.Include(p => p.Contact).Include(p => p.Images);
+            var dbModel = db.Propertys
+                .Include(p => p.Contact)
+                .Include(p => p.Images)
+                .Where(p => p.Deleted != true);
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
