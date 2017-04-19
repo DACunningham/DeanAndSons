@@ -73,6 +73,19 @@ namespace DeanAndSons.Models
             return contact;
         }
 
+        public bool IsCustomer(ApplicationUser obj)
+        {
+            if (obj != null)
+            {
+                if (obj is Customer)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         //Checks if property's image value is null
         public ImageAppUser getImage(ICollection<ImageAppUser> item)
         {

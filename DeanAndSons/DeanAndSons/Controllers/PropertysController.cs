@@ -2,12 +2,15 @@
 using DeanAndSons.Models.CMS.ViewModels;
 using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
@@ -26,6 +29,10 @@ namespace DeanAndSons.Controllers
             var _MaxPrice = Int32.Parse(MaxPrice);
             var _Beds = UInt16.Parse(Beds);
             var _Age = Convert.ToUInt16(Age);
+
+            //Get current logged in user object and check if it is of type customer and set this as a viewbag var.
+            var _currentUser = CurrentUser();
+            ViewBag.IsCustomer = _currentUser.IsCustomer(_currentUser);
 
             // ********** Database Access **********
             //var dbModel = new List<Property>();
@@ -250,6 +257,10 @@ namespace DeanAndSons.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            //Get current logged in user object and check if it is of type customer and set this as a viewbag var.
+            var _currentUser = CurrentUser();
+            ViewBag.IsCustomer = _currentUser.IsCustomer(_currentUser);
+
             Property property = db.Propertys.Include(i => i.Images)
                 .Include(c => c.Contact)
                 .Include(s => s.StaffOwner)
@@ -408,6 +419,11 @@ namespace DeanAndSons.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private ApplicationUser CurrentUser()
+        {
+            return System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
         }
 
         //Populate category and sort drop down lists

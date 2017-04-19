@@ -27,13 +27,13 @@
     <div class="row">
         <div class="col-md-12">
             <h2>@Model.Title - @Model.Type - £@Model.Price</h2>
-            @if (Request.IsAuthenticated)
-            {
-                <a id="saveProperty" class="btn btn-success btn-sm pull-right" href="#">Add To Favourites</a>
-            }
-            else
+            @if (!Request.IsAuthenticated)
             {
                 <a id="savePropertyAnon" class="btn btn-success btn-sm pull-right" href="#">Add To Temporary Favourites</a>
+            }
+            else if (ViewBag.IsCustomer)
+            {
+                <a id="saveProperty" class="btn btn-success btn-sm pull-right" href="#">Add To Favourites</a>
             }
 
             @Html.HiddenFor(p => p.PropertyID)
@@ -182,6 +182,6 @@
 </div>
 
 @section Scripts {
-<script src="~/Scripts/Custom/FavouriteProperty.js"></script>
+    <script src="~/Scripts/Custom/FavouriteProperty.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }
