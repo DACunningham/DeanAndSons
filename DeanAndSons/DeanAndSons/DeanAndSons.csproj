@@ -96,6 +96,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -271,6 +272,10 @@
     <Compile Include="Migrations\201704080924250_ConversationInitial.cs" />
     <Compile Include="Migrations\201704080924250_ConversationInitial.Designer.cs">
       <DependentUpon>201704080924250_ConversationInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704222018065_AddContactLatLong.cs" />
+    <Compile Include="Migrations\201704222018065_AddContactLatLong.Designer.cs">
+      <DependentUpon>201704222018065_AddContactLatLong.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -720,6 +725,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704080924250_ConversationInitial.resx">
       <DependentUpon>201704080924250_ConversationInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704222018065_AddContactLatLong.resx">
+      <DependentUpon>201704222018065_AddContactLatLong.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

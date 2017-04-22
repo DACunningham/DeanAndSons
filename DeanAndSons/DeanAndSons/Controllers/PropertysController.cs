@@ -8,6 +8,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Device.Location;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -23,12 +24,13 @@ namespace DeanAndSons.Controllers
         // GET: Propertys
         [AllowAnonymous]
         public ActionResult Index(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null,
-            string Location = null, string MinPrice = "50000", string Beds = "1", string Radius = null, string MaxPrice = "1000000", string Age = "0")
+            string Location = "Bath", string MinPrice = "50000", string Beds = "1", string Radius = "30", string MaxPrice = "1000000", string Age = "0")
         {
             var _MinPrice = Int32.Parse(MinPrice);
             var _MaxPrice = Int32.Parse(MaxPrice);
             var _Beds = UInt16.Parse(Beds);
             var _Age = Convert.ToUInt16(Age);
+            var _Radius = Convert.ToUInt16(Radius);
 
             //Get current logged in user object and check if it is of type customer and set this as a viewbag var.
             var _currentUser = CurrentUser();
@@ -61,6 +63,23 @@ namespace DeanAndSons.Controllers
             }
 
             var dbModelList = dbModel.ToList();
+
+            // ********** Distance Calculations **********
+            var sourceLocation = Contact.GetLocationLatLng(Location);
+
+            foreach (var item in dbModelList.ToList())
+            {
+                var itemContact = item.getContact(item.Contact);
+                var destLocation = new GeoCoordinate(itemContact.Lat, itemContact.Long);
+                //Get distance between two positions in meters & convert to miles
+                var itemDistanceSource = sourceLocation.GetDistanceTo(destLocation);
+                itemDistanceSource = (itemDistanceSource / 1000) * 0.621371192;
+
+                if (itemDistanceSource > _Radius)
+                {
+                    dbModelList.Remove(item);
+                }
+            }
 
             // ********** Paging and Sorting **********
 
@@ -96,25 +115,25 @@ namespace DeanAndSons.Controllers
             {
                 case "00":
                     //Alters dbModelList SQL to add order params to it, ditto for all of below.
-                    dbModelList = dbModel.OrderBy(a => a.Title).ToList();
+                    dbModelList = dbModelList.OrderBy(a => a.Title).ToList();
                     break;
                 case "01":
-                    dbModelList = dbModel.OrderByDescending(a => a.Title).ToList();
+                    dbModelList = dbModelList.OrderByDescending(a => a.Title).ToList();
                     break;
                 case "10":
-                    dbModelList = dbModel.OrderBy(a => a.Created).ToList();
+                    dbModelList = dbModelList.OrderBy(a => a.Created).ToList();
                     break;
                 case "11":
-                    dbModelList = dbModel.OrderByDescending(a => a.Created).ToList();
+                    dbModelList = dbModelList.OrderByDescending(a => a.Created).ToList();
                     break;
                 case "20":
-                    dbModelList = dbModel.OrderBy(a => a.Price).ToList();
+                    dbModelList = dbModelList.OrderBy(a => a.Price).ToList();
                     break;
                 case "21":
-                    dbModelList = dbModel.OrderByDescending(a => a.Price).ToList();
+                    dbModelList = dbModelList.OrderByDescending(a => a.Price).ToList();
                     break;
                 default:
-                    dbModelList = dbModel.OrderBy(a => a.Title).ToList();
+                    dbModelList = dbModelList.OrderBy(a => a.Title).ToList();
                     break;
             }
 
