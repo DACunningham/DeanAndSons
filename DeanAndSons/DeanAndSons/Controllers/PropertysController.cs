@@ -24,13 +24,14 @@ namespace DeanAndSons.Controllers
         // GET: Propertys
         [AllowAnonymous]
         public ActionResult Index(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null,
-            string Location = "Bath", string MinPrice = "50000", string Beds = "1", string Radius = "30", string MaxPrice = "1000000", string Age = "0")
+            string Location = "Bath", string MinPrice = "50000", string Beds = "1", string Radius = "30", string MaxPrice = "1000000", string Age = "0", string SaleState = "0")
         {
             var _MinPrice = Int32.Parse(MinPrice);
             var _MaxPrice = Int32.Parse(MaxPrice);
             var _Beds = UInt16.Parse(Beds);
             var _Age = Convert.ToUInt16(Age);
             var _Radius = Convert.ToUInt16(Radius);
+            var _SaleState = Convert.ToUInt16(SaleState);
 
             //Get current logged in user object and check if it is of type customer and set this as a viewbag var.
             var _currentUser = CurrentUser();
@@ -62,6 +63,18 @@ namespace DeanAndSons.Controllers
                 dbModel = dbModel.Where(a => a.Age == (PropertyAge)_Age);
             }
 
+            if (_SaleState != 0)
+            {
+                dbModel = dbModel.Where(a => a.SaleState == (SaleState)_SaleState);
+            }
+            else
+            {
+                dbModel = dbModel.Where(a => a.SaleState == Models.SaleState.Any
+                || a.SaleState == Models.SaleState.ForSale
+                || a.SaleState == Models.SaleState.ToLet
+                || a.SaleState == Models.SaleState.UnderOffer);
+            }
+
             var dbModelList = dbModel.ToList();
 
             // ********** Distance Calculations **********
@@ -90,6 +103,7 @@ namespace DeanAndSons.Controllers
             ViewBag.MaxPrice = populateMaxPrice();
             ViewBag.Beds = populateBeds();
             ViewBag.Age = populateAge();
+            ViewBag.SaleState = populateSaleState();
             ViewBag.CategorySort = populateCategorySort();
             ViewBag.OrderSort = populateOrderSort();
 
@@ -537,6 +551,18 @@ namespace DeanAndSons.Controllers
             items.Add(new SelectListItem { Text = "New Build", Value = "4" });
             items.Add(new SelectListItem { Text = "Post War", Value = "8" });
             items.Add(new SelectListItem { Text = "Pre-War", Value = "16" });
+
+            return items;
+        }
+
+        private List<SelectListItem> populateSaleState()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Any", Value = "0", Selected = true });
+            items.Add(new SelectListItem { Text = "For Sale", Value = "1" });
+            items.Add(new SelectListItem { Text = "Under Offer", Value = "2" });
+            items.Add(new SelectListItem { Text = "To Let", Value = "8" });
 
             return items;
         }
