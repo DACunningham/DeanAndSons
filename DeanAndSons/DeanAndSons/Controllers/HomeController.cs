@@ -1,14 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using DeanAndSons.Models;
+using System.Collections.Generic;
 using System.Web;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
+using DeanAndSons.Models.Global.ViewModels;
 
 namespace DeanAndSons.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+            var model = db.Propertys.Include(p => p.Images)
+                .Where(p => p.Deleted != true)
+                .OrderByDescending(p => p.Created)
+                .Take(3)
+                .ToList();
+
+            HomeIndexViewModel vm = new HomeIndexViewModel(model);
+
+            return View(vm);
         }
 
         public ActionResult About()

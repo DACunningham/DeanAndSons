@@ -1,0 +1,14 @@
+﻿.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+      width: auto;
+      margin: auto;
+      height: 30em;
+      max-height: 30em;
+  }
+
+#noCarouselImg {
+      width: auto;
+      margin: auto;
+      height: 30em;
+      max-height: 30em;
+}

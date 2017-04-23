@@ -284,6 +284,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Global\Contact.cs" />
     <Compile Include="Models\Global\Image.cs" />
+    <Compile Include="Models\Global\ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileCustDetailsViewModel.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileCustEditViewModel.cs" />
     <Compile Include="Models\Global\ViewModels\ProfileStaffDetailsViewModel.cs" />
@@ -334,6 +335,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\CarouselFS.css" />
     <Content Include="Content\Custom\Carousel.css" />
     <Content Include="Content\Custom\FamilyTree.css" />
     <Content Include="Content\Custom\PropertyDetailsWAP.css" />

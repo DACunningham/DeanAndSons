@@ -1,4 +1,6 @@
-﻿@{
+﻿@model DeanAndSons.Models.Global.ViewModels.HomeIndexViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -27,47 +29,26 @@
 
     <div class="row dc-rows">
 
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3><a href="/Propertys/Details/2">137 Bromham, Chippenham</a></h3>
+        @foreach (var item in Model.Properties)
+        {
+            <div class="col-md-4">
+
+                <div class="row">
+
+                    <div class="col-md-12 text-center">
+                        <h3>@Html.ActionLink(item.Title, "Details", "Propertys", new { id = item.PropertyID }, null)</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <a href=@Url.Action("Details", "Propertys", new { id = item.PropertyID })>
+                            <img src="@item.ImageLocation" class="img-responsive center-block dc-Tiles-Lg" alt="@item.Title" />
+                        </a>
+                    </div>
+
                 </div>
-                <div class="col-md-12">
-                    <a href="/Propertys/Details/2">
-                        <img src="/Storage/Propertys/60697cfe-5629-497c-9599-8d81d89d9db9Dining-Room.jpg" class="img-responsive center-block" alt="137 New Road Bromham, Chippenham image" />
-                    </a>
-                </div>
+
             </div>
+        }
 
-        </div>
-
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3><a href="/Propertys/Details/2">Alan Cobham Road, Devizes</a></h3>
-                </div>
-                <div class="col-md-12">
-                    <a href="/Propertys/Details/2">
-                        <img src="/Storage/Propertys/0cee2501-5172-4982-81f2-aa4127c74db6Front-(1).jpg" class="img-responsive center-block" alt="137 New Road Bromham, Chippenham image" />
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3><a href="/Propertys/Details/2">Mill Lane Doynton, Bristol</a></h3>
-                </div>
-                <div class="col-md-12">
-                    <a href="/Propertys/Details/2">
-                        <img src="/Storage/Propertys/5d036034-ce79-4c5d-bfbb-53b5fb1d4506Garden.jpg" class="img-responsive center-block" alt="137 New Road Bromham, Chippenham image" />
-                    </a>
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <div class="row dc-rows">

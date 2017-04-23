@@ -49,6 +49,12 @@ textarea {
     max-width: 175px;
 }
 
+.dc-Tiles-Lg{
+    background-color: transparent;
+    max-height: 200px;
+    max-width: 300px;
+}
+
 .dc-FamilyTreeImg{
     background-color: transparent;
     height: 100px;
