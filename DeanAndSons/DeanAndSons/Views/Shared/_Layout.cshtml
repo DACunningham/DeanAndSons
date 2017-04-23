@@ -1,10 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@using DeanAndSons.Models
+
+<!DOCTYPE html>
 <html lang="en-us">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Dean & Sons.</title>
     @Styles.Render("~/Content/css")
+
+    @if (Request.IsAuthenticated)
+    {
+        <link href="~/Content/@User.Identity.GetSiteTheme()" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/Content/Site.css" rel="stylesheet" />
+    }
+
     @Scripts.Render("~/bundles/modernizr")
     @* ********** Move scripts here as seems only way to get JQuery working on pages ********** *@
     @Scripts.Render("~/bundles/jquery")
@@ -38,9 +50,9 @@
         </div>
     </div>
 
-    
-        @RenderBody()
-    
+
+    @RenderBody()
+
 
     <div class="container-fluid dc-footer">
         <div class="container">

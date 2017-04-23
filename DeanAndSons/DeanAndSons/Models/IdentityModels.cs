@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -36,6 +37,10 @@ namespace DeanAndSons.Models
         [Required]
         [Display(Name = "User Name to Display")]
         public string UserNameDisp { get; set; }
+
+        [Required]
+        [Display(Name = "Site Theme")]
+        public string SiteTheme { get; set; } = "site.css";
 
         //Is this user deleted? This allows logic deletes so, admins can administrate and undelete items.
         [Required]
@@ -125,7 +130,18 @@ namespace DeanAndSons.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("SiteTheme", this.SiteTheme.ToString()));
             return userIdentity;
+        }
+    }
+
+    public static class IdentityExtensions
+    {
+        public static string GetSiteTheme(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("SiteTheme");
+            // Test for null to avoid issues during local testing
+            return (claim != null) ? claim.Value : "site.css";
         }
     }
 
