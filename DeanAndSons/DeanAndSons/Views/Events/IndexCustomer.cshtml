@@ -7,12 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script>
-    var catsel = "" + @ViewBag.CurrentSort
-</script>
-
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-<script src="~/Scripts/Custom/IndexSort.js"></script>
 
 @* ********** Page Header ********** *@
 
@@ -62,7 +57,7 @@
             </div>
 
             <div class="col-md-12 dc-rows">
-                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by property title" })
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "search", @class = "form-control", placeholder = "Search by event title" })
             </div>
         }
     </div>
@@ -76,5 +71,6 @@
 </div>
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
 }
