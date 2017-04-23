@@ -138,7 +138,12 @@ footer {
     margin-top: 1em;
 }
 
-.dc-btn-space{
+.dc-btn-space {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.dc-spacing {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }

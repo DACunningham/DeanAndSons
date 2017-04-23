@@ -27,7 +27,7 @@
         @foreach (var item in Model)
         {
             <a id="tab" href="@Url.Action("DetailsCustomer", "Services", new { id = item.ServiceID })">
-                <div class="col-md-4">
+                <div class="col-md-4 dc-rows">
                     <div class="row">
                         <div class="col-md-12">
                             <img src="@item.Image.Location" class="img-responsive center-block dc-Tiles" alt="@item.Title image" />
