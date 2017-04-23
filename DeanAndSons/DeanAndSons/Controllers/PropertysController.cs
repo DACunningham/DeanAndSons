@@ -177,6 +177,12 @@ namespace DeanAndSons.Controllers
             // ********** Database Access **********
             var dbModel = db.Propertys.AsQueryable();
 
+            if (!User.IsInRole("Admin"))
+            {
+                var _currentUser = CurrentUser();
+                dbModel = dbModel.Where(p => p.StaffOwnerID == _currentUser.Id);
+            }
+
             if (!String.IsNullOrWhiteSpace(searchString))
             {
                 dbModel = dbModel.Where(p => p.Title.Contains(searchString));
@@ -195,8 +201,13 @@ namespace DeanAndSons.Controllers
         public ActionResult IndexIMS(string searchString)
         {
             // ********** Database Access **********
-            //var dbModel = db.Propertys.AsQueryable();
             var dbModel = db.Propertys.Include(b => b.Buyer).Include(s => s.Seller);
+
+            if (!User.IsInRole("Admin"))
+            {
+                var _currentUser = CurrentUser();
+                dbModel = dbModel.Where(p => p.StaffOwnerID == _currentUser.Id);
+            }
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {

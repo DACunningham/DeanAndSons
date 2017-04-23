@@ -3,6 +3,8 @@ using DeanAndSons.Models.CMS.ViewModels;
 using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Staff")]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -106,6 +109,12 @@ namespace DeanAndSons.Controllers
             // ********** Database Access **********
             var dbModel = db.Events.Include(e => e.StaffOwner);
 
+            if (!User.IsInRole("Admin"))
+            {
+                var _currentUser = CurrentUser();
+                dbModel = dbModel.Where(p => p.StaffOwnerID == _currentUser.Id);
+            }
+
             if (!String.IsNullOrWhiteSpace(searchString))
             {
                 dbModel = dbModel.Where(p => p.Title.Contains(searchString));
@@ -124,6 +133,12 @@ namespace DeanAndSons.Controllers
         {
             // ********** Database Access **********
             var dbModel = db.Events.Include(e => e.StaffOwner);
+
+            if (!User.IsInRole("Admin"))
+            {
+                var _currentUser = CurrentUser();
+                dbModel = dbModel.Where(p => p.StaffOwnerID == _currentUser.Id);
+            }
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
@@ -387,6 +402,11 @@ namespace DeanAndSons.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private ApplicationUser CurrentUser()
+        {
+            return System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
         }
 
         //Populate category and sort drop down lists

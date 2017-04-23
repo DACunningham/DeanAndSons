@@ -3,7 +3,8 @@ using DeanAndSons.Models.CMS.ViewModels;
 using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
-using PagedList;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,7 +15,7 @@ using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Staff")]
     public class ServicesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -41,11 +42,16 @@ namespace DeanAndSons.Controllers
             return View(indexList);
         }
 
-        [Authorize(Roles = "Admin, Staff")]
         public ActionResult IndexIMS(string searchString)
         {
             // ********** Database Access **********
             var dbModel = db.Services.Include(e => e.StaffOwner);
+
+            if (!User.IsInRole("Admin"))
+            {
+                var _currentUser = CurrentUser();
+                dbModel = dbModel.Where(p => p.StaffOwnerID == _currentUser.Id);
+            }
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
@@ -61,11 +67,16 @@ namespace DeanAndSons.Controllers
             return View(dbModel);
         }
 
-        [Authorize(Roles = "Admin, Staff")]
         public ActionResult IndexCMS(string searchString)
         {
             // ********** Database Access **********
             var dbModel = db.Services.Include(e => e.StaffOwner);
+
+            if (!User.IsInRole("Admin"))
+            {
+                var _currentUser = CurrentUser();
+                dbModel = dbModel.Where(p => p.StaffOwnerID == _currentUser.Id);
+            }
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
@@ -362,6 +373,11 @@ namespace DeanAndSons.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private ApplicationUser CurrentUser()
+        {
+            return System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
         }
 
         //Populate category and sort drop down lists
