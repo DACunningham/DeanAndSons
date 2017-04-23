@@ -35,8 +35,24 @@ namespace DeanAndSons.Controllers
             }
 
             var conversation = db.Conversations.Include(c => c.Messages)
+                .Include(c => c.Sender)
+                .Include(c=>c.Receiver)
                 .Include(c => c.Messages.Select(a => a.Author))
                 .Single(c => c.ConversationID == id);
+
+            var userID = User.Identity.GetUserId();
+
+            if (conversation.Receiver.Id == userID)
+            {
+                conversation.LastCheckedReceiver = DateTime.Now;
+            }
+            else
+            {
+                conversation.LastCheckedSender = DateTime.Now;
+            }
+
+            db.Entry(conversation).State = EntityState.Modified;
+            db.SaveChanges();
 
             if (conversation == null)
             {

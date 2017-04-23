@@ -144,8 +144,8 @@ footer {
 }
 
 .dc-spacing {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* ********** Hyperlink customisations ********* */

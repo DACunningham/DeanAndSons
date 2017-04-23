@@ -62,6 +62,7 @@ namespace DeanAndSons.Models.Global.ViewModels
         [ForeignKey("SiteThemeObj")]
         public string SiteTheme { get; set; }
 
+        [Display(Name = "Site Theme")]
         public SelectList SiteThemeObj { get; set; }
 
         public ProfileStaffEditViewModel()
