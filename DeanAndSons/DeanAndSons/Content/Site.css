@@ -138,6 +138,11 @@ footer {
     margin-top: 1em;
 }
 
+.dc-btn-space{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
 /* ********** Hyperlink customisations ********* */
 
 a {

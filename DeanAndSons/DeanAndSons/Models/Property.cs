@@ -3,6 +3,7 @@ using DeanAndSons.Models.WAP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -191,6 +192,7 @@ namespace DeanAndSons.Models
         Mobile = 8,
         Bungalow = 16,
         HMO = 32,
+        [Description("Building Plot")]
         BuildingPlot = 64
     }
 
@@ -198,10 +200,14 @@ namespace DeanAndSons.Models
     {
         Any = 0,
         Detached = 1,
+        [Description("Semi-Detached")]
         SemiDetached = 2,
         Terraced = 4,
+        [Description("End Terrace")]
         EndTerrace = 8,
+        [Description("Ground Floor Flat")]
         GroundFloorFlat = 16,
+        [Description("Upper Floor Flat")]
         UpperFloorFlat = 32
     }
 
@@ -210,17 +216,23 @@ namespace DeanAndSons.Models
         Any = 0,
         Older = 1,
         Modern = 2,
+        [Description("New Build")]
         NewBuild = 4,
+        [Description("Post-War")]
         PostWar = 8,
+        [Description("Pre-War")]
         PreWar = 16
     }
 
     public enum SaleState
     {
         Any = 0,
+        [Description("For Sale")]
         ForSale = 1,
+        [Description("Under Offer")]
         UnderOffer = 2,
         Sold = 4,
+        [Description("To Let")]
         ToLet = 8
     }
 }

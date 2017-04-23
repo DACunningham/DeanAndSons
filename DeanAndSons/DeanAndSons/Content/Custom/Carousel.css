@@ -2,8 +2,8 @@
 .carousel-inner > .item > a > img {
       width: auto;
       margin: auto;
-      height: 30em;
-      max-height: 30em;
+      /*height: 900px;*/
+      max-height: 500px;
   }
 
 #noCarouselImg {

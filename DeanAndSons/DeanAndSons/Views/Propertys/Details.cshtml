@@ -23,162 +23,209 @@
     </div>
 </div>
 
-<div class="container body-content">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>@Model.Title - @Model.Type - £@Model.Price</h2>
-            @if (!Request.IsAuthenticated)
-            {
-                <a id="savePropertyAnon" class="btn btn-success btn-sm pull-right" href="#">Add To Temporary Favourites</a>
-            }
-            else if (ViewBag.IsCustomer)
-            {
-                <a id="saveProperty" class="btn btn-success btn-sm pull-right" href="#">Add To Favourites</a>
-            }
+@*<div class="container-fluid dc-bar2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Welcome To Dean & Sons. Estate Agency</h2>
+                </div>
+            </div>
 
-            @Html.HiddenFor(p => p.PropertyID)
+            <div class="row dc-rows">
+                <div class="col-md-12">
+                    <p>
+                        Dean & Sons. is an independently owned, family run estate agency, firmly established in Corsham, covering the surrounding villages and including Chippenham,
+                        Melksham, Trowbridge and Bath. The company specialize in the sale, letting and management of residential property from their prominently positioned high street offices
+                        “all under the same roof”. 
+                    </p>
+                    <p>
+                        The Directors, John, Jane and Jasmine Dean have a combined total of 45 years experience in the property business and you can be assured that each has a vested interest
+                        in ensuring a first class, personal service is delivered to all buyers, sellers, landlords and tenants.
+                    </p>
+                    <p>
+                        Combining the latest technology with traditional values and an extensive knowledge of the local property market, Dean & Sons. are committed to providing,
+                        honest and professional advice you can rely on at all times.
+                    </p>
+                </div>
+            </div>
         </div>
-    </div>
+    </div>*@
 
-    <div class="row">
-        <div class="col-md-8">
-            <!-- Bootstrap Carousel for images -->
-            <div id="propertyImages" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    @for (int i = 0; i < Model.Images.Count; i++)
-                    {
-                        if (i == 0)
-                        {
-                            <li data-target="#propertyImages" data-slide-to="0" class="active"></li>
-                        }
-                        else
-                        {
-                            <li data-target="#propertyImages" data-slide-to="@i"></li>
-                        }
-                    }
-                </ol>
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    @{
-                        var count = 0;
+<div class="container-fluid dc-bar1">
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>@Model.Title - @Model.Type - £@Model.Price</h2>
+                @if (!Request.IsAuthenticated)
+            {
+                    <a id="savePropertyAnon" class="btn btn-success btn-sm pull-right" href="#">Add To Temporary Favourites</a>
+                }
+                else if (ViewBag.IsCustomer)
+                {
+                    <a id="saveProperty" class="btn btn-success btn-sm pull-right" href="#">Add To Favourites</a>
+                }
 
-                        foreach (var item in Model.Images)
+                @Html.HiddenFor(p => p.PropertyID)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Bootstrap Carousel for images -->
+                <div id="propertyImages" class="carousel slide" data-ride="carousel" data-interval="10000">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        @for (int i = 0; i < Model.Images.Count; i++)
                         {
-                            if (count == 0)
+                            if (i == 0)
                             {
-                                <div class="item active">
-                                    <img class="img-responsive" src="@item.Location" alt="A property Picture">
-                                </div>
+                                <li data-target="#propertyImages" data-slide-to="0" class="active"></li>
                             }
                             else
                             {
-                                <div class="item">
-                                    <img class="img-responsive" src="@item.Location" alt="A property Picture">
-                                </div>
+                                <li data-target="#propertyImages" data-slide-to="@i"></li>
                             }
-                            count++;
                         }
-                    }
-                </div>
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#propertyImages" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#propertyImages" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            var count = 0;
 
-        <div class="col-md-4">
-
-            <div class="row">
-                <div class="col-xs-4">
-                    <img src="~/Storage/Global/bed.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
-                </div>
-                <div class="col-xs-8 dc-PropWAPIconText">
-                    @Model.NoBedRms
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-4">
-                    <img src="~/Storage/Global/bathroom.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
-                </div>
-                <div class="col-xs-8 dc-PropWAPIconText">
-                    @Model.NoBathRms
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-4">
-                    <img src="~/Storage/Global/Sofa.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
-                </div>
-                <div class="col-xs-8 dc-PropWAPIconText">
-                    @Model.NoSittingRms
+                            foreach (var item in Model.Images)
+                            {
+                                if (count == 0)
+                                {
+                                    <div class="item active">
+                                        <img class="img-responsive" src="@item.Location" alt="A property Picture">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <img class="img-responsive" src="@item.Location" alt="A property Picture">
+                                    </div>
+                                }
+                                count++;
+                            }
+                        }
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#propertyImages" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#propertyImages" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-4">
-                    <b>Type:</b>
-                </div>
-                <div class="col-xs-8">
-                    @Model.Type
-                </div>
-            </div>
+            <div class="col-md-4">
 
-            <div class="row">
-                <div class="col-xs-4">
-                    <b>Style:</b>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="~/Storage/Global/bed.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
+                    </div>
+                    <div class="col-xs-8 dc-PropWAPIconText">
+                        @Model.NoBedRms
+                    </div>
                 </div>
-                <div class="col-xs-8">
-                    @Model.Style
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-xs-4">
-                    <b>Age:</b>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="~/Storage/Global/bathroom.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
+                    </div>
+                    <div class="col-xs-8 dc-PropWAPIconText">
+                        @Model.NoBathRms
+                    </div>
                 </div>
-                <div class="col-xs-8">
-                    @Model.Age
-                </div>
-            </div>
 
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="~/Storage/Global/Sofa.png" class="img-responsive dc-PropWAPIcon" alt="Bed image" />
+                    </div>
+                    <div class="col-xs-8 dc-PropWAPIconText">
+                        @Model.NoSittingRms
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <p><b>Address: </b>@Model.PropertyNo @Model.Street, @Model.Town, @Model.PostCode</p>
+<div class="container-fluid dc-bar2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Details</h2>
+            </div>
+        </div>
+
+        <div class="row dc-rows">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Address:</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <p>
+                            @Model.PropertyNo @Model.Street, @Model.Town, @Model.PostCode
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Information:</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <p>
+                            This property is a @Model.Type of the @Model.Style variety and is categorised in the @Model.Age age range.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            @Html.Raw(Model.Description)
+<div class="container-fluid dc-bar1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Description</h2>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <p>
-                For further information on this property please contact @Model.Forename @Model.Surname at
-                <a href="mailto:@Model.Email?Subject=Property%20Enquiry" target="_top">@Model.Email</a>
-            </p>
+        <div class="row dc-rows">
+            <div class="col-md-12">
+                <p>
+                    @Html.Raw(Model.Description)
+                </p>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-default text-center", role = "button" })
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    For further information on this property please contact @Model.Forename @Model.Surname at
+                    <a href="mailto:@Model.Email?Subject=Property%20Enquiry" target="_top">@Model.Email</a>
+                </p>
+            </div>
         </div>
-    </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Property List", "Index", new { }, new { @class = "btn btn-default text-center dc-btn-space", role = "button" })
+            </div>
+        </div>
+
+    </div>
 </div>
 
 @section Scripts {
