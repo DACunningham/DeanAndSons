@@ -5,6 +5,7 @@ using DeanAndSons.Models.JSONClasses;
 using DeanAndSons.Models.WAP;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -571,11 +573,13 @@ namespace DeanAndSons.Controllers
             if (user is Customer)
             {
                 var vm = new ProfileCustEditViewModel((Customer)user);
+                ViewBag.SiteTheme = new SelectList(populateSiteTheme(), "Value", "Text", user.SiteTheme);
                 return View("ProfileCustEdit", vm);
             }
             else
             {
                 var vm = new ProfileStaffEditViewModel((Staff)user);
+                ViewBag.SiteTheme = new SelectList(populateSiteTheme(), "Value", "Text", user.SiteTheme);
                 return View("ProfileStaffEdit", vm);
             }
         }
@@ -587,7 +591,9 @@ namespace DeanAndSons.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _cust = db.Users.OfType<Customer>().Include(i => i.Image).Include(c => c.Contact)
+                var _cust = db.Users.OfType<Customer>()
+                    .Include(i => i.Image)
+                    .Include(c => c.Contact)
                     .Where(s => s.Id == vm.ID).Single();
 
 
@@ -606,14 +612,12 @@ namespace DeanAndSons.Controllers
 
                 _cust.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, null, _cust);
                 _cust.addImage(vm.Image);
+                _cust.SiteTheme = vm.SiteTheme;
 
                 db.Entry(_cust).State = EntityState.Modified;
                 db.SaveChanges();
-
-                //Create details view model
-                var dvm = new ProfileCustDetailsViewModel(_cust);
-
-                return View("ProfileCustDetails", dvm);
+                
+                return RedirectToAction("ProfileDetails", new { userID = _cust.Id });
             }
 
             return View(vm);
@@ -636,14 +640,12 @@ namespace DeanAndSons.Controllers
 
                 _staff.addContact(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, null, _staff);
                 _staff.addImage(vm.Image);
+                _staff.SiteTheme = vm.SiteTheme;
 
                 db.Entry(_staff).State = EntityState.Modified;
                 db.SaveChanges();
 
-                //Create details view model
-                var dvm = new ProfileStaffDetailsViewModel(_staff);
-
-                return View("ProfileStaffDetails", dvm);
+                return RedirectToAction("ProfileDetails", new { userID = _staff.Id });
             }
 
             return View(vm);
@@ -756,6 +758,16 @@ namespace DeanAndSons.Controllers
             }
 
             return "{\"response\":\"Property Save Successful!\"}";
+        }
+
+        private List<SelectListItem> populateSiteTheme()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Grey", Value = "site.css" });
+            items.Add(new SelectListItem { Text = "Gold", Value = "site2.css" });
+
+            return items;
         }
 
         #region Helpers

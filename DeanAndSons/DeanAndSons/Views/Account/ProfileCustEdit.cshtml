@@ -57,14 +57,6 @@
                 </div>
             </div>
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
             <div class="form-group">
                 @Html.LabelFor(model => model.UserNameDisp, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -180,6 +172,16 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TelephoneNo, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TelephoneNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <h3>Site Preferences</h3>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SiteThemeObj, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("SiteTheme", null, htmlAttributes: new { @class = "form-control" })
                 </div>
             </div>
 

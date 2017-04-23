@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DeanAndSons.Models.Global.ViewModels
 {
@@ -57,6 +59,11 @@ namespace DeanAndSons.Models.Global.ViewModels
         [DataType(DataType.Upload)]
         public HttpPostedFileBase Image { get; set; }
 
+        [ForeignKey("SiteThemeObj")]
+        public string SiteTheme { get; set; }
+
+        public SelectList SiteThemeObj { get; set; }
+
         public ProfileStaffEditViewModel()
         {
 
@@ -77,6 +84,7 @@ namespace DeanAndSons.Models.Global.ViewModels
             Town = addr.Town;
             PostCode = addr.PostCode;
             TelephoneNo = addr.TelephoneNo;
+            SiteTheme = usr.SiteTheme;
         }
     }
 }
