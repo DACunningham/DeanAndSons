@@ -102,10 +102,10 @@
         {
             <div class="row">
                 <div class="col-md-6">
-                    @Html.ActionLink("Messages", "Index", "Conversations", new { userId = Model.ID }, new { @class = "btn btn-default pull-left dc-btn-space", role = "button" })
+                    @Html.ActionLink("Direct Messages", "Index", "Conversations", new { userId = Model.ID }, new { @class = "btn btn-default pull-left dc-btn-space", role = "button" })
                 </div>
                 <div class="col-md-6">
-                    @Html.ActionLink("Edit", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right dc-btn-space", role = "button" })
+                    @Html.ActionLink("Edit Profile", "ProfileEdit", new { userId = Model.ID }, new { @class = "btn btn-default pull-right dc-btn-space", role = "button" })
                 </div>
             </div>
         }

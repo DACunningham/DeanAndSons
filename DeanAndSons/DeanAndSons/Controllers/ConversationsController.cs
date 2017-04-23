@@ -2,11 +2,14 @@
 using DeanAndSons.Models.WAP;
 using DeanAndSons.Models.WAP.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DeanAndSons.Controllers
@@ -66,7 +69,19 @@ namespace DeanAndSons.Controllers
         public ActionResult Create()
         {
             var vm = new ConversationCreateViewModel();
-            ViewBag.ReceiverID = new SelectList(db.ApplicationUsers, "Id", "Forename");
+
+            var _currentUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            if (_currentUser is Customer)
+            {
+                var _userList = db.Users.OfType<Staff>();
+                ViewBag.ReceiverID = new SelectList(_userList, "Id", "Forename");
+            }
+            else
+            {
+                var _userList = db.Users.Where(u => u.Id != _currentUser.Id);
+                ViewBag.ReceiverID = new SelectList(_userList, "Id", "Forename");
+            }
 
             return View(vm);
         }
