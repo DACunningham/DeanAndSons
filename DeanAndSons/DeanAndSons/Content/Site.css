@@ -105,6 +105,18 @@ textarea {
     background-color: #96858f;
 }
 
+.dc-bar1{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #f6f2f5;
+}
+
+.dc-bar2{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #ede5eb;
+}
+
 .dc-footer {
     background-color: #96858f;
     color: #ffffff;

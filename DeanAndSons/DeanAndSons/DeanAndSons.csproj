@@ -366,6 +366,7 @@
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\CarouselFS.js" />
     <Content Include="Scripts\Custom\CMSEditProp.js" />
     <Content Include="Scripts\Custom\DeleteModal.js" />
     <Content Include="Scripts\Custom\EditorCMS.js" />
@@ -555,6 +556,10 @@
     <Content Include="Storage\Global\bed.png" />
     <Content Include="Storage\Global\Event.png" />
     <Content Include="Storage\Global\Hierarchy.png" />
+    <Content Include="Storage\Global\Index1.jpg" />
+    <Content Include="Storage\Global\Index2.jpg" />
+    <Content Include="Storage\Global\Index3.jpg" />
+    <Content Include="Storage\Global\Index4.jpg" />
     <Content Include="Storage\Global\Mortgage.png" />
     <Content Include="Storage\Global\NoImg.jpg" />
     <Content Include="Storage\Global\Profile.png" />

@@ -4,6 +4,8 @@
     ViewBag.Title = "Home Page";
 }
 
+<link href="~/Content/Custom/CarouselFS.css" rel="stylesheet" />
+
 @* ********** Page Header ********** *@
 
 <div class="container-fluid dc-header">
@@ -19,61 +21,141 @@
     </div>
 </div>
 
-<div class="container">
+<!-- Bootstrap Carousel for images -->
+<div id="propertyImages" class="carousel slide" data-ride="carousel">
 
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Latest Properties To Market...</h2>
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mycarousel" data-slide-to="1"></li>
+        <li data-target="#mycarousel" data-slide-to="2"></li>
+        <li data-target="#mycarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item">
+            <img src="~/Storage/Global/Index1.jpg" data-color="lightblue" alt="First Image">
+            <div class="carousel-caption">
+                <h3>Church Lane, Devizes</h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Storage/Global/Index2.jpg" data-color="firebrick" alt="Second Image">
+            <div class="carousel-caption">
+                <h3>Bences Lane, Corsham</h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Storage/Global/Index3.jpg" data-color="lightblue" alt="Third Image">
+            <div class="carousel-caption">
+                <h3>Main Road, Calne</h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Storage/Global/Index4.jpg" data-color="firebrick" alt="Fourth Image">
+            <div class="carousel-caption">
+                <h3>Cold Ashton, Chippenham</h3>
+            </div>
         </div>
     </div>
 
-    <div class="row dc-rows">
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#propertyImages" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#propertyImages" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
-        @foreach (var item in Model.Properties)
-        {
-            <div class="col-md-4">
+<div class="container-fluid dc-bar1">
+    <div class="container">
 
-                <div class="row">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Latest Properties To Market</h2>
+            </div>
+        </div>
 
-                    <div class="col-md-12 text-center">
-                        <h3>@Html.ActionLink(item.Title, "Details", "Propertys", new { id = item.PropertyID }, null)</h3>
-                    </div>
-                    <div class="col-md-12">
-                        <a href=@Url.Action("Details", "Propertys", new { id = item.PropertyID })>
-                            <img src="@item.ImageLocation" class="img-responsive center-block dc-Tiles-Lg" alt="@item.Title" />
-                        </a>
+        <div class="row dc-rows">
+
+            @foreach (var item in Model.Properties)
+            {
+                <div class="col-md-4">
+
+                    <div class="row">
+
+                        <div class="col-md-12 text-center">
+                            <h3>@Html.ActionLink(item.Title, "Details", "Propertys", new { id = item.PropertyID }, null)</h3>
+                        </div>
+                        <div class="col-md-12">
+                            <a href=@Url.Action("Details", "Propertys", new { id = item.PropertyID })>
+                                <img src="@item.ImageLocation" class="img-responsive center-block dc-Tiles-Lg" alt="@item.Title" />
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
+            }
 
-            </div>
-        }
-
-    </div>
-
-    <div class="row dc-rows">
-        <div class="col-md-4">
-            <a href="/Services/Details/2">
-                <img src="/Storage/Services/af908198-fff2-4bbb-bf1d-d0f91fe3da3bAgency.png" class="img-responsive center-block" alt="137 New Road Bromham, Chippenham image" />
-            </a>
-        </div>
-        <div class="col-md-8">
-            <h2>Our local knowledge helped over 4,000* customers find their place called home last year.</h2>
-            <p>With thousands of buyers and tenants registering in our branches every month, we help a customer move every 40* minutes.</p>
-        </div>
-    </div>
-
-    <div class="row dc-rows">
-        <div class="col-md-4">
-            <a href="/Services/Details/2">
-                <img src="/Storage/Global/SoldHouse.jpg" style="height: 200px; width: 300px;" class="img-responsive center-block" alt="137 New Road Bromham, Chippenham image" />
-            </a>
-        </div>
-        <div class="col-md-8">
-            <blockquote>
-                <p>You're simply the best! I instructed eight other agents months before you, you found a buyer in one week and we completed in six!</p>
-                <cite title="Source Title">Mr Sutton, Hertfordshire</cite>
-            </blockquote>
         </div>
     </div>
 </div>
+
+<div class="container-fluid dc-bar2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Welcome To Dean & Sons. Estate Agency</h2>
+            </div>
+        </div>
+
+        <div class="row dc-rows">
+            <div class="col-md-12">
+                <p>
+                    Dean & Sons. is an independently owned, family run estate agency, firmly established in Corsham, covering the surrounding villages and including Chippenham,
+                    Melksham, Trowbridge and Bath. The company specialize in the sale, letting and management of residential property from their prominently positioned high street offices
+                    “all under the same roof”. 
+                </p>
+                <p>
+                    The Directors, John, Jane and Jasmine Dean have a combined total of 45 years experience in the property business and you can be assured that each has a vested interest
+                    in ensuring a first class, personal service is delivered to all buyers, sellers, landlords and tenants.
+                </p>
+                <p>
+                    Combining the latest technology with traditional values and an extensive knowledge of the local property market, Dean & Sons. are committed to providing,
+                    honest and professional advice you can rely on at all times.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid dc-bar1">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Latest Review</h2>
+            </div>
+        </div>
+
+        <div class="row dc-rows">
+            <div class="col-md-12">
+                <blockquote>
+                    <p>You're simply the best! I instructed eight other agents months before you, you found a buyer in one week and we completed in six!</p>
+                    <cite title="Source Title">Mr Sutton, Hertfordshire</cite>
+                </blockquote>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/Custom/CarouselFS.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
