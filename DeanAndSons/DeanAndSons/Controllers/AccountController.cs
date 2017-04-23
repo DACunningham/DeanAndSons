@@ -660,7 +660,7 @@ namespace DeanAndSons.Controllers
             db.SavedSearches.Add(savedSearch);
             db.SaveChanges();
 
-            return "{\"response\":\"Save Successful!\"}";
+            return "{\"response\":\"Search parameters have been saved to your favourites\"}";
         }
 
         public string SaveProperty(string obj)
@@ -680,7 +680,7 @@ namespace DeanAndSons.Controllers
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
 
-            return "{\"response\":\"Property Save Successful!\"}";
+            return "{\"response\":\"Property has been saved to your favourites\"}";
         }
 
         [HttpPost, ActionName("DeletePropFav")]
@@ -757,7 +757,7 @@ namespace DeanAndSons.Controllers
                 Session["Propertys"] = _sessionPropertys;
             }
 
-            return "{\"response\":\"Property Save Successful!\"}";
+            return "{\"response\":\"Property has been saved to your temporary favourites\"}";
         }
 
         private List<SelectListItem> populateSiteTheme()
