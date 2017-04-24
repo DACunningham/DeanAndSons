@@ -23,92 +23,111 @@
     </div>
 </div>
 
-<div class="container body-content">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>@Model.Title</h2>
-            <h3>Originally Listed: @Model.Created.ToLongDateString()</h3>
+<div class="container-fluid dc-bar1">
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>@Model.Title</h2>
+                <h3>Originally Listed: @Model.Created.ToLongDateString()</h3>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-8">
-            <!-- Bootstrap Carousel for images -->
-            <div id="propertyImages" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    @for (int i = 0; i < Model.Images.Count; i++)
-                    {
-                        if (i == 0)
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Bootstrap Carousel for images -->
+                <div id="propertyImages" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        @for (int i = 0; i < Model.Images.Count; i++)
                         {
-                            <li data-target="#propertyImages" data-slide-to="0" class="active"></li>
-                        }
-                        else
-                        {
-                            <li data-target="#propertyImages" data-slide-to="@i"></li>
-                        }
-                    }
-                </ol>
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    @{
-                        var count = 0;
-
-                        foreach (var item in Model.Images)
-                        {
-                            if (count == 0)
+                            if (i == 0)
                             {
-                                <div class="item active">
-                                    <img class="img-responsive" src="@item.Location" alt="A property Picture">
-                                </div>
+                                <li data-target="#propertyImages" data-slide-to="0" class="active"></li>
                             }
                             else
                             {
-                                <div class="item">
-                                    <img class="img-responsive" src="@item.Location" alt="A property Picture">
-                                </div>
+                                <li data-target="#propertyImages" data-slide-to="@i"></li>
                             }
-                            count++;
                         }
-                    }
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            var count = 0;
+
+                            foreach (var item in Model.Images)
+                            {
+                                if (count == 0)
+                                {
+                                    <div class="item active">
+                                        <img class="img-responsive" src="@item.Location" alt="A property Picture">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <img class="img-responsive" src="@item.Location" alt="A property Picture">
+                                    </div>
+                                }
+                                count++;
+                            }
+                        }
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#propertyImages" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#propertyImages" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#propertyImages" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#propertyImages" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <p>@Model.PropertyNo @Model.Street, @Model.Town, @Model.PostCode</p>
+<div class="container-fluid dc-bar2">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Details</h2>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            @Html.Raw(Model.Description)
+        <div class="row dc-rows">
+            <div class="col-md-12">
+                <h4>Address:</h4>
+            </div>
+            <div class="col-md-12">
+                <p>@Model.PropertyNo @Model.Street, @Model.Town, @Model.PostCode</p>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <p>
-                For further information on this event please contact @Model.Forename @Model.Surname at
-                <a href="mailto:@Model.Email?Subject=Event%20Enquiry" target="_top">@Model.Email</a>
-            </p>
+        <div class="row dc-rows">
+            <div class="col-md-12">
+                <h4>Description:</h4>
+            </div>
+            <div class="col-md-12">
+                @Html.Raw(Model.Description)
+            </div>
         </div>
-    </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    For further information on this event please contact @Model.Forename @Model.Surname at
+                    <a href="mailto:@Model.Email?Subject=Event%20Enquiry" target="_top">@Model.Email</a>
+                </p>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            @Html.ActionLink("Back", "IndexCustomer", new { }, new { @class = "btn btn-default text-center", role = "button" })
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Back", "IndexCustomer", new { }, new { @class = "btn btn-default text-center", role = "button" })
+            </div>
         </div>
     </div>
 </div>
