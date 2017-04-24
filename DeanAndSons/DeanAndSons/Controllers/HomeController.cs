@@ -1,10 +1,10 @@
 ﻿using DeanAndSons.Models;
+using DeanAndSons.Models.Global.ViewModels;
 using System.Collections.Generic;
-using System.Web;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using DeanAndSons.Models.Global.ViewModels;
 
 namespace DeanAndSons.Controllers
 {
@@ -17,8 +17,7 @@ namespace DeanAndSons.Controllers
             var model = db.Propertys.Include(p => p.Images)
                 .Where(p => p.Deleted != true)
                 .OrderByDescending(p => p.Created)
-                .Take(3)
-                .ToList();
+                .Take(3);
 
             HomeIndexViewModel vm = new HomeIndexViewModel(model);
 

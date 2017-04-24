@@ -8,7 +8,7 @@ namespace DeanAndSons.Models.Global.ViewModels
     {
         public ICollection<HomeIndexProperty> Properties { get; set; }
 
-        public HomeIndexViewModel(List<Property> props)
+        public HomeIndexViewModel(IEnumerable<Property> props)
         {
             Properties = new List<HomeIndexProperty>();
 
