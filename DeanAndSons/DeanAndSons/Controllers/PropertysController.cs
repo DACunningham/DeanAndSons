@@ -24,7 +24,7 @@ namespace DeanAndSons.Controllers
         // GET: Propertys
         [AllowAnonymous]
         public ActionResult Index(int? page, string searchString = null, string CategorySort = "0", string OrderSort = "0", string currentFilter = null,
-            string Location = "Bath", string MinPrice = "50000", string Beds = "1", string Radius = "30", string MaxPrice = "1000000", string Age = "0", string SaleState = "0")
+            string Location = "Bath", string MinPrice = "50000", string Beds = "1", string Radius = "30", string MaxPrice = "100000000", string Age = "0", string SaleState = "0")
         {
             var _MinPrice = Int32.Parse(MinPrice);
             var _MaxPrice = Int32.Parse(MaxPrice);
@@ -536,7 +536,8 @@ namespace DeanAndSons.Controllers
             items.Add(new SelectListItem { Text = "700,000", Value = "700000" });
             items.Add(new SelectListItem { Text = "800,000", Value = "800000" });
             items.Add(new SelectListItem { Text = "900,000", Value = "900000" });
-            items.Add(new SelectListItem { Text = "1,000,000", Value = "1000000", Selected = true });
+            items.Add(new SelectListItem { Text = "1,000,000", Value = "1000000" });
+            items.Add(new SelectListItem { Text = "100,000,000", Value = "100000000", Selected = true });
 
             return items;
         }
