@@ -35,7 +35,7 @@ namespace DeanAndSons.Controllers
 
             //Get current logged in user object and check if it is of type customer and set this as a viewbag var.
             var _currentUser = CurrentUser();
-            ViewBag.IsCustomer = _currentUser.IsCustomer(_currentUser);
+            ViewBag.IsCustomer = ApplicationUser.IsCustomer(_currentUser);
 
             // ********** Database Access **********
             //var dbModel = new List<Property>();
@@ -305,7 +305,7 @@ namespace DeanAndSons.Controllers
 
             //Get current logged in user object and check if it is of type customer and set this as a viewbag var.
             var _currentUser = CurrentUser();
-            ViewBag.IsCustomer = _currentUser.IsCustomer(_currentUser);
+            ViewBag.IsCustomer = ApplicationUser.IsCustomer(_currentUser);
 
             Property property = db.Propertys.Include(i => i.Images)
                 .Include(c => c.Contact)

@@ -78,7 +78,7 @@ namespace DeanAndSons.Models
             return contact;
         }
 
-        public bool IsCustomer(ApplicationUser obj)
+        public static bool IsCustomer(ApplicationUser obj)
         {
             if (obj != null)
             {
