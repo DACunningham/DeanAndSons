@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace DeanAndSons.Models.WAP.ViewModels
 {
@@ -13,11 +10,12 @@ namespace DeanAndSons.Models.WAP.ViewModels
         public int PropertyID { get; set; }
 
         [Required]
-        [MaxLength(75), MinLength(10)]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(3000), MinLength(10)]
+        [AllowHtml]
+        [StringLength(10000, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
         public string Description { get; set; } = "**********Placeholder text to be replaced in CMS**********";
 
         [Required]
@@ -25,6 +23,7 @@ namespace DeanAndSons.Models.WAP.ViewModels
         public PropertyType Type { get; set; }
 
         [Required]
+        [Range(50000, 100000000, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         public int Price { get; set; }
 
         [Required]
@@ -40,20 +39,19 @@ namespace DeanAndSons.Models.WAP.ViewModels
         public PropertyAge Age { get; set; }
 
         [Required]
+        [Range(1, 5, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         [Display(Name = "No# Bed Rooms")]
         public int NoBedRms { get; set; }
 
         [Required]
+        [Range(1, 5, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         [Display(Name = "No# Bath Rooms")]
         public int NoBathRms { get; set; }
 
         [Required]
+        [Range(1, 5, ErrorMessage = "Please select a value of between {1} and {2} for {0}.")]
         [Display(Name = "No# Sitting Rooms")]
         public int NoSittingRms { get; set; }
-
-        ////********** Image **********
-        //[DataType(DataType.Upload)]
-        //public ICollection<HttpPostedFileBase> Images { get; set; }
 
         //********** Users **********
         public string BuyerID { get; set; }
@@ -65,16 +63,20 @@ namespace DeanAndSons.Models.WAP.ViewModels
 
         //********** Contact **********
         [Required]
+        [StringLength(50, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 1)]
         [Display(Name = "Property Number/Name")]
         public string PropertyNo { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Street { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         public string Town { get; set; }
 
         [Required]
+        [StringLength(9, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 3)]
         [Display(Name = "Post Code")]
         public string PostCode { get; set; }
 
