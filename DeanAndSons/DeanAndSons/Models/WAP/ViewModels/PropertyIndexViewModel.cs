@@ -49,11 +49,11 @@ namespace DeanAndSons.Models.WAP.ViewModels
         {
             if (desc.Length > 200)
             {
-                return desc.Substring(0, 200) + "...";
+                return desc.Substring(0, 200) + "...</div>";
             }
             else
             {
-                return desc + "...";
+                return desc;
             }
         }
 
