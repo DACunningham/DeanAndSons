@@ -319,32 +319,32 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
-        // GET: Services/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Service service = db.Services.Find(id);
-            if (service == null)
-            {
-                return HttpNotFound();
-            }
-            return View(service);
-        }
+        //// GET: Services/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Service service = db.Services.Find(id);
+        //    if (service == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(service);
+        //}
 
         // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Service service = db.Services.Find(id);
             db.Services.Remove(service);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexIMS");
         }
 
         /// <summary>

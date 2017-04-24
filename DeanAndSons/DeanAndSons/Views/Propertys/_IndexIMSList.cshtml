@@ -70,8 +70,12 @@
                 @Html.DisplayFor(modelItem => item.Seller.Surname)
             </td>
             <td class="col-md-2">
-                <a id=@item.PropertyID class="deleteStaff btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                <a id=@item.PropertyID class="deleteProp btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
                 @Html.ActionLink("Edit", "EditIMS", new { id = item.PropertyID }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Ajax.ActionLink("PD", "Delete", "Propertys", new { id = item.PropertyID }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-danger btn-xs pull-right" })
+                }
             </td>
         </tr>
     }

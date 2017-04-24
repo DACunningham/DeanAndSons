@@ -42,6 +42,10 @@
             <td>
                 <a id=@item.EventID class="deleteStaff btn btn-danger btn-sm pull-right" href="#deleteModal" data-toggle="modal" data-target="#deleteModal">Delete</a>
                 @Html.ActionLink("Edit", "EditIMS", new { id = item.EventID }, new { @class = "btn btn-default btn-sm pull-right", role = "button" })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Ajax.ActionLink("PD", "Delete", "Events", new { id = item.EventID }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-danger btn-xs pull-right" })
+                }
             </td>
         </tr>
     }

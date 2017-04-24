@@ -214,13 +214,15 @@ namespace DeanAndSons.Controllers
                 dbModel = dbModel.Where(p => p.Title.Contains(searchString));
             }
 
+            var dbModelList = dbModel.ToList();
+
             //If the user has called this action via AJAX (ie search field) then only update the partial view.
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_IndexIMSList", dbModel);
+                return PartialView("_IndexIMSList", dbModelList);
             }
 
-            return View(dbModel);
+            return View(dbModelList);
         }
 
         // GET: Propertys/Edit/5
@@ -409,32 +411,32 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
-        // GET: Propertys/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Property property = db.Propertys.Find(id);
-            if (property == null)
-            {
-                return HttpNotFound();
-            }
-            return View(property);
-        }
+        //// GET: Propertys/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Property property = db.Propertys.Find(id);
+        //    if (property == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(property);
+        //}
 
         // POST: Propertys/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Property property = db.Propertys.Find(id);
             db.Propertys.Remove(property);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexIMS");
         }
 
         
