@@ -56,7 +56,6 @@ namespace DeanAndSons.Models.WAP
             Title = vm.Title;
             Description = vm.Description;
             StaffOwnerID = vm.StaffOwnerID;
-            Images = addImages(vm.Images);
             Contact.Add(new ContactEvent(vm.PropertyNo, vm.Street, vm.Town, vm.PostCode, vm.TelephoneNo, vm.Email, this));
         }
 
