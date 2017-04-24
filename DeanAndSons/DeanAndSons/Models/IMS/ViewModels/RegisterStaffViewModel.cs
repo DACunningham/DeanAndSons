@@ -24,12 +24,13 @@ namespace DeanAndSons.Models.IMS.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [StringLength(60, ErrorMessage = "Your {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [StringLength(60, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Forename")]
         public string Forename { get; set; }
 
+        // User's second name
         [Required]
-        [StringLength(60, ErrorMessage = "Your {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [StringLength(60, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Surname")]
         public string Surname { get; set; }
 
