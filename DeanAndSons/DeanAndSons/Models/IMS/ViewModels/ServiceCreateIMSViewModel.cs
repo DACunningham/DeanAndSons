@@ -9,11 +9,11 @@ namespace DeanAndSons.Models.IMS.ViewModels
         public int ServiceID { get; set; }
 
         [Required]
-        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
+        [StringLength(35, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string Title { get; set; }
 
         [Required]
-        [StringLength(75, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 10)]
+        [StringLength(65, ErrorMessage = "The {0} field must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string SubTitle { get; set; } = "**********Placeholder text to be replaced in CMS**********";
 
         [Required]
