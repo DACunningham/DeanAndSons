@@ -3,6 +3,7 @@ using DeanAndSons.Models.IMS.ViewModels;
 using DeanAndSons.Models.WAP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DeanAndSons.Tests.Models
@@ -102,6 +103,31 @@ namespace DeanAndSons.Tests.Models
             Assert.AreEqual<string>(vm2.StaffOwnerID, r1.StaffOwnerID);
             Assert.AreEqual<DateTime>(vm2.LastModified, r1.LastModified);
 
+        }
+
+        [TestMethod]
+        public void PropertyGetContactTest22()
+        {
+            // Arrange
+            var l1 = new List<ContactProperty>();
+            l1.Add(new ContactProperty("20", "test", "test", "test", 123, "test", null));
+            l1.Add(new ContactProperty("30", "test2", "test2", "test2", 345, "test", null));
+
+            var r1 = new Property();
+            var r2 = new Property();
+
+            // Act
+            //Test the method with valid array (but with too many items in it)
+            var cp = r1.getContact(l1);
+            
+            //Test the method with an empty array
+            var cp2 = r2.getContact(new List<ContactProperty>());
+
+            // Assert
+            Assert.AreEqual<ContactProperty>(l1[0], cp);
+            Assert.AreNotEqual<ContactProperty>(l1[1], cp);
+
+            Assert.AreEqual<string>("No address found", cp2.PropertyNo);
         }
     }
 }
