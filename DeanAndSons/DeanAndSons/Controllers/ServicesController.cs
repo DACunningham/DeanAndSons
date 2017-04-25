@@ -270,6 +270,12 @@ namespace DeanAndSons.Controllers
                 db.SaveChanges();
                 return RedirectToAction("IndexCMS");
             }
+
+            var svc = db.Services.Include(i => i.Images)
+                .Include(s => s.StaffOwner)
+                .Single(p => p.ServiceID == vm.ServiceID);
+            vm.ImagesProp = svc.Images;
+
             return View(vm);
         }
 
