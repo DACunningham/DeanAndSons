@@ -74,29 +74,43 @@ namespace DeanAndSons.Models
             double resultLat = 10.1;
             double resultLong = 10.2;
 
-            using (WebClient wc = new WebClient())
+            try
             {
-                using (StreamReader sr = new StreamReader(wc.OpenRead(fullUri)))
+                using (WebClient wc = new WebClient())
                 {
-                    JsonResponse = sr.ReadToEnd();
+                    using (StreamReader sr = new StreamReader(wc.OpenRead(fullUri)))
+                    {
+                        JsonResponse = sr.ReadToEnd();
+                    }
+                }
+
+                GoogleAddressJ gaJson = JsonConvert.DeserializeObject<GoogleAddressJ>(JsonResponse);
+
+                //Check a valid address was received by Google and assign data from Google's response to appropriate properties of EventAddress instance.
+                if (gaJson.status == "OK")
+                {
+                    if (Double.TryParse(gaJson.results[0].geometry.location.lat, out resultLat))
+                    {
+                        Lat = resultLat;
+                    }
+                    if (Double.TryParse(gaJson.results[0].geometry.location.lng, out resultLong))
+                    {
+                        Long = resultLong;
+                    }
+                    //FormattedAddr = gaJson.results[0].formatted_address;
+                }
+                else if (gaJson.status == "ZERO_RESULTS")
+                {
+                    throw new WebException();
                 }
             }
-
-            GoogleAddressJ gaJson = JsonConvert.DeserializeObject<GoogleAddressJ>(JsonResponse);
-
-            //Check a valid address was received by Google and assign data from Google's response to appropriate properties of EventAddress instance.
-            if (gaJson.status == "OK")
+            catch (WebException ex)
             {
-                if (Double.TryParse(gaJson.results[0].geometry.location.lat, out resultLat))
-                {
-                    Lat = resultLat;
-                }
-                if (Double.TryParse(gaJson.results[0].geometry.location.lng, out resultLong))
-                {
-                    Long = resultLong;
-                }
-                //FormattedAddr = gaJson.results[0].formatted_address;
+                Lat = 51.375814;
+                Long = -2.359904;
             }
+
+            
         }
 
         public static GeoCoordinate GetLocationLatLng(string location)

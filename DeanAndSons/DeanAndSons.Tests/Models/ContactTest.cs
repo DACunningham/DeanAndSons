@@ -45,14 +45,14 @@ namespace DeanAndSons.Tests.Models
             Assert.AreNotEqual<double>(0, r1.Lat);
             Assert.AreNotEqual<double>(0, r1.Long);
 
-            Assert.AreEqual<double>(0, r2.Lat);
-            Assert.AreEqual<double>(0, r2.Long);
+            Assert.AreEqual<double>(51.375814, r2.Lat);
+            Assert.AreEqual<double>(-2.359904, r2.Long);
 
-            Assert.AreEqual<double>(0, r3.Lat);
-            Assert.AreEqual<double>(0, r3.Long);
+            Assert.AreEqual<double>(51.375814, r3.Lat);
+            Assert.AreEqual<double>(-2.359904, r3.Long);
 
-            Assert.AreEqual<double>(0, r4.Lat);
-            Assert.AreEqual<double>(0, r4.Long);
+            Assert.AreEqual<double>(51.375814, r4.Lat);
+            Assert.AreEqual<double>(-2.359904, r4.Long);
         }
     }
 }
