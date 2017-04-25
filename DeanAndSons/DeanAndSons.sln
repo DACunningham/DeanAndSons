@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanAndSons", "DeanAndSons\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeanAndSons.Tests", "DeanAndSons.Tests\DeanAndSons.Tests.csproj", "{51D42ECF-299A-4E6F-957C-8E0EE9295302}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAndLoadTestProject1", "WebAndLoadTestProject1\WebAndLoadTestProject1.csproj", "{45B94C36-CEF8-4154-8619-14505782A7F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF41DD91-7292-43EA-BF77-B4D42CC7E456}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{51D42ECF-299A-4E6F-957C-8E0EE9295302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51D42ECF-299A-4E6F-957C-8E0EE9295302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51D42ECF-299A-4E6F-957C-8E0EE9295302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45B94C36-CEF8-4154-8619-14505782A7F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45B94C36-CEF8-4154-8619-14505782A7F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45B94C36-CEF8-4154-8619-14505782A7F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45B94C36-CEF8-4154-8619-14505782A7F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
