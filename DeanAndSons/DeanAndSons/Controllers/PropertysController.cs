@@ -291,6 +291,9 @@ namespace DeanAndSons.Controllers
                 db.SaveChanges();
                 return RedirectToAction("IndexL");
             }
+
+            Property prop = db.Propertys.Include(i => i.Images).Single(p => p.PropertyID == vm.PropertyID);
+            vm.ImagesProp = prop.Images;
             return View(vm);
         }
 
