@@ -345,6 +345,13 @@ namespace DeanAndSons.Controllers
                 db.SaveChanges();
                 return RedirectToAction("IndexCMS");
             }
+
+            var ev = db.Events.Include(i => i.Images)
+                .Include(s => s.StaffOwner)
+                .Include(a => a.Contact)
+                .Single(p => p.EventID == vm.EventID);
+            vm.ImagesProp = ev.Images;
+
             return View(vm);
         }
 
