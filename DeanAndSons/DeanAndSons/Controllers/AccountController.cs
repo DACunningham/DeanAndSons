@@ -747,17 +747,39 @@ namespace DeanAndSons.Controllers
 
             if (_sessionPropertys != null)
             {
-                _sessionPropertys.Add(property);
-                Session["Propertys"] = _sessionPropertys;
+                // Flag variable
+                var _alreadyExists = false;
+
+                // Iterate through all properties in list
+                foreach (var item in _sessionPropertys)
+                {
+                    // check if property ID fed in from view equals any of the properties in the list
+                    if (item.PropertyID == _temp.PropertyID)
+                    {
+                        // If so change flag to true
+                        _alreadyExists = true;
+                    }
+                }
+
+                // If the property is not in the list, then add it
+                if (!_alreadyExists)
+                {
+                    _sessionPropertys.Add(property);
+                    Session["Propertys"] = _sessionPropertys;
+
+                    return "{\"response\":\"Property has been saved to your temporary favourites\"}";
+                }
             }
             else
             {
                 _sessionPropertys = new List<Property>();
                 _sessionPropertys.Add(property);
                 Session["Propertys"] = _sessionPropertys;
+
+                return "{\"response\":\"Property has been saved to your temporary favourites\"}";
             }
 
-            return "{\"response\":\"Property has been saved to your temporary favourites\"}";
+            return "{\"response\":\"An unexpected error has occurred.  Please try again later.\"}";
         }
 
         private List<SelectListItem> populateSiteTheme()
