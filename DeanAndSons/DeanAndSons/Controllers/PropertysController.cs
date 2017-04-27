@@ -414,22 +414,6 @@ namespace DeanAndSons.Controllers
             return View(vm);
         }
 
-        //// GET: Propertys/Delete/5
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Property property = db.Propertys.Find(id);
-        //    if (property == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(property);
-        //}
-
         // POST: Propertys/Delete/5
         [HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
@@ -442,7 +426,6 @@ namespace DeanAndSons.Controllers
             return RedirectToAction("IndexIMS");
         }
 
-        
         /// <summary>
         /// Sets DB flag to deleted but doesn't physically remove the item
         /// </summary>

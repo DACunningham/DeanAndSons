@@ -1,5 +1,6 @@
 ﻿using DeanAndSons.Models;
 using DeanAndSons.Models.IMS.ViewModels;
+using DeanAndSons.Models.WAP;
 using Microsoft.AspNet.Identity;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -123,8 +124,46 @@ namespace DeanAndSons.Controllers
         [Authorize(Roles = "Admin, Staff")]
         public ActionResult StaffManagerDelete(string id)
         {
-            var staff = db.Users.OfType<Staff>().Include(s => s.Subordinates).Include(su => su.Superior)
+            var staff = db.Users.OfType<Staff>()
+                .Include(s => s.Subordinates)
+                .Include(su => su.Superior)
+                .Include(p => p.PropertysOwned)
+                .Include(s => s.ServicesOwned)
+                .Include(e => e.EventsOwned)
+                .Include(c => c.Contact)
                 .Where(u => u.Id == id).Single();
+
+            foreach (var item in staff.PropertysOwned.ToList())
+            {
+                item.StaffOwnerID = "411c9abb-2f72-4531-a46c-9813c7c0009a";
+                //item.Superior = (Staff)db.Users.Find("1f8a6942-2e52-480d-b0e1-1e4afb9ee33b");
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            foreach (var item in staff.ServicesOwned.ToList())
+            {
+                item.StaffOwnerID = "411c9abb-2f72-4531-a46c-9813c7c0009a";
+                //item.Superior = (Staff)db.Users.Find("1f8a6942-2e52-480d-b0e1-1e4afb9ee33b");
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            foreach (var item in staff.EventsOwned.ToList())
+            {
+                item.StaffOwnerID = "411c9abb-2f72-4531-a46c-9813c7c0009a";
+                //item.Superior = (Staff)db.Users.Find("1f8a6942-2e52-480d-b0e1-1e4afb9ee33b");
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            foreach (var item in staff.Contact.ToList())
+            {
+                var t =  db.Contacts.OfType<ContactUser>().Where(a => a.UserID == staff.Id);
+                //item.Superior = (Staff)db.Users.Find("1f8a6942-2e52-480d-b0e1-1e4afb9ee33b");
+                db.Contacts.RemoveRange(t);
+                db.SaveChanges();
+            }
 
             foreach (var item in staff.Subordinates.ToList())
             {

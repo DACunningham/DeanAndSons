@@ -2,12 +2,14 @@
     selector: '#titleDisp',
     inline: true,
     toolbar: 'undo redo',
+    forced_root_block : 'div',
     menubar: false
 });
 
 tinymce.init({
     selector: '#descriptionDisp',
     inline: true,
+    forced_root_block : 'div',
     plugins: [
       'advlist autolink lists link image charmap print preview anchor',
       'searchreplace visualblocks code fullscreen',

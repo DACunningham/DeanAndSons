@@ -46,7 +46,7 @@
                     <div id="propertyImages" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
-                            @for (int i = 0; i < Model.ImagesProp.Count; i++)
+                            @for (int i = 0; i < Model.ImagesProp.Count - 1; i++)
                             {
                                 if (i == 0)
                                 {
@@ -63,7 +63,7 @@
                             @{
                                 var count = 0;
 
-                                foreach (var item in Model.ImagesProp)
+                                foreach (var item in Model.ImagesProp.Where(i => i.Type == DeanAndSons.Models.ImageType.ServiceBody))
                                 {
                                     if (count == 0)
                                     {

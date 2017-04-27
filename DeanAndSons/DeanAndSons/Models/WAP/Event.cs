@@ -110,7 +110,22 @@ namespace DeanAndSons.Models.WAP
         {
             StaffOwnerID = obj.StaffOwnerID;
 
-            addContact(obj.PropertyNo, obj.Street, obj.Town, obj.PostCode, obj.TelephoneNo, obj.Email, this);
+            if (Contact.Count != 0)
+            {
+                var _contact = Contact.Single();
+                _contact.PropertyNo = obj.PropertyNo;
+                _contact.Street = obj.Street;
+                _contact.Town = obj.Town;
+                _contact.PostCode = obj.PostCode;
+                _contact.TelephoneNo = obj.TelephoneNo;
+                _contact.Email = obj.Email;
+            }
+            else
+            {
+                Contact.Add(new ContactEvent(obj.PropertyNo, obj.Street, obj.Town, obj.PostCode, obj.TelephoneNo, obj.Email, this));
+            }
+
+            //addContact(obj.PropertyNo, obj.Street, obj.Town, obj.PostCode, obj.TelephoneNo, obj.Email, this);
         }
 
         private void addContact(string propNo, string street, string town, string postCode, int? telNo, string email, Event usrObj)

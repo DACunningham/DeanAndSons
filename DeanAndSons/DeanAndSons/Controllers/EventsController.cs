@@ -263,9 +263,12 @@ namespace DeanAndSons.Controllers
             if (ModelState.IsValid)
             {
                 //Get object to edit from DB
-                var _obj = db.Events.Find(vm.EventID);
+                //var _obj = db.Events.Find(vm.EventID);
+                Event _obj = db.Events.Include(a => a.Contact)
+                .Single(e => e.EventID == vm.EventID);
                 //Apply view model properties to EF tracked DB object
                 _obj.ApplyEditIMS(vm);
+                //_obj.Contact.Add(new ContactEvent("12", "123456", "qw1", "123456", 123, null, _obj));
 
                 db.Entry(_obj).State = EntityState.Modified;
                 db.SaveChanges();

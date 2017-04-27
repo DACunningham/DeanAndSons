@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>@Model.Title</h2>
-                <h3>@Model.SubTitle</h3>
+                @*<h3>@Model.SubTitle</h3>*@
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <div id="propertyImages" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        @for (int i = 0; i < Model.Images.Count; i++)
+                        @for (int i = 0; i < Model.Images.Count - 1; i++)
                         {
                             if (i == 0)
                             {
@@ -56,7 +56,7 @@
                         @{
                             var count = 0;
 
-                            foreach (var item in Model.Images)
+                            foreach (var item in Model.Images.Where(i => i.Type == DeanAndSons.Models.ImageType.ServiceBody))
                             {
                                 if (count == 0)
                                 {
@@ -97,7 +97,8 @@
                     <h2>Details</h2>
                 </div>
                 <div class="col-md-12">
-                    <p>@Model.Description</p>
+                    @Html.Raw(Model.Description)
+                    @*<p>@Model.Description</p>*@
                 </div>
             </div>
 
